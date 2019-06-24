@@ -695,13 +695,15 @@
           telPhone:userphone,
           ageGroups:age,
           education:xue,
-          yearsSocial:she
+          yearsSocial:she,
+          sourceLink: document.referrer ? document.referrer : window.location.href,
+          fromPlatform: "入户宝官网"
         }
         
         console.log(data)
         $('form')[0].reset();
         $.ajax({
-          url: "../../data/customer/addCustomer",
+          url: "http://localhost:9092/data/customer/addCustomer",
           data: data,
           type: "POST",
           success: function(res) {

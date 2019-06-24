@@ -428,20 +428,21 @@
 
           <div class="inp">
             <div>
-              <input type="text" maxlength="11" name="userphone" id="" value="" placeholder="请输入手机号码" />
+              <input type="text" maxlength="11" name="userphone" id="userphone" value="" placeholder="请输入手机号码" />
               <input type="text" class="ma" maxlength="6" name="ma" id="" value=""  placeholder="验证码"/>
               <span class="getMa">获取验证码</span>
             </div>
             <div class="btn">
               <button type="button" class="getResult">提交获取积分测算结果</button>
             </div>
-            <p class="f">注：系统将在10分钟内通过短信形式将结果发送到您的手机上，请注意查收！</p>
+            <!-- <p class="f">注：系统将在10分钟内通过短信形式将结果发送到您的手机上，请注意查收！</p> -->
+            <p class="f">注：查询结果仅供个人参考，不作为真实测算结果！</p>
           </div>
         </form>
       </div>
 
       <div class="footer">
-        <p>广州博霖教育科技有限公司 备案号：粤ICP备19060809号-3</p>
+        <p>广州博霖教育科技有限公司     &nbsp;粤ICP备19060809号-3</p>     
       </div>
     </div>
 
@@ -464,10 +465,10 @@
         //获取多少人测试显示 ajax number
        
         $.ajax({
-          url: "data.json",
+          url: "http://localhost:9092/data/authCode/getCountNumber",
           type: "get",
           success: function(res) {
-            var number = res.number;
+            var number = res.countNumber;
             console.log(res)
             $('.number').html(number)
           },
@@ -479,11 +480,13 @@
         
         var ma = ""; //验证码
         
+        
         // getMa
         $('.getMa').on('click',function(){
           // 发送手机号码
           $.ajax({
-            url: "data2.json",
+            url: "http://localhost:9092/data/authCode/getCode",
+            data:{telPhone:$("#userphone").val()},
             type: "get",
             success: function(res) {
              ma = res.ma;
@@ -589,19 +592,25 @@
             ageGroups:age,
             nvq:zhicheng,
             areaId:diqu,
-            fraction:fraction  //积分
+            sourceLink: document.referrer ? document.referrer : window.location.href,
+            fromPlatform: "入户宝测试分网"
+           /*  fraction:fraction  //积分 */
           }
           
           $('form')[0].reset();
           console.log('可以发送数据了！',data)
              //发送测试请求
             $.ajax({
-              url: "data.json",
+              url: "http://localhost:9092/data/customer/addCustomer",
               data:data,
-              type: "get",
+              type: "post",
               success: function(res) {
-                
-                layer.msg('测试请求成功,测试结果将发送到您的手机，请注意查收！');
+               //发送一次请求到reids的缓存里面
+               $.post("http://localhost:9092/data/authCode/addCountNumber");
+               var tuiguangren=getQueryString("tuiguangren");
+             /*   alert(tuiguangren); */
+               /*  layer.msg('测试请求成功,测试结果将发送到您的手机，请注意查收！'); */
+                layer.msg('测试请求成功,您所获得的积分数为'+fraction);
               },
               error: function() {
                 layer.msg('测试请求失败！');
@@ -612,6 +621,15 @@
         })
         
         
+        
+        function getQueryString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+			return unescape(r[2]);
+							}
+			return null;
+		}
         
       </script>
   </body>
