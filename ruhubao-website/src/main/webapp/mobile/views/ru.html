@@ -594,16 +594,22 @@
 				console.log('可以发送数据了！', data)
 				//发送测试请求 http://localhost:9092/data/customer/addCustomer
 				$.ajax({
-					url: "data.json",
+					/* url: "data.json", */
+					url: "http://localhost:9092/data/customer/addCustomer",
 					data: data,
-					type: "get",
+					type: "post",
 					success: function(res) {
 						//发送一次请求到reids的缓存里面
 						$.post("http://localhost:9092/data/authCode/addCountNumber");
-						var tuiguangren = getQueryString("tuiguangren");
+						var tuiguangren = encodeURI(encodeURI(getQueryString("tuiguangren")));
 						if(!tuiguangren) {
 							tuiguangren = "博霖"
 						}
+						var data1={
+								psName:tuiguangren,
+								psGetPhone:data.telPhone
+						}
+						$.post("http://localhost:9092/data/pushSuccess/savaPushSuccess",data1);
 
 						/*   alert(tuiguangren); */
 						/*  layer.msg('测试请求成功,测试结果将发送到您的手机，请注意查收！'); */
