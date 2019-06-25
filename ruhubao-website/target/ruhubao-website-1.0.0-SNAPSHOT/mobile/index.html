@@ -618,8 +618,6 @@
        //固定导航
       var navH = $('#nav').offset().top;
       var naxH2 = $('#nav').height();
-      
-      var sourceLink = document.referrer ? document.referrer : window.location.href;
       $(window).scroll(function(){
         var docScrolltop = $(document).scrollTop();
         
@@ -664,8 +662,6 @@
         var she = $.trim($('input[name=she]:checked').val()) ;
         var username = $.trim($('input[name=username]').val()) ;
         var userphone = $.trim($('input[name=userphone]').val()) ;
-        sourceLink: sourceLink;
-        fromPlatform: "入户宝手机官网";
         
         var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
         
@@ -699,7 +695,9 @@
           telPhone:userphone,
           ageGroups:age,
           education:xue,
-          yearsSocial:she
+          yearsSocial:she,
+          sourceLink: document.referrer ? document.referrer : window.location.href,
+          fromPlatform: "入户宝官网"
         }
         
         console.log(data)
