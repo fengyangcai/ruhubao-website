@@ -601,7 +601,7 @@
 					success: function(res) {
 						//发送一次请求到reids的缓存里面
 						$.post("http://localhost:9092/data/authCode/addCountNumber");
-						var tuiguangren = encodeURI(encodeURI(getQueryString("tuiguangren")));
+						var tuiguangren = getQueryString("tuiguangren");
 						if(!tuiguangren) {
 							tuiguangren = "博霖"
 						}
