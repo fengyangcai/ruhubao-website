@@ -29,11 +29,12 @@
 		<jsqlparser.version>0.9.6</jsqlparser.version>
 		<jedis.version>2.9.0</jedis.version>
 		<quartz.version>2.2.2</quartz.version>
-		<shiro.version>1.2.1</shiro.version>
+		<!-- <shiro.version>1.2.1</shiro.version> -->
 		<springfox.version>2.4.0</springfox.version>
 		<!-- <swagger2.version>2.2.2</swagger2.version> <swagger-springmvc.version>1.0.2</swagger-springmvc.version> -->
 		<!-- 文件上传包版本 -->
 		<poi.version>3.9</poi.version>
+		<freemarker.version>2.3.23</freemarker.version>
 
 	</properties>
 
@@ -207,7 +208,7 @@
 
 
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<version>${shiro.version}</version>
@@ -226,7 +227,7 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>${shiro.version}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -257,6 +258,14 @@
 			<!-- <version>1.1.37</version> -->
 			<version>1.2.41</version>
 		</dependency>
+		
+		<!-- 静态化freemarker -->
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>${freemarker.version}</version>
+			</dependency>
+			
 		<!-- springfox依赖 -->
 		<dependency>
 			<groupId>io.springfox</groupId>

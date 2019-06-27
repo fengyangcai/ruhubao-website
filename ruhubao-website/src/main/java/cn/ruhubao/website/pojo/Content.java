@@ -31,9 +31,7 @@ public class Content extends BasePojo {
 
     private String url;
 
-    private String pic;
-
-    private String pic2;
+   
 
     private String content;
 
@@ -85,21 +83,6 @@ public class Content extends BasePojo {
         this.url = url;
     }
 
-    public String getPic() {
-        return pic;
-    }
-
-    public void setPic(String pic) {
-        this.pic = pic;
-    }
-
-    public String getPic2() {
-        return pic2;
-    }
-
-    public void setPic2(String pic2) {
-        this.pic2 = pic2;
-    }
 
     public String getContent() {
         return content;
