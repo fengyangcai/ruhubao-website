@@ -8,7 +8,7 @@
 </head>
 <body>
  
-	<form action="${pageContext.request.contextPath}/pic/upload" method="post" enctype="multipart/form-data">	
+	<form action="${pageContext.request.contextPath}/pic/uploadimage" method="post" enctype="multipart/form-data">	
 		图片： <input type="file"     name = "pictureFile" /><br>
 			<input type = "submit" value = "提交">
 	</form>

@@ -4,30 +4,28 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<!-- 静态资源访问 -->
 	<mvc:default-servlet-handler />
-	
+
 	<mvc:annotation-driven />
 
 	<context:component-scan
 		base-package="cn.ruhubao.website.controller" />
 	<!-- 配置转换服务对象 -->
-	<!-- <bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
-			<set>
-				<bean class="cn.crm.ruhubao.converter.DateConverter"></bean>
-			</set>
-		</property>
-	</bean> -->
+	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> 
+		<property name="converters"> <set> <bean class="cn.crm.ruhubao.converter.DateConverter"></bean> 
+		</set> </property> </bean> -->
 
 	<!-- 引入swagger相关 -->
-   <!--  <mvc:resources mapping="com.swagger-ui.html" location="classpath:/META-INF/resources/" />
-    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" /> -->
+	<!-- <mvc:resources mapping="com.swagger-ui.html" location="classpath:/META-INF/resources/" 
+		/> <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" 
+		/> -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
@@ -51,8 +49,23 @@
 		<!-- defaultEncoding属性：配置字符集编码 -->
 		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
-
-	
+	<!-- 文件中需要配置转换的bean -->
+	<!-- <bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean> -->
 
 
 </beans>
