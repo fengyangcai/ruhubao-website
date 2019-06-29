@@ -3,7 +3,7 @@
   <display-name>ruhubao-website</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-  <!--   <welcome-file>index.jsp</welcome-file> -->
+    <welcome-file>index.jsp</welcome-file>
  
   </welcome-file-list>
   <!-- 解决POST乱码问题 -->

@@ -3,16 +3,12 @@ package cn.ruhubao.website.controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -58,7 +54,7 @@ public class ContentController {
 			}
 		 * */
 		
-		String imageUrl ="http://localhost/pic/uploadimage";
+		String imageUrl ="http://localhost:9091/pic/uploadimage";
 		String imagePath="/ueditor/jsp/upload/";
 		String imageFieldName="uploadimage";
 		int imageMaxSize=2018;
@@ -77,7 +73,7 @@ public class ContentController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> deleteContent(
+	public ResponseEntity<HashMap<String, Object>> deleteContent(
 			@RequestParam(value = "ids", required = false) Long[] ids) {
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
@@ -123,9 +119,10 @@ public class ContentController {
 		 * "其他配置项...": "其他配置值..." }
 		 * 
 		 */
+		
 
 		try {
-			// contentService.saveSelective(content);
+			 contentService.saveSelective(content);
 			return ResponseEntity.ok(null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
