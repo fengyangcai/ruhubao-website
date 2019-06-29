@@ -61,7 +61,7 @@
     <div class="footer">
       <div class="container copyRight clearfix">
         <div class="left">
-          <img src="img/logo2.jpg" alt="">
+          <img src="../img/logo2.jpg" alt="">
           <p class="r">020-82526164</p>
           <p class="f">周一至周日：09：00-18:00</p>
         </div>
@@ -94,6 +94,16 @@
     <script src="../../js/export_world.js"></script>
 
     <script type="text/javascript">
+      
+      //接入客服
+      $('a').not('.link,.nv').on('click', function() {
+        layer.open({
+          type: 2,
+          area: ['800px', '500px'],
+          content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
+        })
+      })
+      
       
     	  $("button.download").click(function(event) {
             $(".pagecontent").wordExport("new");

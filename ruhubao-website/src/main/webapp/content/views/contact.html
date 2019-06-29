@@ -60,7 +60,7 @@
       <div class="footer">
         <div class="container copyRight clearfix">
           <div class="left">
-            <img src="img/logo2.jpg" alt="">
+            <img src="../img/logo2.jpg" alt="">
             <p class="r">020-82526164</p>
             <p class="f">周一至周日：09：00-18:00</p>
           </div>
@@ -91,23 +91,27 @@
     <script src="../../ku/layui/layui.all.js "></script>
 
     <script type="text/javascript">
-      // var mp = new BMap.Map("map");
-      // map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  
-      // mp.centerAndZoom(new BMap.Point(23.13,113.40), 12);
-      // mp.enableScrollWheelZoom();
+      
+      
+      //接入客服
+      $('a').not('.link,.nv').on('click', function() {
+        layer.open({
+          type: 2,
+          area: ['800px', '500px'],
+          content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
+        })
+      })
+      
+      
       
       var map = new BMap.Map("map");          // 创建地图实例  
-      var point = new BMap.Point(116.404, 39.915);  // 创建点坐标 
-      var point2 = new BMap.Point(23.13,113.40);  // 创建点坐标  
+      var point = new BMap.Point(113.40,23.130);  // 创建点坐标   
 
-      map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别  
+      map.centerAndZoom(point,15);                 // 初始化地图，设置中心点坐标和地图级别  
       map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
       var marker = new BMap.Marker(point);        // 创建标注  
-      var marker2 = new BMap.Marker(point2); 
-      map.addOverlay(marker);  
-      map.addOverlay(marker2);  
+      map.addOverlay(marker);   
 
-      // var map = new BMap.Map("allmap");
       
     </script>
   </body>
