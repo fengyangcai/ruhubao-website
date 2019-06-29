@@ -1,0 +1,33 @@
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>KindEditor JSP</title>
+	<link rel="stylesheet" href="../../ku/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="../../ku/kindeditor/plugins/code/prettify.css" />
+	
+</head>
+<body>
+  
+	<form name="example" method="post" action="">
+		<textarea id="editor_id" name="content" style="width:700px;height:300px;">
+    1111
+    </textarea>
+		<input type="submit" name="button" value="提交内容" /> 
+	</form>
+  
+  
+  <script charset="utf-8" src="../../ku/kindeditor/kindeditor-all.js"></script>
+  <script charset="utf-8" src="../../ku/kindeditor/lang/zh-CN.js"></script>
+  <script type="text/javascript">
+    
+  	 KindEditor.ready(function(K) {
+        window.editor = K.create('#editor_id');
+     });
+  </script>
+</body>
+</html>
+
+
+
