@@ -41,6 +41,7 @@ String htmlData = request.getParameter("content") != null ? request.getParameter
 				/* fileManagerJson : '../jsp/file_manager_json.jsp', */
 				//开启图片空间
 				allowFileManager : true,
+				
 				/* afterCreate : function() {
 					var self = this;
 					K.ctrl(document, 13, function() {

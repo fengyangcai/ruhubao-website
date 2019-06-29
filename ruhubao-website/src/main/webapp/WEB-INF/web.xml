@@ -34,7 +34,7 @@
 	<servlet-mapping>
 		<servlet-name>ruhubao-website</servlet-name>
 		<!-- <url-pattern>*.html</url-pattern> -->
-		<url-pattern>/</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 		
 	</servlet-mapping>
   

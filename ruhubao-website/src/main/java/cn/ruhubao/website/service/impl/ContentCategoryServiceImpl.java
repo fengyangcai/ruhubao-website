@@ -72,7 +72,7 @@ public class ContentCategoryServiceImpl extends BaseServiceImpl<ContentCategory>
 		
 		
 	}
-	
+		
 	
 
 }

@@ -13,14 +13,15 @@ public interface ContentCategoryService extends BaseService<ContentCategory>{
 
 	/**
 	 * 删除内容分类
-	 * @param contentCategroy 内容分类
+	 * @param contentCategroy 内容分类 
 	 * @return
 	 */
 	void deleteContentCategory(ContentCategory contentCategroy);
 		
-		
-	//查询类目
 	
-
+	
+	
+	
 	
 }
+

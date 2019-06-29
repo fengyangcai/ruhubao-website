@@ -32,7 +32,7 @@ public class PicUploadController {
 	private static HashMap<String, Object> result =new HashMap<String, Object>();;
 	//@RequestMapping(value = "/uploadimage", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/uploadimage")
-	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("pictureFile")MultipartFile pictureFile) throws Exception {
+	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("dir")MultipartFile pictureFile) throws Exception {
 		
 		/*//成功时
 		{
