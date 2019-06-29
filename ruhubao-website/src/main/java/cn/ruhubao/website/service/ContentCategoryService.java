@@ -19,6 +19,7 @@ public interface ContentCategoryService extends BaseService<ContentCategory>{
 	void deleteContentCategory(ContentCategory contentCategroy);
 		
 		
+	//查询类目
 	
 
 	

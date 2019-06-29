@@ -24,11 +24,20 @@ public class ContentCategoryController {
 			ContentCategory result=contentCategoryService.saveContentCategory( contentCategory);
 			return ResponseEntity.ok(result);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		
 	}
+	
+	/*
+	 * public ResponseEntity<ContentCategory> getCategoryIds(ArrayList<Long> ids,
+	 * Long categoryId){
+	 * 
+	 * contentCategoryService.c
+	 * 
+	 * }
+	 */
 	
 }

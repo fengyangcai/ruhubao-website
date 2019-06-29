@@ -43,6 +43,7 @@ public class ContentController {
 	@RequestMapping(value = "/controlle")
 	public ResponseEntity<Map<String,Object>> controller(HttpServletRequest request){
 		//默认需要传回去的参数
+		
 		/*
 		  {
     "imageUrl": "http://localhost/ueditor/php/controller.php?action=uploadimage",

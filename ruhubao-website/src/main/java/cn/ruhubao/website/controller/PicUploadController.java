@@ -17,6 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +32,7 @@ public class PicUploadController {
 	private static HashMap<String, Object> result =new HashMap<String, Object>();;
 	//@RequestMapping(value = "/uploadimage", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/uploadimage")
-	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,MultipartFile pictureFile) throws Exception {
+	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("pictureFile")MultipartFile pictureFile) throws Exception {
 		
 		/*//成功时
 		{
