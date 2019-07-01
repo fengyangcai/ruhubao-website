@@ -143,8 +143,6 @@
         
         
        
-        // 模拟树形数据
-       
         
         //编译器创建 html = editor.html();
         KindEditor.ready(function(K) {
@@ -154,40 +152,47 @@
           window.editor2 = K.create('#editor_id2');
         });
         
-        //获取树形数据
+        //获取树形数据  
         $.ajax({
-          url: '../js/data.json',
+          url: '../js/data2.json',
           type: 'get',
           success: function(res) {
             tree_data = res;
             
-            // console.log(tree_data)
+            
+            console.log(tree_data)
              //树形结构
             tree.render({
               elem: '#test12',
               data: tree_data,
               showCheckbox: true, //是否显示复选框
-              id: 'demoId1',
+              id: 'demoId',
               showLine: false,
-              edit: ['add', 'update', 'del'], //操作节点的图标
+              spread: true,
+              edit: false, //操作节点的图标 ['add', 'update', 'del']
               isJump: true, //是否允许点击节点时弹出新窗口跳转
               click: function(obj) {
-                var data = obj.data; //获取当前点击的节点数据
+                var data = obj.data; //获取当前点击的节点数据 mian-content box1
                 
-                console.log(data.children);
+                console.log(data.isParent);
+                for(var i=0;i<tree_data.length;i++){
+                  tree_data[i].index = i;
+                }
                 
-                if (!data.children) { //最底层的文章
+                
+                if (data.parentId == 1 && data.isParent == false) { //文章
                   //编辑 
+                  // ajax 获取数据
+                  
                   $('.mian-content').addClass('hide');
                   $('.box2').removeClass('hide');
-                  console.log(data.children);
+                  eidt_id = obj.data.id;
                   
-                  // ajax 获取数据
-                  var listId = obj.data.id;
+                  console.log(obj,eidt_id)
                   $.ajax({
                     url: '../js/getDate.json',
                     data: {
-                      id:listId
+                      id:eidt_id
                     },
                     type: 'GET',
                     success: function(res) {
@@ -214,6 +219,66 @@
                     }
                   })
                   
+                }else if(data.parentId == 0 && data.isParent == true){ //一级目录
+                 var id = obj.data.id;
+                 console.log(obj,id)
+                 
+                  // 获取子类数据
+                  $.ajax({
+                    url: '../js/data2.json',
+                    data: {
+                      id:id
+                    },
+                    type: 'GET',
+                    success: function(res) {
+                     
+                      
+                      tree_data[obj.data.index].children = res;//添加二级目录
+                      for(var i=0;i<tree_data[obj.data.index].children.length;i++){
+                        tree_data[obj.data.index].children[i].index = i;
+                      }
+                      console.log(obj.data.index,obj)
+                      console.log(tree_data);
+                      //重新渲染树形结构
+                      tree.reload('demoId', {
+                        spread: true,
+                        edit:['add', 'update', 'del']
+                      });
+                    },
+                    error: function(res) {
+                      layer.msg('获取数据失败');
+                    }
+                  })
+                 
+                }else if(data.parentId == 1 && data.isParent == true){ //显示文章列表()
+                  //获取文章子目录
+                 
+                  var id = obj.data.id;
+                  console.log(obj.data.id,obj.data,555)
+                  $.ajax({
+                    url: '../js/data2.json',
+                    data: {
+                      id:id
+                    },
+                    type: 'GET',
+                    success: function(res) {
+                     
+                      tree_data[obj.data.index].children = res;//添加三级目录
+                      for(var i=0;i<tree_data[obj.data.index].children.length;i++){
+                        tree_data[obj.data.index].children[i].index = i;
+                      }
+                      console.log(obj.data.index,obj)
+                      console.log(tree_data);
+                      //重新渲染树形结构
+                      tree.reload('demoId', {
+                        spread: true,
+                        edit:false
+                      });
+                    },
+                    error: function(res) {
+                      layer.msg('获取数据失败');
+                    }
+                  })
                 }
               },
               accordion: true,
@@ -227,7 +292,8 @@
                   $('.mian-content').addClass('hide');
                   $('.box1').removeClass('hide');
                   console.log(data.children);
-                  
+                  m_id = obj.data.id;
+                  console.log(m_id,obj)
                 }
                 if (type == 'update') {
                   //编辑更新 ajax
@@ -286,6 +352,7 @@
         
         
         // 添加文章提交发布  title  user lianmu time
+        var m_id = '';  //文章类目id;
         $('.postDate1-add').on('click', function() {
           
           if (!$('input[name=title]').val()) {
@@ -315,7 +382,7 @@
             lanmu: $('select[name=lianmu]').val(), // 发布类目
             time: $('input[name=time]').val(), // 发布时间
             content: editor.html(), // 发布内容
-            id: "", //类型栏目id
+            id: m_id, //类型栏目id
           }
           
           //发送请求
@@ -358,6 +425,8 @@
           });
           return false;
         })
+        
+        var eidt_id = ''; //编辑文章的id
         $('.postDate2-save').on('click',function(){
           layer.confirm('确定保存吗？', {
             btn: ['确定', '取消']
@@ -369,7 +438,7 @@
                lanmu: $('select[name=lianmu]').val(), // 发布类目
                time: $('input[name=time]').val(), // 发布时间
                content: editor2.html(), // 发布内容
-               id: "", //类型栏目id
+               id: eidt_id, //类型栏目id
              }
              addEditAjax('../js/data.json','post','edit',data,'保存成功！','保存失败！')
              layer.closeAll();
