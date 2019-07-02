@@ -11,11 +11,28 @@
     <link rel="stylesheet" type="text/css" href="ku/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <style type="text/css">
-      [v-cloak] {
-        display: none;
-      }
-    </style>
+    
+    <script type="text/javascript">
+    	function goPAGE() {
+    		if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+    			// var link = document.createElement('link');
+    			// link.href = 'css/ru_moble.css';
+    			// link.rel = 'stylesheet';
+    			// link.type = 'text/css';
+    			// document.getElementsByTagName('head').item(0).appendChild(link);
+          window.location.href = "mobile/index.html";
+    		} else {
+    			// var link = document.createElement('link');
+    			// link.href = 'css/ru1.css';
+    			// link.rel = 'stylesheet';
+    			// link.type = 'text/css';
+    			// document.getElementsByTagName('head').item(0).appendChild(link);
+    			console.log("pc")
+    		}
+    	}
+    	goPAGE();
+    </script>
+  
   </head>
   <body>
 
@@ -638,8 +655,7 @@
       }
       // show_list(data_list)
      
-      
-      
+     
       
     </script>
   </body>
