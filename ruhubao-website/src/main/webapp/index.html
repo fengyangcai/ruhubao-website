@@ -11,11 +11,15 @@
     <link rel="stylesheet" type="text/css" href="ku/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-
+    <style type="text/css">
+      [v-cloak] {
+        display: none;
+      }
+    </style>
   </head>
   <body>
 
-    <div class="app">
+    <div class="app" id="app">
       <div class="logo-top">
         <div class="container logo-box">
           <img src="img/logo.jpg" alt="">
@@ -91,8 +95,8 @@
           </div>
         </div>
         <div class="page3">
-          <div class="page3-box container clearfix">
-            <div>
+          <div class="page3-box container clearfix"  id="wp">
+            <!-- <div class="item">
               <h3>
                 <img src="img/b1.jpg" alt="">
                 <span>最新政策</span>
@@ -120,7 +124,7 @@
                 </li>
               </ul>
             </div>
-            <div>
+            <div class="item">
               <h3>
                 <img src="img/b2.jpg" alt="">
                 <span>办事指南</span>
@@ -148,7 +152,7 @@
                 </li>
               </ul>
             </div>
-            <div>
+            <div class="item">
               <h3>
                 <img src="img/b3.jpg" alt="">
                 <span>服务窗口</span>
@@ -176,7 +180,7 @@
                 </li>
               </ul>
             </div>
-            <div>
+            <div class="item">
               <h3>
                 <img src="img/b4.jpg" alt="">
                 <span>常见问题</span>
@@ -204,8 +208,12 @@
                 </li>
               </ul>
             </div>
-            
+            -->
           </div>
+        
+        <!-- <div id="wp" style="height: 400px;background: #C9C9C9;"></div> -->
+          
+        
         </div>
         <div class="page4">
           <div><img src="img/line.jpg" alt="" class="page4-img"></div>
@@ -327,7 +335,7 @@
             </div>
             <p class="t">地址：广州市天河区车陂加悦大厦十楼1009室</p>
             <div class="copy">
-              <span>版权所有©2019  广州博霖教育科技有限公司  备案号：粤ICP备19060809号-3</span>
+              <span><span>版权所有©2019  广州博霖教育科技有限公司  备案号：</span><a href="http://beian.miit.gov.cn/" class="nv">粤ICP备19060809号-3</a></span>
             </div>
           </div>
           <div class="right">
@@ -337,13 +345,47 @@
       </div>
     
     </div>
-
-
-
+    
+    
+    
+    
+   <!-- img/b1.jpg -->
+    <script id="tpl" type="text/html">
+      <%for (var i = 0; i < list.length; i++) {%>
+        <div class="item">
+          <h3>
+            <img src="<%:='img/b'+(i+1)+'.jpg'%>" alt="">
+            <span><%:=list[i].title%></span>
+          </h3>
+           <ul>
+            <%for (var j = 0; j < list[i].list.length; j++) {%>
+                <li>
+                  <span class="dian"></span>
+                  <a href="<%:=list[i].list[j].url%>" title="<%:=list[i].list[j].title%>" class="link"><%:=list[i].list[j].title%></a>
+                </li>
+            <%}%>
+           </ul>
+        </div>
+      <%}%>
+    </script>
+    
     <script src="js/jquery2.01.js"></script>
     <script src="ku/layui/layui.all.js "></script>
     <script src="js/swiper.min.js"></script>
+    <script src="ku/template/template.js"></script>
+    
+    
     <script type="text/javascript">
+      
+      //接入客服
+      $('a').not('.link,.nv').on('click', function() {
+        layer.open({
+          type: 2,
+          area: ['800px', '500px'],
+          content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
+        })
+      })
+      
       // 开启轮播图 content-box  .swiper-container
       var swiper = new Swiper('.page1', {
         speed: 900,
@@ -356,16 +398,6 @@
         },
         loop: true,
       });
-      
-      
-      //接入客服
-      $('a').not('.link,.nv').on('click', function() {
-        layer.open({
-          type: 2,
-          area: ['800px', '500px'],
-          content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
-        })
-      })
       
       
        // 提交表单
@@ -437,10 +469,176 @@
             layer.msg('提交失败！');
           }
         })
-          
+         
         return false;
         
       })
+      
+      // 模拟数据
+      // var data_list = {
+      //   list:[
+      //   {
+      //     title:"最新政策",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         src:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //       ]
+      //   }, {
+      //     title:"办事指南",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //       ]
+      //   }, {
+      //     title:"服务窗口",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //       ]
+      //   }, {
+      //     title:"常见问题",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //      ]
+      //   }
+      // ]
+      // }
+      // 
+      
+      //请求文章数据
+      require()
+      var data_list = {};
+      function require(){
+        $.ajax({
+          url: 'js/data.json',
+          type: 'GET',
+          data:{
+            rows:4
+          },
+          success: function(res) {
+            console.log(res)
+            data_list.list = res.rows;
+            console.log(data_list,data_list.list[0].id)
+            
+            for(var i=0;i<data_list.list.length;i++){
+              var index = i;
+              require_list(data_list.list[0].id,index,data_list);
+            }
+            
+          },
+          error: function(res) {
+            layer.msg('获取数据失败');
+          }
+        })
+      }
+      function require_list(id,index,data_list){
+         $.ajax({
+          url: 'js/data-list.json',
+          type: 'GET',
+          data:{
+            categoryId:id,
+            rows:5
+          },
+          success:function(res){
+            var newdata = res.rows;
+            data_list.list[index].list = newdata;
+            console.log(data_list);
+            setTimeout(function(){
+              show_list(data_list)
+            },1)
+          },
+          error:function(){
+            layer.msg('获取数据失败');
+          }
+        })
+      }
+      
+      
+      function show_list(data){
+          
+        //渲染模板
+        var html = template(document.getElementById('tpl').innerHTML, data);
+        
+        // console.log(html);
+        document.getElementById('wp').innerHTML = html;
+        
+      }
+      // show_list(data_list)
+     
+      
       
       
     </script>

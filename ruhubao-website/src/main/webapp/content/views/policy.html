@@ -10,10 +10,14 @@
     <link rel="shortcut icon" type="images/x-icon" href="../../img/bolinglink.png">
     <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../css/polity.css" />
-    
+    <style type="text/css">
+    	[v-cloak] {
+          display: none;
+      }
+    </style>
 	</head>
 	<body>
-    <div class="app">
+    <div class="app" id="app" v-cloak>
       <div class="logo-top">
         <div class="container logo-box">
           <img src="../img/logo.jpg" alt="">
@@ -33,171 +37,29 @@
           </p>
           <div class="page1 page clearfix" id="page1">
             <ul>
-              <li class="clearfix">
-                <img src="../img/zc1.jpg"  class="f_l list-img" >
+              <li class="clearfix" v-for="item in data_list">
+                <img :src="item.img_src"  class="f_l list-img" >
                 <div class="list f_l">
                   <p class="time">
-                    <span>2019-05-25</span>
+                    <span>{{ item.time }}</span>
                     <span class="line"></span>
                   </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
+                  <p class="title" :title="item.title">
+                    <a href="showContent.html" class="link">{{ item.title }}</a>
                   </p>
                   <div class="btn">
                     <a href="showContent.html" class="link">点击了解</a>
                   </div>
                 </div>
               </li>
-              <li>
-                <img src="../img/zc2.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <img src="../img/zc3.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <img src="../img/zc4.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <img src="../img/zc5.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="page2 page hide clearfix" id="page2">
-             <ul>
-              <li class="clearfix">
-                <img src="../img/zc1.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <img src="../img/zc2.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <img src="../img/zc3.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="page3 page hide clearfix"   id="page3">
-             <ul>
-              <li>
-                <img src="../img/zc4.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <img src="../img/zc5.jpg"  class="f_l list-img" >
-                <div class="list f_l">
-                  <p class="time">
-                    <span>2019-05-25</span>
-                    <span class="line"></span>
-                  </p>
-                  <p class="title" title="《广州市涞水人员积分制服务管理规定通过审议》">
-                    <a href="showContent.html" class="link">《广州市涞水人员积分制服务管理规定通过审议》</a>
-                  </p>
-                  <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
-                  </div>
-                </div>
-              </li>
+              
             </ul>
           </div>
           
           <div class="page-btn-box">
-            <a href="#page1" class="nv page-btn">1</a>
-            <a href="#page2" class="nv page-btn">2</a>
-            <a href="#page3" class="nv page-btn">3</a>
+            <a href="#page1" data-number="1" v-on:click="getDataList(1)"  class="nv page-btn">1</a>
+            <a href="#page2"  data-number="2" v-on:click="getDataList(2)"   class="nv page-btn">2</a>
+            <a href="#page3" data-number="3" v-on:click="getDataList(3)"   class="nv page-btn">3</a>
           </div>
         </div>
       </div>
@@ -219,7 +81,7 @@
             </div>
             <p class="t">地址：广州市天河区车陂加悦大厦十楼1009室</p>
             <div class="copy">
-              <span>版权所有©2019  广州博霖教育科技有限公司  备案号：粤ICP备19060809号-3</span>
+              <span><span>版权所有©2019  广州博霖教育科技有限公司  备案号：</span><a href="http://beian.miit.gov.cn/" class="nv"></a>粤ICP备19060809号-3</span>
             </div>
           </div>
           <div class="right">
@@ -232,7 +94,59 @@
    
     <script src="../../js/jquery2.01.js"></script>
     <script src="../../ku/layui/layui.all.js "></script>
+    <script src="../js/Vue.js"></script>
     <script type="text/javascript">
+     Vue.prototype.$ = jQuery;
+    
+    
+     var vm = new Vue({
+       el:'#app',
+       data:{
+         data_list:[]//数据列表
+       },
+       methods:{
+         getDataList:function(num){
+          var pagenumber = num;
+          
+          var _this = this;
+          this.$.ajax({
+            url: '../js/data4.json',
+            data: {
+              pageNum:pagenumber
+            },
+            type: 'GET',
+            success: function(res) {
+              _this.data_list = res;
+              console.log(res,_this.data_list)
+            },
+            error: function(res) {
+              layer.msg('获取数据失败');
+            }
+          })
+           
+         }
+       },
+       mounted:function(){
+         //获取数据
+         var _this = this;
+         this.$.ajax({
+           url: '../js/data3.json',
+           data: {
+             pageNum:1
+           },
+           type: 'GET',
+           success: function(res) {
+             _this.data_list = res;
+             console.log(res,_this.data_list,88888)
+           },
+           error: function(res) {
+             layer.msg('获取数据失败');
+           }
+         })
+                          
+       }
+     })
+      
     	 //接入客服
     	$('a').not('.link,.nv').on('click', function() {
     	  layer.open({
