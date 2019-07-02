@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,8 @@ public class ContentController {
 
 	@Autowired
 	private FreeMarkerConfig freeMarkerConfig;
+	@Value("${CONTENT_HTML_PATH}")
+	private String CONTENT_HTML_PATH;
 	
 	
 	private static Map<String, Object> result =new HashMap<String, Object>();
@@ -171,7 +174,8 @@ public class ContentController {
 				FileWriter writer = new FileWriter(new File(fileUrlAndName));
 				Map<String, Object> map = new HashMap<String, Object>();
 				
-				String strUrl = UrlRequestUtils.getContextUrl(request) +"content"+File.separator +"ftl"+File.separator + id + ".html";//拿到路径全称。
+				//String strUrl = UrlRequestUtils.getContextUrl(request) +"content"+File.separator +"ftl"+File.separator + id + ".html";//拿到路径全称。
+				String strUrl = CONTENT_HTML_PATH+File.separator +"content"+File.separator +"ftl"+File.separator + id + ".html";
 				content.setUrl(strUrl);
 				// 把需要展示的内容存到map中。
 				map.put("content", content.getContent());	
@@ -179,6 +183,9 @@ public class ContentController {
 				map.put("pic",content.getPic());
 				map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(content.getCreated()));
 				map.put("url",strUrl);
+				
+				map.put("nextUrl","");
+				map.put("nextTitle","");
 
 				// 输出
 				template.process(map, writer);

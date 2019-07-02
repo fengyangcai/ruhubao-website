@@ -7,13 +7,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +31,16 @@ public class PicUploadController {
 	// 这是一个java对象与jason格式字符串互转的工具lei
 
 	private static final ObjectMapper MAPPER = new ObjectMapper();
-	private static HashMap<String, Object> result =new HashMap<String, Object>();;
+	private static HashMap<String, Object> result =new HashMap<String, Object>();
+	
+	
+	@Value("${PIC_PATH}")
+	private String PIC_PATH;
+	
+	@Value("${PIC_REQUEST_URL}")
+	private String PIC_REQUEST_URL;
+	
+	
 	//@RequestMapping(value = "/uploadimage", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/uploadFile")
 	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("pictureFile")MultipartFile pictureFile) throws Exception {
@@ -49,29 +58,29 @@ public class PicUploadController {
 		
 		//把文件保存到服务器的硬盘(位置:项目根目录/upload)
 		//获取upload目录的绝对路径 ； e:/xxx/bos-web/upload  ServletContext.getRealPath():获取web项目下的某个目录绝对路径
-		String uploadPath=request.getSession().getServletContext().getRealPath("/content/uploadimg");
-		System.out.println(uploadPath);
+		//String uploadPath=request.getSession().getServletContext().getRealPath("/content/uploadimg");
+		//System.out.println(uploadPath);
 		//生成随机文件名称  uuid.jpg
 		String uuid = UUID.randomUUID().toString();
 		//获取文件后缀名
-		System.out.println("----------------");
-		System.out.println(pictureFile);
-		System.out.println("----------------");
+		
+		     
 		String extName = FilenameUtils.getExtension(pictureFile.getOriginalFilename());
 		String fileName = uuid+"."+extName;
 		
 		//FileUtils.copyFile( pictureFile, new File(uploadPath+"/"+fileName));
 		
 		// 以相对路径保存重名命后的图片
-		pictureFile.transferTo(new File(uploadPath+File.separator+fileName));
+		//pictureFile.transferTo(new File(uploadPath+File.separator+fileName));
+		pictureFile.transferTo(new File(PIC_PATH+File.separator+fileName));
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		//返回去的是相对路径
-		String url =request.getContextPath()+"/content/uploadimg/"+fileName;	
-		String url1=UrlRequestUtils.getContextUrl(request)+"content/uploadimg/"+fileName;
+		String url =PIC_REQUEST_URL+File.separator+fileName;	
+		//String url1=UrlRequestUtils.getContextUrl(request)+"content/uploadimg/"+fileName;
 		//pictureFile.transferTo(new File(url));
 			
 		map.put("error", 0);
-		map.put("url", url1);
+		map.put("url", url);
 		
 				
 		return ResponseEntity.ok(map);

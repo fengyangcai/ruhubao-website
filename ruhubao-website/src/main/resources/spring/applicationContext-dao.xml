@@ -28,6 +28,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:db.properties</value>
+				<value>classpath:env.properties</value>
 
 			</list>
 		</property>
