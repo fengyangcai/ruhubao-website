@@ -583,19 +583,19 @@
       var data_list = {};
       function require(){
         $.ajax({
-          url: 'js/data.json',
+          url: '../content/category',
           type: 'GET',
           data:{
-            rows:4
+        	id:1 
           },
           success: function(res) {
             console.log(res)
-            data_list.list = res.rows;
+            data_list.list = res;
             console.log(data_list,data_list.list[0].id)
             
             for(var i=0;i<data_list.list.length;i++){
               var index = i;
-              require_list(data_list.list[0].id,index,data_list);
+              require_list(data_list.list[i].id,index,data_list);
             }
             
           },
@@ -606,7 +606,8 @@
       }
       function require_list(id,index,data_list){
          $.ajax({
-          url: 'js/data-list.json',
+         /*  url: 'js/data-list.json', */
+         url:'../content',
           type: 'GET',
           data:{
             categoryId:id,

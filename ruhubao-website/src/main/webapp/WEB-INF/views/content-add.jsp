@@ -19,10 +19,10 @@
 	            <td><input class="easyui-textbox" name="titleDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
 	            </td>
 	        </tr>
-	         <tr>
+	        <!--  <tr>
 	            <td>URL:</td>
 	            <td><input class="easyui-textbox" type="text" name="url" style="width: 280px;"></input></td>
-	        </tr>
+	        </tr> -->
 	        <tr>
 	            <td>图片:</td>
 	            <td>
@@ -30,13 +30,13 @@
 	                <br><input type="hidden" name="pic" />
 	            </td>
 	        </tr>
-	        <tr>
+	        <!-- <tr>
 	            <td>图片2:</td>
 	            <td>
 	            	<a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
 	            	<br><input type="hidden" name="pic2" />
 	            </td>
-	        </tr>
+	        </tr> -->
 	        <tr>
 	            <td>内容:</td>
 	            <td>
