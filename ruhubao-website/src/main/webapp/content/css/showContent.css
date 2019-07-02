@@ -97,13 +97,13 @@ input {
 }
 .app .content .pagecontent .title {
   color: #4c4c4c;
-  font-size: 36px;
+  font-size: 28px;
   line-height: 36px;
   padding: 90px 0 28px;
 }
 .app .content .pagecontent .time {
   color: #6b6b6b;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 24px;
   padding-bottom: 62px;
 }
