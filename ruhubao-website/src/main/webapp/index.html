@@ -7,6 +7,7 @@
     <meta name="keywords" content="博霖教育|学历报考中心|学历提升|广东省成人学历报名中心" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
     <link rel="shortcut icon" type="images/x-icon" href="img/bolinglink.png">
     <link rel="stylesheet" type="text/css" href="ku/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
@@ -20,7 +21,7 @@
     			link.rel = 'stylesheet';
     			link.type = 'text/css';
     			document.getElementsByTagName('head').item(0).appendChild(link);
-          window.location.href = "mobile/index.html";
+          
     		} else {
     			var link = document.createElement('link');
     			link.href = 'css/index.css';
@@ -30,7 +31,8 @@
     			console.log("pc")
     		}
     	}
-    	goPAGE();
+    	
+      goPAGE();
     </script>
   
   </head>
@@ -40,7 +42,7 @@
       <div class="logo-top">
         <div class="container logo-box">
           <img src="img/logo.jpg" alt="">
-          <a href="index.html" style="margin-left: 45px;" class="nv">首页</a>
+          <a href="index.html" style="margin-left: 45px;" class="nv first">首页</a>
           <a href="ruhu-way/index.html" class="nv">入户方式 </a>
           <a href="content/views/policy.html" class="nv">入户政策</a>
           <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
@@ -106,7 +108,7 @@
             <div>
               <a href="javascript:;"><img src="img/f3.jpg" alt=""></a>
             </div>
-            <div style="margin: 0;">
+            <div class="last">
               <a href="javascript:;"><img src="img/f4.jpg" alt=""></a>
             </div>
           </div>
@@ -352,7 +354,7 @@
             </div>
             <p class="t">地址：广州市天河区车陂加悦大厦十楼1009室</p>
             <div class="copy">
-              <span><span>版权所有©2019  广州博霖教育科技有限公司  备案号：</span><a href="http://beian.miit.gov.cn/" class="nv">粤ICP备19060809号-3</a></span>
+              <span><span>版权所有©2019  广州博霖教育科技有限公司 &nbsp;</span><a href="http://beian.miit.gov.cn/" class="nv">粤ICP备19060809号-3</a></span>
             </div>
           </div>
           <div class="right">
@@ -362,8 +364,6 @@
       </div>
     
     </div>
-    
-    
     
     
    <!-- img/b1.jpg -->
@@ -395,13 +395,24 @@
     <script type="text/javascript">
       
       //接入客服
-      $('a').not('.link,.nv').on('click', function() {
-        layer.open({
-          type: 2,
-          area: ['800px', '500px'],
-          content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
-        })
-      })
+      function goPAGE() {
+      	if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+      		 $('a').not('.link,.nv').on('click', function() {
+      		  window.location.href = "https://www16.53kf.com/webCompany.php?kf_sign=TI4NDMTU1OgxNjExMDkwNDA0NTUzMDA4NzIxODc2NzM%253D&arg=10187673&style=1";
+      		})
+      	} else {
+      		 $('a').not('.link,.nv').on('click', function() {
+      		  layer.open({
+      		    type: 2,
+      		    area: ['800px', '500px'],
+      		    content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
+      		  })
+      		})
+      		console.log("pc")
+      	}
+      }
+      goPAGE()
+     
       
       // 开启轮播图 content-box  .swiper-container
       var swiper = new Swiper('.page1', {
@@ -474,6 +485,7 @@
         }
         
         console.log(data)
+        // http://120.79.160.22:9092/ruhubao-web-1.0.0-SNAPSHOT/data/customer/addCustomer
         $('form')[0].reset();
         $.ajax({
           url: "http://120.79.160.22:9092/ruhubao-web-1.0.0-SNAPSHOT/data/customer/addCustomer",
@@ -492,158 +504,158 @@
       })
       
       // 模拟数据
-      // var data_list = {
-      //   list:[
-      //   {
-      //     title:"最新政策",
-      //     list:[
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         src:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
+      var data_list = {
+        list:[
+        {
+          title:"最新政策",
+          list:[
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              src:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            }
+            ]
+        }, {
+          title:"办事指南",
+          list:[
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            }
+            ]
+        }, {
+          title:"服务窗口",
+          list:[
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            }
+            ]
+        }, {
+          title:"常见问题",
+          list:[
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            },
+            {
+              title:'广州入户条件',
+              url:'https://www.baidu.com'
+            }
+           ]
+        }
+      ]
+      }
+      
+      
+      //请求文章数据  ../content/category
+      // require()
+      // var data_list = {};
+      // function require(){
+      //   $.ajax({
+      //     url: '../content/category',
+      //     type: 'GET',
+      //     data:{
+      //   	id:1 
+      //     },
+      //     success: function(res) {
+      //       console.log(res)
+      //       data_list.list = res;
+      //       console.log(data_list,data_list.list[0].id)
+      //       
+      //       for(var i=0;i<data_list.list.length;i++){
+      //         var index = i;
+      //         require_list(data_list.list[i].id,index,data_list);
       //       }
-      //       ]
-      //   }, {
-      //     title:"办事指南",
-      //     list:[
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       }
-      //       ]
-      //   }, {
-      //     title:"服务窗口",
-      //     list:[
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       }
-      //       ]
-      //   }, {
-      //     title:"常见问题",
-      //     list:[
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       },
-      //       {
-      //         title:'广州入户条件',
-      //         url:'https://www.baidu.com'
-      //       }
-      //      ]
-      //   }
-      // ]
+      //       
+      //     },
+      //     error: function(res) {
+      //       layer.msg('获取数据失败');
+      //     }
+      //   })
+      // }
+      // function require_list(id,index,data_list){
+      //    $.ajax({
+      //    /*  url: 'js/data-list.json',    ../content*/
+      //    url:'../content',
+      //     type: 'GET',
+      //     data:{
+      //       categoryId:id,
+      //       rows:5
+      //     },
+      //     success:function(res){
+      //       var newdata = res.rows;
+      //       data_list.list[index].list = newdata;
+      //       console.log(data_list);
+      //       setTimeout(function(){
+      //         show_list(data_list)
+      //       },1)
+      //     },
+      //     error:function(){
+      //       layer.msg('获取数据失败');
+      //     }
+      //   })
       // }
       // 
-      
-      //请求文章数据
-      require()
-      var data_list = {};
-      function require(){
-        $.ajax({
-          url: '../content/category',
-          type: 'GET',
-          data:{
-        	id:1 
-          },
-          success: function(res) {
-            console.log(res)
-            data_list.list = res;
-            console.log(data_list,data_list.list[0].id)
-            
-            for(var i=0;i<data_list.list.length;i++){
-              var index = i;
-              require_list(data_list.list[i].id,index,data_list);
-            }
-            
-          },
-          error: function(res) {
-            layer.msg('获取数据失败');
-          }
-        })
-      }
-      function require_list(id,index,data_list){
-         $.ajax({
-         /*  url: 'js/data-list.json', */
-         url:'../content',
-          type: 'GET',
-          data:{
-            categoryId:id,
-            rows:5
-          },
-          success:function(res){
-            var newdata = res.rows;
-            data_list.list[index].list = newdata;
-            console.log(data_list);
-            setTimeout(function(){
-              show_list(data_list)
-            },1)
-          },
-          error:function(){
-            layer.msg('获取数据失败');
-          }
-        })
-      }
-      
       
       function show_list(data){
           
@@ -654,7 +666,9 @@
         document.getElementById('wp').innerHTML = html;
         
       }
-      // show_list(data_list)
+      
+      
+      show_list(data_list)
      
      
       
