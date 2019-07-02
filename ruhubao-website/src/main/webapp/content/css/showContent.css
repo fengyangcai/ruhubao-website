@@ -122,9 +122,15 @@ input {
   margin: 0 auto;
   margin-top: 30px;
   line-height: 23px;
-  font-size: 22px;
+  font-size: 16px;
   padding: 33px 0 54px 0;
   border-top: 1px solid #bababa;
+}
+.app .content .pagecontent .recommend span {
+  font-size: 18px;
+}
+.app .content .pagecontent .recommend a {
+  font-size: 16px;
 }
 .app .content .pagecontent .recommend a:hover {
   color: red;
@@ -135,13 +141,13 @@ input {
 }
 .app .content .pagecontent .recommend .btn .layui-btn {
   display: inline-block;
-  width: 120px;
-  line-height: 46px;
+  width: 100px;
+  line-height: 44px;
   border: 0;
   outline: none;
   background: #009688;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   letter-spacing: 4px;
 }
