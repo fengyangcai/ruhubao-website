@@ -5,4 +5,7 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface ContentMapper extends Mapper<Content>{
 
+	
+	//public int savaContent(Content content);
+	
 }

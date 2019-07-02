@@ -9,7 +9,9 @@ import javax.persistence.Table;
 @Table(name = "tb_content_category")
 public class ContentCategory extends BasePojo {
 
-    @Id
+  
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -74,7 +76,7 @@ public class ContentCategory extends BasePojo {
         this.isParent = isParent;
     }
 
-    // 扩展字段，用于EasyUI中tree结构
+    // 扩展字段，用于EasyUI或者其他的的UI中tree结构
     public String getText() {
         return getName();
     }
@@ -82,5 +84,10 @@ public class ContentCategory extends BasePojo {
     public String getState() {
         return getIsParent() ? "closed" : "open";
     }
+    
+    public String getTitle() {
+    	return getName();
+    }
+    
 
 }

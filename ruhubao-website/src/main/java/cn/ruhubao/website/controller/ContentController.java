@@ -2,11 +2,14 @@ package cn.ruhubao.website.controller;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +23,9 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import cn.ruhubao.website.pojo.Content;
 import cn.ruhubao.website.pojo.DataGridResult;
 import cn.ruhubao.website.service.ContentService;
-import freemarker.core.ParseException;
+import cn.ruhubao.website.utils.UrlRequestUtils;
 import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateNotFoundException;
 
 @RequestMapping("/content")
 @Controller
@@ -75,7 +75,7 @@ public class ContentController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ResponseEntity<HashMap<String, Object>> deleteContent(
-			@RequestParam(value = "ids", required = false) Long[] ids) {
+			@RequestParam(value = "ids", required = false) Long[] ids,HttpServletRequest request,HttpServletResponse response) {
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("status", 500);
@@ -83,6 +83,18 @@ public class ContentController {
 		try {
 			if (ids != null && ids.length > 0) {
 				contentService.deleteByIds(ids);
+				//根据商品id到 特定路径 下将对应的静态页面删除
+				for (Long itemId : ids) {
+					//E:\\mygit\\ruhubao-website\\ruhubao-website\\src\\main\\webapp\\content\\ftl\\37.html
+					String filePath = request.getSession().getServletContext().getRealPath("/content/ftl")+ File.separator + itemId + ".html";
+					//String filePath = UrlRequestUtils.getContextUrl(request) +"content"+File.separator +"ftl"+File.separator + itemId + ".html";//拿到路径全称。
+
+					File file = new File(filePath);
+					if(file.exists()) {
+						file.delete();
+					
+					}
+				}
 			}
 			result.put("status", 200);
 		} catch (Exception e) {
@@ -95,10 +107,41 @@ public class ContentController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ResponseEntity<Void> updateContent(Content content) {
+	public ResponseEntity<Void> updateContent(Content content,HttpServletRequest request,HttpServletResponse response) {
 
 		try {
+			//先把cotent的id 的图片地址查询处理
+			Content content2 = contentService.queryById(content.getId());
+			content.setPic(content2.getPic());
 			contentService.updateSelective(content);
+			//重新删除生成新的静态页面
+			String filePath = request.getSession().getServletContext().getRealPath("/content/ftl")+ File.separator + content.getId() + ".html";
+			if (filePath!=null) {
+				
+				boolean b = new File(filePath).delete();
+				System.out.println("删除成功了吗：" +b);
+			}
+			Configuration configuration = freeMarkerConfig.getConfiguration();
+			Template template = configuration.getTemplate("content.ftl");
+			//String url = request.getSession().getServletContext().getRealPath("/content/ftl");
+			FileWriter writer = new FileWriter(new File(filePath));
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			String strUrl = UrlRequestUtils.getContextUrl(request) +"content"+File.separator +"ftl"+File.separator + content.getId()+ ".html";//拿到路径全称。
+			content.setUrl(strUrl);
+			System.out.println(content);
+			// 把需要展示的内容存到map中。
+			map.put("content", content.getContent());	
+			map.put("title",content.getTitle());
+			//pic来到这里是null,
+			map.put("pic",content.getPic());
+			map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+			map.put("url",strUrl);
+			// 输出
+			template.process(map, writer);
+			// 在这里把路径写入content的url上
+			// 更新content的数据
+			contentService.updateSelective(content);	
 			return ResponseEntity.ok(null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -111,19 +154,37 @@ public class ContentController {
 
 	// 保存内容
 	@RequestMapping(value = "/savaContent")
-	public ResponseEntity<Void> savaContent(Content content) {
-		/*
-		 * 需要返回的数据格式为这个 { "imageUrl":
-		 * "http://localhost/ueditor/php/controller.php?action=uploadimage",
-		 * "imagePath": "/ueditor/php/", "imageFieldName": "upfile", "imageMaxSize":
-		 * 2048, "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"]
-		 * "其他配置项...": "其他配置值..." }
-		 * 
-		 */
-		
-
+	public ResponseEntity<Void> savaContent(Content content,HttpServletRequest request) {
+	
 		try {
-			 contentService.saveSelective(content);
+			System.out.println("游离态："+content);
+			contentService.saveSelective(content);
+			System.out.println("瞬时态："+content);			
+			Long id = content.getId();			
+			/* 这里保存他的一个访问的路径 */
+			// 获取模板
+				Configuration configuration = freeMarkerConfig.getConfiguration();
+				Template template = configuration.getTemplate("content.ftl");
+				
+				String fileUrlAndName  = request.getSession().getServletContext().getRealPath("/content/ftl")+File.separator + id + ".html";
+				
+				FileWriter writer = new FileWriter(new File(fileUrlAndName));
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				String strUrl = UrlRequestUtils.getContextUrl(request) +"content"+File.separator +"ftl"+File.separator + id + ".html";//拿到路径全称。
+				content.setUrl(strUrl);
+				// 把需要展示的内容存到map中。
+				map.put("content", content.getContent());	
+				map.put("title",content.getTitle());
+				map.put("pic",content.getPic());
+				map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(content.getCreated()));
+				map.put("url",strUrl);
+
+				// 输出
+				template.process(map, writer);
+				// 在这里把路径写入content的url上
+				// 更新content的数据
+				contentService.updateSelective(content);	
 			return ResponseEntity.ok(null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -158,57 +219,21 @@ public class ContentController {
 		// 返回500
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}
-
-	// 使用freemarker生成html存储
-	@RequestMapping(value = "/createHtml")
-	public ResponseEntity<Void> createHtml(@RequestParam(value = "contentId", required = true) Integer id,
-			HttpServletRequest request) throws TemplateNotFoundException, MalformedTemplateNameException,
-			ParseException, IOException, TemplateException {
-
+	
+	public ResponseEntity<Map<String,Object>> queryContentAll(){
+		
 		try {
-			// 获取数据库的content的信息
-			Content content = contentService.queryById(id);
-
-			// 获取模板
-			Configuration configuration = freeMarkerConfig.getConfiguration();
-
-			Template template = configuration.getTemplate("content.ftl");
-
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			// 把需要展示的内容存到map中。
-			map.put("content", content.getContent());
-			// map.put("content", "sdsrfsdfsdfgdsgdsfgsd");
-			// String COMTENT_HTML_PATH="";
-			// 获取输出的对象
-			// FileWriter writer = new
-			// FileWriter("/content/"+File.separator+content.getId()+"./html");
-
-			// request.getre
-			String url = request.getSession().getServletContext().getRealPath("/content");
-			System.out.println(url);
-			// E:\mygit\ruhubao-website\ruhubao-website\src\main\webapp\content
-			// D:\\icaca\\aclass2tc\\20170626\\tt-html\\item
-			// E:\\mygit\\ruhubao-website\\ruhubao-website\\src\\main\\webapp\\content"
-			// FileWriter writer = new
-			// FileWriter(request.getSession().getServletContext().getRealPath("/content/")+File.separator+".html");
-			// 生成文件名称
-			String fileUrlAndName = url + File.separator + "sd" + ".html";
-			FileWriter writer = new FileWriter(fileUrlAndName);
-
-			// 输出
-			template.process(map, writer);
-			// 在这里把路径写入content的url上
-			content.setUrl(fileUrlAndName);
-			// 更新content的数据
-			contentService.saveSelective(content);
-			return ResponseEntity.ok(null);
+			List<Content> contents=contentService.queryAll();
+			result.put("contetnList", contents);
+			return ResponseEntity.ok(result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-
+		
+		
 	}
+
 
 }

@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cn.ruhubao.website.utils.UrlRequestUtils;
+
 @RequestMapping("/pic")
 @Controller
 public class PicUploadController {
@@ -31,8 +33,8 @@ public class PicUploadController {
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	private static HashMap<String, Object> result =new HashMap<String, Object>();;
 	//@RequestMapping(value = "/uploadimage", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = "/uploadimage")
-	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("dir")MultipartFile pictureFile) throws Exception {
+	@RequestMapping(value = "/uploadFile")
+	public ResponseEntity<HashMap<String, Object>> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("pictureFile")MultipartFile pictureFile) throws Exception {
 		
 		/*//成功时
 		{
@@ -47,7 +49,7 @@ public class PicUploadController {
 		
 		//把文件保存到服务器的硬盘(位置:项目根目录/upload)
 		//获取upload目录的绝对路径 ； e:/xxx/bos-web/upload  ServletContext.getRealPath():获取web项目下的某个目录绝对路径
-		String uploadPath=request.getSession().getServletContext().getRealPath("/uploadimg");
+		String uploadPath=request.getSession().getServletContext().getRealPath("/content/uploadimg");
 		System.out.println(uploadPath);
 		//生成随机文件名称  uuid.jpg
 		String uuid = UUID.randomUUID().toString();
@@ -56,18 +58,20 @@ public class PicUploadController {
 		System.out.println(pictureFile);
 		System.out.println("----------------");
 		String extName = FilenameUtils.getExtension(pictureFile.getOriginalFilename());
-		String fileName = uuid+extName;
+		String fileName = uuid+"."+extName;
 		
 		//FileUtils.copyFile( pictureFile, new File(uploadPath+"/"+fileName));
 		
 		// 以相对路径保存重名命后的图片
-		pictureFile.transferTo(new File(uploadPath+"/"+fileName));
+		pictureFile.transferTo(new File(uploadPath+File.separator+fileName));
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String url =request.getContextPath()+"/uploadimg/"+fileName;	
+		//返回去的是相对路径
+		String url =request.getContextPath()+"/content/uploadimg/"+fileName;	
+		String url1=UrlRequestUtils.getContextUrl(request)+"content/uploadimg/"+fileName;
 		//pictureFile.transferTo(new File(url));
 			
 		map.put("error", 0);
-		map.put("url", url);
+		map.put("url", url1);
 		
 				
 		return ResponseEntity.ok(map);
@@ -76,7 +80,7 @@ public class PicUploadController {
 	@RequestMapping("/manage")
 	public ResponseEntity<HashMap<String, Object>> manage(HttpServletRequest request,HttpServletResponse response){
 		//获取uploadimg的绝对路径
-		String uploadPath =request.getSession().getServletContext().getRealPath("/uploadimg");
+		String uploadPath =request.getSession().getServletContext().getRealPath("/content/uploadimg");
 		//1.读取upload目录
 		File uploadFile = new File(uploadPath);
 		//图片扩展名
@@ -111,7 +115,7 @@ public class PicUploadController {
 		
 		//3.把文件信息转为KindEditor固定json格式返回
 		//加上文件存放的路径
-		result.put("current_url",request.getContextPath()+"/upload/");
+		result.put("current_url",request.getContextPath()+"/content/upload/");
 		result.put("file_list", fileList);
 		return ResponseEntity.ok(result);
 

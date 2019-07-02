@@ -23,15 +23,18 @@ public interface BaseService<T> {
 		public List<T> queryByPage(Integer page, Integer rows);
 		
 		//选择性新增
-		public void saveSelective(T t);
+		public int saveSelective(T t);
 		
 		//选择性更新
-		public void updateSelective(T t);
+		public int updateSelective(T t);
 		
 		//根据id删除
 		public void deleteById(Serializable id);
 		
 		//批量删除
 		public void deleteByIds(Serializable[] ids);
+		
+		//获取到对象的id
+		//public T getOne(T t);
 	
 }

@@ -1,6 +1,7 @@
 package cn.ruhubao.website.service;
 
 import cn.ruhubao.website.pojo.ContentCategory;
+import cn.ruhubao.website.pojo.DataGridResult;
 
 public interface ContentCategoryService extends BaseService<ContentCategory>{
 
@@ -17,6 +18,8 @@ public interface ContentCategoryService extends BaseService<ContentCategory>{
 	 * @return
 	 */
 	void deleteContentCategory(ContentCategory contentCategroy);
+
+	DataGridResult queryContentCategoryListByPage(Integer page, Integer rows);
 		
 	
 	

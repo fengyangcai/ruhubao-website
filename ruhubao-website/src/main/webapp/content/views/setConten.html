@@ -156,7 +156,7 @@
         
         //获取树形数据
         $.ajax({
-          url: '../js/data.json',
+          url: '../../rest/content/category',
           type: 'get',
           success: function(res) {
             tree_data = res;
@@ -175,8 +175,8 @@
                 var data = obj.data; //获取当前点击的节点数据
                 
                 console.log(data.children);
-                
-                if (!data.children) { //最底层的文章
+                //
+                if (!isParent) { //最底层的文章
                   //编辑 
                   $('.mian-content').addClass('hide');
                   $('.box2').removeClass('hide');
@@ -185,7 +185,7 @@
                   // ajax 获取数据
                   var listId = obj.data.id;
                   $.ajax({
-                    url: '../js/getDate.json',
+                    url: '../../rest/content/category',
                     data: {
                       id:listId
                     },

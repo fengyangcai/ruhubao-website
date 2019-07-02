@@ -13,7 +13,7 @@
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<!-- 设置freemarker模版路径 -->
 		<!-- <property name="templateLoaderPath" value="WEB-INF/ftl"></property> -->
-		<property name="templateLoaderPath" value="/ftl"></property>
+		<property name="templateLoaderPath" value="/content/ftl"></property>
 		<!-- 设置生成文件的编码 -->
 		<property name="defaultEncoding" value="utf-8"></property>
 		 <property name="freemarkerSettings">

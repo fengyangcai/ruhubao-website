@@ -28,7 +28,27 @@ public class Content extends BasePojo {
 
     @Column(name = "title_desc")
     private String titleDesc;
+    
+    public String getPic() {
+		return pic;
+	}
 
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getPic2() {
+		return pic2;
+	}
+
+	public void setPic2(String pic2) {
+		this.pic2 = pic2;
+	}
+
+	private String pic;
+
+    private String pic2;
+    
     private String url;
 
    
@@ -91,5 +111,13 @@ public class Content extends BasePojo {
     public void setContent(String content) {
         this.content = content;
     }
+
+	@Override
+	public String toString() {
+		return "Content [id=" + id + ", categoryId=" + categoryId + ", title=" + title + ", subTitle=" + subTitle
+				+ ", titleDesc=" + titleDesc + ", pic=" + pic + ", pic2=" + pic2 + ", url=" + url + ", content="
+				+ content + "]";
+	}
+    
 
 }

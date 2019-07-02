@@ -59,22 +59,24 @@ public class BaseServiceImpl<T extends BasePojo> implements BaseService<T>{
 	}
 
 	@Override
-	public void saveSelective(T t) {
+	public int saveSelective(T t) {
 		if (t.getCreated()==null) {
 			t.setCreated(new Date());
 			t.setUpdated(t.getCreated());
 		}else if (t.getUpdated()==null) {
 			t.setUpdated(new Date());
 		}
-		mapper.insertSelective(t);
+		int i = mapper.insertSelective(t);
+		return i;
 	}
 
 	@Override
-	public void updateSelective(T t) {
+	public int updateSelective(T t) {
 		if (t.getUpdated()==null) {
 			t.setUpdated(new Date());
 		}
-		mapper.updateByPrimaryKeySelective(t);
+		return mapper.updateByPrimaryKeySelective(t);
+		
 	}
 
 	@Override
@@ -91,6 +93,8 @@ public class BaseServiceImpl<T extends BasePojo> implements BaseService<T>{
 		mapper.deleteByExample(example);
 		
 	}
+
+	
 
 	
 }

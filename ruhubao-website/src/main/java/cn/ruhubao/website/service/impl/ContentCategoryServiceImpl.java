@@ -6,8 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import cn.ruhubao.website.mapper.ContentCategoryMapper;
+import cn.ruhubao.website.pojo.Content;
 import cn.ruhubao.website.pojo.ContentCategory;
+import cn.ruhubao.website.pojo.DataGridResult;
 import cn.ruhubao.website.service.ContentCategoryService;
 @Service
 public class ContentCategoryServiceImpl extends BaseServiceImpl<ContentCategory> implements ContentCategoryService{
@@ -41,7 +47,7 @@ public class ContentCategoryServiceImpl extends BaseServiceImpl<ContentCategory>
 		//递归获取当前的节点的所有的子孙节点
 		getCategoryIds(ids,contentCategroy.getId());
 		//批量删除
-		deleteById(ids);
+		deleteByIds(ids.toArray(new Long[]{}));
 		
 		
 		//判断当前的删除的节点的父节点是否为父节点（父节点是否还有其它子节点，如果没有其它子节点则更新父节点为叶子节点）
@@ -52,7 +58,7 @@ public class ContentCategoryServiceImpl extends BaseServiceImpl<ContentCategory>
 			//没有其它兄弟节点，也就是父节点没有其它子节点所以要更新父节点为叶子节点
 			ContentCategory parent = new ContentCategory();
 			parent.setIsParent(false);
-			parent.setId(contentCategroy.getId());
+			parent.setId(contentCategroy.getParentId());
 			updateSelective(parent);
 		}
 		
@@ -70,6 +76,16 @@ public class ContentCategoryServiceImpl extends BaseServiceImpl<ContentCategory>
 			}
 		}
 		
+		
+	}
+
+	@Override
+	public DataGridResult queryContentCategoryListByPage(Integer page, Integer rows) {
+		
+		 PageHelper.startPage(page, rows);
+		 List<ContentCategory> list = contentCategoryMapper.selectAll();
+		 PageInfo<ContentCategory> pageInfo = new PageInfo<>(list);
+		return new DataGridResult(pageInfo.getTotal(), pageInfo.getList());
 		
 	}
 		

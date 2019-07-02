@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.ruhubao.website.pojo.ContentCategory;
+import cn.ruhubao.website.pojo.DataGridResult;
 import cn.ruhubao.website.service.ContentCategoryService;
 
 @Controller
@@ -100,4 +101,22 @@ public class ContentCategoryController {
 		//返回500
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}
+	
+	//查询类目的，根据需要的条目查询
+	@RequestMapping(value="/queryContentCategoryListByPage",method = RequestMethod.GET)
+	public ResponseEntity<DataGridResult>  queryContentCategoryListByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "rows", defaultValue = "10") Integer rows) {
+		try {
+			DataGridResult dataGridResult = contentCategoryService.queryContentCategoryListByPage(page, rows);
+
+			return ResponseEntity.ok(dataGridResult);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 返回500
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		
+	}
+	
 }
