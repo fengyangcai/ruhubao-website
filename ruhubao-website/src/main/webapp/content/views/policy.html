@@ -7,13 +7,41 @@
     <meta name="keywords" content="广州入户|入户|广州入户服务中心" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
     <link rel="shortcut icon" type="images/x-icon" href="../../img/bolinglink.png">
     <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/polity.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../css/polity.css" /> -->
+    <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
+    
+     <script type="text/javascript">
+    	function goPAGE() {
+    		if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+    			var link = document.createElement('link');
+    			link.href = '../css/polity_moble.css';
+    			link.rel = 'stylesheet';
+    			link.type = 'text/css';
+    			document.getElementsByTagName('head').item(0).appendChild(link);
+          
+    		} else {
+    			var link = document.createElement('link');
+    			link.href = '../css/polity.css';
+    			link.rel = 'stylesheet';
+    			link.type = 'text/css';
+    			document.getElementsByTagName('head').item(0).appendChild(link);
+    			console.log("pc")
+    		}
+    	}
+      
+    	goPAGE();
+      
+    </script>  
+    	
+    
     <style type="text/css">
     	[v-cloak] {
           display: none;
       }
+      
     </style>
 	</head>
 	<body>
@@ -21,7 +49,7 @@
       <div class="logo-top">
         <div class="container logo-box">
           <img src="../img/logo.jpg" alt="">
-          <a href="../../index.html" style="margin-left: 45px;" class="nv">首页</a>
+          <a href="../../index.html" class="first" style="margin-left: 45px;" class="nv">首页</a>
           <a href="../../ruhu-way/index.html" class="nv">入户方式 </a>
           <a href="policy.html"  class="nv active">入户政策</a>
           <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
@@ -30,6 +58,7 @@
           <a href="contact.html" class="nv">联系我们</a>
         </div>
       </div>
+      
       <div class="content">
         <div class="container">
           <p class="wei">
@@ -52,7 +81,6 @@
                   </div>
                 </div>
               </li>
-              
             </ul>
           </div>
           
@@ -81,7 +109,7 @@
             </div>
             <p class="t">地址：广州市天河区车陂加悦大厦十楼1009室</p>
             <div class="copy">
-              <span><span>版权所有©2019  广州博霖教育科技有限公司  备案号：</span><a href="http://beian.miit.gov.cn/" class="nv"></a>粤ICP备19060809号-3</span>
+              <span><span>版权所有©2019  广州博霖教育科技有限公司 </span><a href="http://beian.miit.gov.cn/" class="nv"></a>粤ICP备19060809号-3</span>
             </div>
           </div>
           <div class="right">
@@ -91,7 +119,6 @@
       </div>
     </div>
     
-   
     <script src="../../js/jquery2.01.js"></script>
     <script src="../../ku/layui/layui.all.js "></script>
     <script src="../js/Vue.js"></script>

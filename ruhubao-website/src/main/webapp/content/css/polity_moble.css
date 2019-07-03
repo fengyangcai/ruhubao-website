@@ -6,7 +6,7 @@ div {
   box-sizing: border-box;
 }
 .container {
-  width: 1200px;
+  width: 94%;
   margin: 0 auto;
 }
 .f_r {
@@ -23,7 +23,7 @@ li {
   list-style: none;
 }
 .clearfix:after {
-  content: ".";
+  content: '.';
   display: block;
   height: 0;
   clear: both;
@@ -48,14 +48,25 @@ input {
 .hide {
   display: none;
 }
+.app {
+  max-width: 7.5rem;
+  margin: 0 auto;
+}
 .app .logo-top {
-  height: 93px;
   background-color: #ffffff;
   box-shadow: 0px 3px 6px 0px rgba(200, 200, 200, 0.31);
   font-size: 0;
 }
 .app .logo-top .logo-box {
-  height: 100%;
+  padding: 5px 0;
+}
+.app .logo-top .logo-box .first {
+  margin: 0 !important;
+  margin-left: 0.01rem !important;
+}
+.app .logo-top .logo-box img {
+  width: 4rem;
+  display: block;
 }
 .app .logo-top .logo-box a,
 .app .logo-top .logo-box img {
@@ -67,10 +78,9 @@ input {
 }
 .app .logo-top .logo-box a {
   display: inline-block;
-  font-size: 18px;
-  padding: 0 21px;
+  font-size: 0.2rem;
   height: 100%;
-  line-height: 93px;
+  padding: 0.04rem 0.04rem;
 }
 .app .logo-top .logo-box a:hover {
   background: red;
@@ -79,9 +89,9 @@ input {
   transition: all 0.3s;
 }
 .app .content p.wei {
-  padding-top: 34px;
+  padding-top: 0.3rem;
   color: #4c4c4c;
-  font-size: 16px;
+  font-size: 0.24rem;
 }
 .app .content .page1,
 .app .content .page2,
@@ -91,41 +101,41 @@ input {
 .app .content .page1 ul,
 .app .content .page2 ul,
 .app .content .page3 ul {
-  padding-top: 47px;
+  padding-top: 0.4rem;
 }
 .app .content .page1 li,
 .app .content .page2 li,
 .app .content .page3 li {
-  height: 217px;
+  height: 2.17rem;
   font-size: 0;
-  margin-bottom: 71px;
+  margin-bottom: 0.7rem;
 }
 .app .content .page1 li img.list-img,
 .app .content .page2 li img.list-img,
 .app .content .page3 li img.list-img {
-  width: 358px;
-  height: 217px;
+  width: 2.5rem;
+  height: 2.17rem;
 }
 .app .content .page1 li .list,
 .app .content .page2 li .list,
 .app .content .page3 li .list {
-  font-size: 20px;
+  font-size: 0.3rem;
   color: #4c4c4c;
   display: inline-block;
-  width: 450px;
+  width: 4.2rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  margin-left: 39px;
+  margin-left: 0.28rem;
 }
 .app .content .page1 li .list .time,
 .app .content .page2 li .list .time,
 .app .content .page3 li .list .time {
   position: relative;
-  line-height: 21px;
-  height: 39px;
+  line-height: 0.26rem;
+  height: 0.4rem;
   overflow: visible;
-  margin-top: 28px;
+  margin-top: 0.27rem;
 }
 .app .content .page1 li .list .time .line,
 .app .content .page2 li .list .time .line,
@@ -142,7 +152,7 @@ input {
 .app .content .page3 li .list .title {
   line-height: 21px;
   height: 22px;
-  padding: 22px 0 32px;
+  padding: 0.22rem 0 0.32rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -156,14 +166,14 @@ input {
 .app .content .page2 li .list .btn a,
 .app .content .page3 li .list .btn a {
   display: inline-block;
-  width: 124px;
-  height: 44px;
+  width: 1.5rem;
+  height: 0.5rem;
   background-color: #0097de;
   border-radius: 5px;
   text-align: center;
-  line-height: 44px;
+  line-height: 0.5rem;
   color: #fff;
-  font-size: 18px;
+  font-size: 0.26rem;
 }
 .app .content .page1 li .list .btn a:hover,
 .app .content .page2 li .list .btn a:hover,
@@ -173,7 +183,7 @@ input {
 .app .content .page-btn-box {
   font-size: 0;
   text-align: center;
-  padding: 80px 0;
+  padding: 0.7rem 0;
 }
 .app .content .page-btn-box a {
   display: inline-block;
@@ -188,7 +198,7 @@ input {
   margin-left: 10px;
 }
 .app .footer {
-  height: 275px;
+  height: 3.95rem;
   background-color: #001f33;
   color: #fff;
 }
@@ -196,13 +206,13 @@ input {
   font-size: 0;
 }
 .app .footer .copyRight > div {
-  font-size: 18px;
+  font-size: 0.23rem;
   float: left;
-  height: 275px;
+  height: 2.75rem;
 }
 .app .footer .copyRight .left {
-  width: 280px;
-  padding-top: 47px;
+  width: 2.8rem;
+  padding-top: 0.37rem;
 }
 .app .footer .copyRight .left img {
   width: 100%;
@@ -214,36 +224,26 @@ input {
   border-bottom: 1px solid #fff;
 }
 .app .footer .copyRight .left p.f {
-  line-height: 40px;
-  height: 40px;
-  text-indent: 20px;
+  line-height: 20px;
+  height: 20px;
+  font-size: 0.2rem;
 }
 .app .footer .copyRight .center {
-  width: 699px;
-  margin-left: 60px;
+  width: 3.1rem;
+  margin-left: 0.1rem;
+  padding-top: 0.37rem;
 }
 .app .footer .copyRight .center a {
   color: #fff;
   display: inline-block;
-  padding: 2 5px;
-  margin-right: 30px;
-}
-.app .footer .copyRight .center .alink {
-  padding-top: 70px;
-  padding-left: 42px;
-}
-.app .footer .copyRight .center p.t {
-  padding-top: 39px;
-  padding-left: 42px;
-}
-.app .footer .copyRight .center .copy {
-  padding-top: 60px;
+  padding: 0.04rem;
+  margin-right: 0.03rem;
 }
 .app .footer .copyRight .right {
-  width: 103px;
+  width: 0.9rem;
   float: right;
 }
 .app .footer .copyRight .right img {
-  padding-top: 58px;
+  padding-top: 0.37rem;
   width: 100%;
 }
