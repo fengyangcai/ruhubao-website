@@ -9,7 +9,7 @@
 </head>
 <body style="background-color: #F3F3F3">
     <div class="easyui-dialog" title="管理员登录" data-options="closable:false,draggable:false" style="width:400px;height:300px;padding:10px;">
-       <form id="userForm" action="${pageContext.request.contextPath}/user/login">
+       <form id="userForm" action="/user/login">
        	<div style="margin-left: 50px;margin-top: 50px;">
        		<div style="margin-bottom:20px;">
 	            <div>
