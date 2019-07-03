@@ -123,6 +123,9 @@
     <script src="../js/Vue.js"></script>
     
     <script type="text/javascript">
+      //  crossorigin="anonymous" 
+      $('img').attr('crossorigin','anonymous');
+      
       Vue.prototype.$ = jQuery;
       //接入客服
       $('a').not('.link,.nv').on('click', function() {
@@ -178,6 +181,7 @@
         }
       })
     
+    // 
     
     </script>
   </body>
