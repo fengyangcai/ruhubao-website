@@ -137,7 +137,8 @@
             var pagenumber = num;
             var _this = this;
             this.$.ajax({
-              url: '../../content',
+              url: '../../content', 
+              cache:false,
               data: {
                 page: pagenumber,
                 rows: 5,
@@ -148,23 +149,6 @@
                 _this.data_list = res.rows;
                 console.log(res, _this.data_list)
                 
-                this.$.ajax({
-                  url: '../../content',
-                  data: {
-                    page: pagenumber,
-                    rows: 5
-                  },
-                  type: 'GET',
-                  success: function(res) {
-                    _this.data_list = res.rows;
-                    console.log(res, _this.data_list)
-                    alert(222)
-
-                  },
-                  error: function(res) {
-                    layer.msg('获取数据失败');
-                  }
-                })
               },
               error: function(res) {
                 layer.msg('获取数据失败');
