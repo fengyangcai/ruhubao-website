@@ -1,5 +1,6 @@
 package cn.ruhubao.website.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.sun.istack.NotNull;
 
 import cn.ruhubao.website.pojo.ContentCategory;
 import cn.ruhubao.website.pojo.DataGridResult;
@@ -118,11 +121,18 @@ public class ContentCategoryController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		
 	}
+	
+	//根据对象字段查询。
 	@RequestMapping(value="/queryContentCategoryByName")
-	public ResponseEntity<List<ContentCategory>> queryContentCategoryByName(ContentCategory cc){
+	public ResponseEntity<List<ContentCategory>> queryContentCategoryByName(@RequestParam(value="name",required = true)String name){
+		// String charName = new String(name.getBytes("ISO-8859-1"),"UTF-8");
 		
 		try {
-			List<ContentCategory> list = contentCategoryService.queryByWhere(cc);
+			ContentCategory category = new ContentCategory();
+			System.out.println(name+"ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+			category.setName(name);
+			
+			List<ContentCategory> list = contentCategoryService.queryByWhere(category);
 			return ResponseEntity.ok(list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

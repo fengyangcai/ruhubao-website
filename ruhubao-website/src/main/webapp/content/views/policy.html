@@ -67,17 +67,17 @@
           <div class="page1 page clearfix" id="page1">
             <ul>
               <li class="clearfix" v-for="item in data_list">
-                <img :src="item.img" class="f_l list-img">
+                <img :src="item.pic" class="f_l list-img">
                 <div class="list f_l">
                   <p class="time">
                     <span>{{ item.updated }}</span>
                     <span class="line"></span>
                   </p>
                   <p class="title" :title="item.title">
-                    <a href="showContent.html" class="link">{{ item.title }}</a>
+                    <a :href="item.url" class="link">{{ item.title }}</a>
                   </p>
                   <div class="btn">
-                    <a href="showContent.html" class="link">点击了解</a>
+                    <a :href="item.url" class="link">点击了解</a>
                   </div>
                 </div>
               </li>
@@ -139,8 +139,6 @@
             this.$.ajax({
               url: '../../content',
               data: {
-                page: pagenumber,
-                rows: 5,
                 categoryId:_this.categoryId
               },
               type: 'GET',
@@ -148,23 +146,6 @@
                 _this.data_list = res.rows;
                 console.log(res, _this.data_list)
                 
-                this.$.ajax({
-                  url: '../../content',
-                  data: {
-                    page: pagenumber,
-                    rows: 5
-                  },
-                  type: 'GET',
-                  success: function(res) {
-                    _this.data_list = res.rows;
-                    console.log(res, _this.data_list)
-                    alert(222)
-
-                  },
-                  error: function(res) {
-                    layer.msg('获取数据失败');
-                  }
-                })
               },
               error: function(res) {
                 layer.msg('获取数据失败');
@@ -174,10 +155,12 @@
           },
           getData:function(categoryId){
             var categoryId = categoryId;
-            this.$.ajax({
+           	var _this = this;
+           	
+           	_this.$.ajax({
               url: '../../content',
               data: {
-                page: pagenumber,
+               /*  page: pagenumber, */
                 rows: 5,
                 categoryId:categoryId
               },
@@ -185,9 +168,10 @@
               success: function(res) {
                 _this.data_list = res.rows;
                 console.log(res, _this.data_list)
+                
               },
               error: function(res) {
-                layer.msg('获取数据失败');
+               
               }
             })       
           }
@@ -198,19 +182,18 @@
           var _this = this;
           this.$.ajax({
             /*  url: '../js/data3.json', */
-            url: '../../content',
+            url: '../../content/category/queryContentCategoryByName',
             data: {
-              categoryId: 2,
-              page: 1,
-              rows: 5
+              name:"最新政策",
+            
             },
-            type: 'GET',
+            type: 'post',
             success: function(res) {
-              _this.categoryId = res.categoryId;
-              
+              _this.categoryId = res[0].id;
+             
               //根据类型id获取数据
               _this.getData(_this.categoryId);
-              
+             
               console.log(res,_this.categoryId)
             },
             error: function(res) {
