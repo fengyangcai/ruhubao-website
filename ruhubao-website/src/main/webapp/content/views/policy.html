@@ -137,7 +137,8 @@
             var pagenumber = num;
             var _this = this;
             this.$.ajax({
-              url: '../../content',
+              url: '../../content', 
+              cache:false,
               data: {
                 categoryId:_this.categoryId
               },
