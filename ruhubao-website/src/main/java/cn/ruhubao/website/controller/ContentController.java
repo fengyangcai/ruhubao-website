@@ -213,7 +213,7 @@ public class ContentController {
 	public ResponseEntity<DataGridResult> queryContentListByPage(
 			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", defaultValue = "20") Integer rows) {
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
 
 		try {
 			DataGridResult dataGridResult = contentService.queryContentListByPage(categoryId, page, rows);

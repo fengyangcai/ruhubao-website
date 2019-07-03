@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
     <link rel="shortcut icon" type="images/x-icon" href="../../img/bolinglink.png">
-    <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" /> -->
     <!-- <link rel="stylesheet" type="text/css" href="../css/polity.css" /> -->
     <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
     
@@ -67,10 +67,10 @@
           <div class="page1 page clearfix" id="page1">
             <ul>
               <li class="clearfix" v-for="item in data_list">
-                <img :src="item.img_src"  class="f_l list-img" >
+                <img :src="item.img"  class="f_l list-img" >
                 <div class="list f_l">
                   <p class="time">
-                    <span>{{ item.time }}</span>
+                    <span>{{ item.updated }}</span>
                     <span class="line"></span>
                   </p>
                   <p class="title" :title="item.title">
@@ -129,22 +129,43 @@
      var vm = new Vue({
        el:'#app',
        data:{
-         data_list:[]//数据列表
+         data_list:[],//数据列表
+      	 categoryId:2
        },
        methods:{
          getDataList:function(num){
-          var pagenumber = num;
-          
+         var pagenumber = num;
+         
           var _this = this;
           this.$.ajax({
-            url: '../js/data4.json',
+            url: '../../content',
             data: {
-              pageNum:pagenumber
+              page:pagenumber,
+              rows:5
             },
             type: 'GET',
             success: function(res) {
-              _this.data_list = res;
+              _this.data_list = res.rows;
               console.log(res,_this.data_list)
+              
+              this.$.ajax({
+	            url: '../../content',
+	            data: {
+	              page:pagenumber,
+	              rows:5
+	            },
+	            type: 'GET',
+	            success: function(res) {
+	              _this.data_list = res.rows;
+	              console.log(res,_this.data_list)
+	              
+	            },
+	            error: function(res) {
+	              layer.msg('获取数据失败');
+	            }
+	          })
+              
+              
             },
             error: function(res) {
               layer.msg('获取数据失败');
@@ -157,13 +178,16 @@
          //获取数据
          var _this = this;
          this.$.ajax({
-           url: '../js/data3.json',
+          /*  url: '../js/data3.json', */
+          url:'../../content',
            data: {
-             pageNum:1
+        	categoryId:2,
+            page:1,
+            rows:5
            },
            type: 'GET',
            success: function(res) {
-             _this.data_list = res;
+             _this.data_list = res.rows;
              console.log(res,_this.data_list,88888)
            },
            error: function(res) {

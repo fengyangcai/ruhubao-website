@@ -118,5 +118,20 @@ public class ContentCategoryController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		
 	}
+	@RequestMapping(value="/queryContentCategoryByName")
+	public ResponseEntity<List<ContentCategory>> queryContentCategoryByName(ContentCategory cc){
+		
+		try {
+			List<ContentCategory> list = contentCategoryService.queryByWhere(cc);
+			return ResponseEntity.ok(list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		
+		
+	}
 	
 }
