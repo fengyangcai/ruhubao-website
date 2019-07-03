@@ -9,15 +9,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="images/x-icon" href="../../img/bolinglink.png">
     <link rel="stylesheet" type="text/css" href="../css/contact.css" />
-    
+    <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=w9RqjL3IfkMReVNZc3FSZXjiGegCwU9f"></script>
+    
+    <script type="text/javascript">
+    	function goPAGE() {
+    		if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+    			var link = document.createElement('link');
+    			link.href = '../css/contact_moble.css';
+    			link.rel = 'stylesheet';
+    			link.type = 'text/css';
+    			document.getElementsByTagName('head').item(0).appendChild(link);
+          
+    		} else {
+    			var link = document.createElement('link');
+    			link.href = '../css/contact.css';
+    			link.rel = 'stylesheet';
+    			link.type = 'text/css';
+    			document.getElementsByTagName('head').item(0).appendChild(link);
+    			console.log("pc")
+    		}
+    	}
+    	goPAGE();
+      
+    </script>  
+    	
+  
   </head>
   <body>
     <div class="app">
       <div class="logo-top">
         <div class="container logo-box">
           <img src="../img/logo.jpg" alt="">
-          <a href="../../index.html" style="margin-left: 45px;" class="nv">首页</a>
+          <a href="../../index.html" class="first" style="margin-left: 45px;" class="nv">首页</a>
           <a href="../../ruhu-way/index.html" class="nv">入户方式 </a>
           <a href="policy.html"  class="nv">入户政策</a>
           <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
@@ -26,6 +50,7 @@
           <a href="contact.html" class="nv active">联系我们</a>
         </div>
       </div>
+      
       <div class="content">
         <div class="banner">
           <img src="../img/banner.jpg" style="width: 100%;">
@@ -75,7 +100,7 @@
             </div>
             <p class="t">地址：广州市天河区车陂加悦大厦十楼1009室</p>
             <div class="copy">
-              <span><span>版权所有©2019  广州博霖教育科技有限公司  备案号：</span><a href="http://beian.miit.gov.cn/" class="nv">粤ICP备19060809号-3</a></span>
+              <span><span>版权所有©2019  广州博霖教育科技有限公司  </span><a href="http://beian.miit.gov.cn/" class="nv">粤ICP备19060809号-3</a></span>
             </div>
           </div>
           <div class="right">

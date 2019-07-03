@@ -17,14 +17,30 @@
 		<input type="submit" name="button" value="提交内容" /> 
 	</form>
   
+  <div class="pp pagecontent">
+    <h3>dghajgdjagdjga导航和健康大河健康</h3>
+    <img src="https://img04.sogoucdn.com/net/a/04/link?url=http%3A%2F%2Fimg01.sogoucdn.com%2Fapp%2Fa%2F100520024%2F3c058db218a32597aff89de103064709&appid=122" alt="">
+    <p> dhajkhjka搭建和登记卡还记得哈空间大扩大空间很大框架按活动就看会</p>
+  </div>
+  
+  <button class="ld">下载</button>
   
   <script charset="utf-8" src="../../ku/kindeditor/kindeditor-all.js"></script>
   <script charset="utf-8" src="../../ku/kindeditor/lang/zh-CN.js"></script>
+  
+  
+  <script src="../../js/jquery2.01.js"></script>
+  <script src="../../js/FileSave.js"></script>
+  <script src="../../js/export_world.js"></script>
   <script type="text/javascript">
     
   	 KindEditor.ready(function(K) {
         window.editor = K.create('#editor_id');
      });
+     
+     $('.ld').on('click',function(){
+       $(".pagecontent").wordExport("new");
+     })
   </script>
 </body>
 </html>
