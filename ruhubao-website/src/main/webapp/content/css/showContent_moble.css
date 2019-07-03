@@ -97,6 +97,9 @@ input {
   min-height: 5rem;
   min-height: 7rem;
 }
+.app .content .pagecontent img {
+  max-width: 82%;
+}
 .app .content .pagecontent .img-box {
   text-align: center;
 }

@@ -31,6 +31,7 @@ if (typeof jQuery !== "undefined" && typeof saveAs !== "undefined") {
                 var h = img[i].height * (w / img[i].width);
                 var img_id = "#" + img[i].id;
                 img[i].crossorigin="anonymous";
+                
                 $('<canvas>').attr("id", "test_word_img_" + i).width(w).height(h).insertAfter(img_id);
                 // Create canvas for converting image to data URL  
                 //var canvas = document.createElement("CANVAS");

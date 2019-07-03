@@ -86,6 +86,9 @@ input {
 .app .content .pagecontent {
   min-height: 500px;
 }
+.app .content .pagecontent img {
+  max-width: 1200px;
+}
 .app .content .pagecontent .img-box {
   text-align: center;
 }
