@@ -31,7 +31,7 @@
     		var password = $("[name=password]").val();
     		
     		if(username!="admin" || password!="admin"){
-    			$.messager.alert('错误',"用户名密码不正确！");
+    			$.messager.alert('错误',"用户名密码不正确！"); 
     			return ;
     		}
     		window.location.href="/page/index";

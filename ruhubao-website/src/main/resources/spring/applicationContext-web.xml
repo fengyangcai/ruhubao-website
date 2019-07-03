@@ -49,23 +49,20 @@
 		<!-- defaultEncoding属性：配置字符集编码 -->
 		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
-	<!-- 文件中需要配置转换的bean -->
-	<!-- <bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<util:list id="beanList">
-				<ref bean="mappingJacksonHttpMessageConverter" />
-			</util:list>
-		</property>
-	</bean>
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean> -->
+	 <!-- 配置拦截器 -->
+        <mvc:interceptors>
+        	<!-- 配置拦截器一 -->
+        	<mvc:interceptor>
+        		<!-- 配置拦截器的url，说明：
+        		1.拦截单个url：/interceptor.do，拦截请求/interceptor.do
+        		2.拦截多个url：/inter/**，拦截以/inter开头的所有请求 -->
+        		<mvc:mapping path="/page/index"/>
+        		<!-- 拦截器处理类 -->
+        		<bean class="cn.ruhubao.website.interceptor.FirstInterceptor"></bean>
+        	</mvc:interceptor>
+        	
+        </mvc:interceptors>
+	
 
 
 </beans>
