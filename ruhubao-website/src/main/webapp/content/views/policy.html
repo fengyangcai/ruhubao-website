@@ -124,7 +124,7 @@
     <script src="../js/Vue.js"></script>
     <script type="text/javascript">
       Vue.prototype.$ = jQuery;
-
+      
 
       var vm = new Vue({
         el: '#app',
@@ -136,6 +136,7 @@
           getDataList: function(num) {
             var pagenumber = num;
             var _this = this;
+            
             this.$.ajax({
               url: '../../content', 
               cache:false,
@@ -182,6 +183,7 @@
         },
         mounted: function() {
           //获取数据类型Id
+          
           var _this = this;
           this.$.ajax({
             /*  url: '../js/data3.json', */

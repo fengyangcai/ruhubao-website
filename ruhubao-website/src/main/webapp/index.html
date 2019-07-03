@@ -508,158 +508,158 @@
       })
       
       // 模拟数据
-      var data_list = {
-        list:[
-        {
-          title:"最新政策",
-          list:[
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              src:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            }
-            ]
-        }, {
-          title:"办事指南",
-          list:[
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            }
-            ]
-        }, {
-          title:"服务窗口",
-          list:[
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            }
-            ]
-        }, {
-          title:"常见问题",
-          list:[
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            },
-            {
-              title:'广州入户条件',
-              url:'https://www.baidu.com'
-            }
-           ]
-        }
-      ]
-      }
-      
-      
-      //请求文章数据  ../content/category
-      // require()
-      // var data_list = {};
-      // function require(){
-      //   $.ajax({
-      //     url: '../content/category',
-      //     type: 'GET',
-      //     data:{
-      //   	id:1 
-      //     },
-      //     success: function(res) {
-      //       console.log(res)
-      //       data_list.list = res;
-      //       console.log(data_list,data_list.list[0].id)
-      //       
-      //       for(var i=0;i<data_list.list.length;i++){
-      //         var index = i;
-      //         require_list(data_list.list[i].id,index,data_list);
+      // var data_list = {
+      //   list:[
+      //   {
+      //     title:"最新政策",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         src:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
       //       }
-      //       
-      //     },
-      //     error: function(res) {
-      //       layer.msg('获取数据失败');
-      //     }
-      //   })
-      // }
-      // function require_list(id,index,data_list){
-      //    $.ajax({
-      //    /*  url: 'js/data-list.json',    ../content*/
-      //    url:'../content',
-      //     type: 'GET',
-      //     data:{
-      //       categoryId:id,
-      //       rows:5
-      //     },
-      //     success:function(res){
-      //       var newdata = res.rows;
-      //       data_list.list[index].list = newdata;
-      //       console.log(data_list);
-      //       setTimeout(function(){
-      //         show_list(data_list)
-      //       },1)
-      //     },
-      //     error:function(){
-      //       layer.msg('获取数据失败');
-      //     }
-      //   })
+      //       ]
+      //   }, {
+      //     title:"办事指南",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //       ]
+      //   }, {
+      //     title:"服务窗口",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //       ]
+      //   }, {
+      //     title:"常见问题",
+      //     list:[
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       },
+      //       {
+      //         title:'广州入户条件',
+      //         url:'https://www.baidu.com'
+      //       }
+      //      ]
+      //   }
+      // ]
       // }
       // 
+      
+      //请求文章数据  ../content/category
+      require()
+      var data_list = {};
+      function require(){
+        $.ajax({
+          url: '../content/category',
+          type: 'GET',
+          data:{
+        	id:1 
+          },
+          success: function(res) {
+            console.log(res)
+            data_list.list = res;
+            console.log(data_list,data_list.list[0].id)
+            
+            for(var i=0;i<data_list.list.length;i++){
+              var index = i;
+              require_list(data_list.list[i].id,index,data_list);
+            }
+            
+          },
+          error: function(res) {
+            layer.msg('获取数据失败');
+          }
+        })
+      }
+      function require_list(id,index,data_list){
+         $.ajax({
+         /*  url: 'js/data-list.json',    ../content*/
+         url:'../content',
+          type: 'GET',
+          data:{
+            categoryId:id,
+            rows:5
+          },
+          success:function(res){
+            var newdata = res.rows;
+            data_list.list[index].list = newdata;
+            console.log(data_list);
+            setTimeout(function(){
+              show_list(data_list)
+            },1)
+          },
+          error:function(){
+            layer.msg('获取数据失败');
+          }
+        })
+      }
+      
       
       function show_list(data){
           
