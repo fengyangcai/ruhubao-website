@@ -41,7 +41,7 @@
         <img src="../img/logo.jpg" alt="">
         <a href="../../index.html" style="margin-left: 45px;" class="nv">首页</a>
         <a href="../../ruhu-way/index.html" class="nv">入户方式 </a>
-        <a href="policy.html"  class="nv active">入户政策</a>
+        <a href="../views/policy.html"  class="nv active">入户政策</a>
         <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
         <a href="https://www.bolinjy.cn/" class="nv">学历提升</a>
         <a href="../views/about.html" class="nv">关于我们</a>
@@ -51,7 +51,7 @@
     <div class="content">
       <div class="container">
         <p class="wei">
-          <span>您当前所在的位置： 首页 > 入户政策>${title}</span>
+          <span>您当前所在的位置： 首页 > ${title}>${title}</span>
         </p>
         <!-- 发布内容 -->
         <div class="pagecontent">
@@ -72,7 +72,7 @@
             </div>
             <div>
               <span style="color: #e60000;font-size: 26px;font-weight: 800;margin-right: 6px;">推荐阅读:</span>
-              <a href="#">广州市积分制入户管理办法实施细则</a>
+              <a href="#" class="nv">广州市积分制入户管理办法实施细则</a>
             </div>
           </div>
           
@@ -107,7 +107,7 @@
     </div>
   </div>
   
-  
+    
     
     <script src="../../js/jquery2.01.js"></script>
     <script src="../../ku/layui/layui.all.js "></script>
@@ -129,8 +129,9 @@
     	  $("button.download").click(function(event) {
             $(".pagecontent").wordExport("new");
         });
-      
-      
+        
+        
+        
     </script>
     <script type="text/javascript">
     

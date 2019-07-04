@@ -222,11 +222,13 @@ input {
   line-height: 33px;
   height: 33px;
   border-bottom: 1px solid #fff;
+  padding-bottom: 0.1rem;
 }
 .app .footer .copyRight .left p.f {
   line-height: 20px;
   height: 20px;
   font-size: 0.2rem;
+  margin-top: 0.1rem;
 }
 .app .footer .copyRight .center {
   width: 3.1rem;
