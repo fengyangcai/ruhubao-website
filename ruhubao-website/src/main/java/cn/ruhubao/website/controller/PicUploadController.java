@@ -88,9 +88,30 @@ public class PicUploadController {
 
 	}
 	
-	
-	public ResponseEntity<Map<String,Object>> uploadFile(@RequestParam("pictureFile")MultipartFile pictureFile,String szname,HttpServletRequest request,HttpServletResponse response){
+	@RequestMapping("/uploadFileAndName")
+	public ResponseEntity<HashMap<String,Object>> uploadFile(@RequestParam("file")MultipartFile file,@RequestParam("szname")String szname,HttpServletRequest request,HttpServletResponse response){
 		
+		String fileName ;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if (szname==null|szname.equals("")) {
+			fileName=file.getOriginalFilename();	
+		}else {
+			String extName = FilenameUtils.getExtension(file.getOriginalFilename());
+			fileName=szname+"."+extName;
+					
+		}
+		
+		//返回去的是相对路径
+		String url =PIC_REQUEST_URL+File.separator+fileName;
+		
+		
+		
+		map.put("error", 0);
+		map.put("url", url);
+	
+		
+		return ResponseEntity.ok(map);
 	}
 	
 	

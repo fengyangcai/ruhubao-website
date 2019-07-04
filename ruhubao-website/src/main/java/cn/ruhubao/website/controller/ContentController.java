@@ -183,7 +183,7 @@ public class ContentController {
 				map.put("pic",content.getPic());
 				map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(content.getCreated()));
 				map.put("url",strUrl);
-				
+				map.put("file",content.getPic2());
 				map.put("nextUrl","");
 				map.put("nextTitle","");
 
