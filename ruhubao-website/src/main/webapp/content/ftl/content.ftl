@@ -63,9 +63,11 @@
           </div>
           
           <div class="recommend">
-            <div class="btn">
-              <a href="../js/w.doc" download="../js/w.doc">
-                <button type="button" title="点击下载"  class="layui-btn download">下载</button>
+          
+            <div class="btn" id="hide" >
+           
+              <a href=${file!} download=${file!}  class="nv">
+                <button type="button"  title="点击下载"  class="layui-btn download" id="butt" hidden=${file!("hide")}>下载</button>
               </a>
             </div>
             <div>
@@ -127,6 +129,19 @@
     	  $("button.download").click(function(event) {
             $(".pagecontent").wordExport("new");
         });
+      
+      
+    </script>
+    <script type="text/javascript">
+    
+    $(function(){
+    	var filename;
+    	filename=${file};
+    	if (filename==null) {
+    		 $("#hide").hide();		
+		}
+    	
+    })
     </script>
 	</body>
 </html>
