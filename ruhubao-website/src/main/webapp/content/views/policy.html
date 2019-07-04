@@ -12,7 +12,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" /> -->
     <!-- <link rel="stylesheet" type="text/css" href="../css/polity.css" /> -->
     <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
-
+    
     <script type="text/javascript">
       function goPAGE() {
         if ((navigator.userAgent.match(
@@ -83,7 +83,7 @@
               </li>
             </ul>
           </div>
-
+          
           <div class="page-btn-box">
             <a href="#page1" data-number="1" v-on:click="getDataList(1)" class="nv page-btn">1</a>
             <a href="#page2" data-number="2" v-on:click="getDataList(2)" class="nv page-btn">2</a>
@@ -221,6 +221,9 @@
         var link = $(this).attr('href');
         $(link).removeClass('hide').siblings('.page').addClass('hide');
       })
+      
+      
+      
     </script>
   </body>
 </html>
