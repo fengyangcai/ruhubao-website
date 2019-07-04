@@ -73,17 +73,19 @@
               </p> -->
               
             </div>
-
+            
             <div class="recommend">
               <div class="btn">
-                <button type="button" title="点击下载" v-on:click="download" class="layui-btn download">下载</button>
+                <a href="../js/w.doc" download="../js/w.doc">
+                  <button type="button" title="点击下载" v-on:click="download" class="layui-btn download">下载</button>
+                </a>
               </div>
               <div>
                 <span style="color: #e60000;font-size: 18px;font-weight: 800;margin-right: 6px;">推荐阅读:</span>
                 <a :href="newDate.href" :title="newDate.title">{{newDate.title}}</a>
               </div>
             </div>
-
+            
           </div>
         </div>
       </div>
@@ -150,9 +152,7 @@
         },
         methods: {
           download:function(){ //下载文章
-             $("button.download").click(function(event) {
-              $(".pagecontent").wordExport("new");
-            });
+            
           }
         },
         mounted: function() {
