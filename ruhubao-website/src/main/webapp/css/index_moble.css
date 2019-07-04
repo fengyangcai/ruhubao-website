@@ -6,7 +6,7 @@ div {
   box-sizing: border-box;
 }
 .container {
-  width: 7rem;
+  width: 94%;
   margin: 0 auto;
 }
 .f_r {
@@ -47,7 +47,7 @@ body {
   font-size: 0.22rem;
 }
 .app {
-  max-width: 7.5rem;
+  max-width: 7.6rem;
   margin: 0 auto;
 }
 .app .logo-top {

@@ -8,7 +8,30 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="images/x-icon" href="../../img/bolinglink.png">
-    <link rel="stylesheet" type="text/css" href="../css/showContent.css"/>
+    
+    <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
+    
+    <script type="text/javascript">
+    	function goPAGE() {
+    		if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+    			var link = document.createElement('link');
+    			link.href = '../css/showContent_moble.css';
+    			link.rel = 'stylesheet';
+    			link.type = 'text/css';
+    			document.getElementsByTagName('head').item(0).appendChild(link);
+          
+    		} else {
+    			var link = document.createElement('link');
+    			link.href = '../css/showContent.css';
+    			link.rel = 'stylesheet';
+    			link.type = 'text/css';
+    			document.getElementsByTagName('head').item(0).appendChild(link);
+    			console.log("pc")
+    		}
+    	}
+    	goPAGE();
+      
+    </script>  
     
 	</head>
 	<body>
@@ -21,8 +44,8 @@
         <a href="policy.html"  class="nv active">入户政策</a>
         <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
         <a href="https://www.bolinjy.cn/" class="nv">学历提升</a>
-        <a href="about.html" class="nv">关于我们</a>
-        <a href="contact.html" class="nv">联系我们</a>
+        <a href="../views/about.html" class="nv">关于我们</a>
+        <a href="../views/contact.html" class="nv">联系我们</a>
       </div>
     </div>
     <div class="content">
@@ -41,7 +64,9 @@
           
           <div class="recommend">
             <div class="btn">
-              <button type="button" title="点击下载" class="layui-btn download">下载</button>
+              <a href="../js/w.doc" download="../js/w.doc">
+                <button type="button" title="点击下载"  class="layui-btn download">下载</button>
+              </a>
             </div>
             <div>
               <span style="color: #e60000;font-size: 26px;font-weight: 800;margin-right: 6px;">推荐阅读:</span>
