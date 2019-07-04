@@ -65,9 +65,9 @@
           <div class="recommend">
           
             <div class="btn" id="hide" >
-           
-              <a href=${file!} download=${file!}  class="nv">
-                <button type="button"  title="点击下载"  class="layui-btn download" id="butt" hidden=${file!("hide")}>下载</button>
+           		<p hidden="hidden" id ="filename">${file}</p>
+              	<a href=${file!} download=${file!}  class="nv">
+                <button type="button"  title="点击下载"  class="layui-btn download" id="butt">下载</button>
               </a>
             </div>
             <div>
@@ -135,9 +135,9 @@
     <script type="text/javascript">
     
     $(function(){
-    	var filename;
-    	filename=${file};
-    	if (filename==null) {
+    	
+    	var filename=$("#filename").html();
+    	if (filename=="kong") {
     		 $("#hide").hide();		
 		}
     	

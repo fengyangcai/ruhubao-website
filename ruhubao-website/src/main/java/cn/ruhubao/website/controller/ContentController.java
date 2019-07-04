@@ -181,9 +181,15 @@ public class ContentController {
 				map.put("content", content.getContent());	
 				map.put("title",content.getTitle());
 				map.put("pic",content.getPic());
-				map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(content.getCreated()));
+				map.put("created", new SimpleDateFormat("yyyy-MM-dd").format(content.getCreated()));
 				map.put("url",strUrl);
-				map.put("file",content.getPic2());
+				if (content.getPic2()!=null&&!content.getPic2().equals("")) {
+					map.put("file",content.getPic2());
+					
+				}else {
+					
+					map.put("file","kong");
+				}
 				map.put("nextUrl","");
 				map.put("nextTitle","");
 
