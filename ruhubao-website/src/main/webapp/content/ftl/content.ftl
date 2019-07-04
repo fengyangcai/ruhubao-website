@@ -21,8 +21,8 @@
         <a href="policy.html"  class="nv active">入户政策</a>
         <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
         <a href="https://www.bolinjy.cn/" class="nv">学历提升</a>
-        <a href="about.html" class="nv">关于我们</a>
-        <a href="contact.html" class="nv">联系我们</a>
+        <a href="../views/about.html" class="nv">关于我们</a>
+        <a href="../views/contact.html" class="nv">联系我们</a>
       </div>
     </div>
     <div class="content">
