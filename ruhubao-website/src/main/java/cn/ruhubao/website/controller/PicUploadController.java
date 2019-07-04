@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +87,13 @@ public class PicUploadController {
 		return ResponseEntity.ok(map);
 
 	}
+	
+	
+	public ResponseEntity<Map<String,Object>> uploadFile(@RequestParam("pictureFile")MultipartFile pictureFile,String szname,HttpServletRequest request,HttpServletResponse response){
+		
+	}
+	
+	
 	@RequestMapping("/manage")
 	public ResponseEntity<HashMap<String, Object>> manage(HttpServletRequest request,HttpServletResponse response){
 		//获取uploadimg的绝对路径
