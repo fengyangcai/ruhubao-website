@@ -148,6 +148,14 @@ public class ContentController {
 			map.put("pic",content.getPic());
 			map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 			map.put("url",strUrl);
+			if (content.getPic2()!=null&&!content.getPic2().equals("")) {
+				map.put("file",content.getPic2());
+				
+			}else {
+				
+				map.put("file","kong");
+			}
+			
 			// 输出
 			template.process(map, writer);
 			// 在这里把路径写入content的url上
