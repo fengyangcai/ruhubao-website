@@ -187,7 +187,7 @@ input {
 }
 .app .content .page-btn-box a {
   display: inline-block;
-  width: 32px;
+  padding: 2px 4px;
   height: 32px;
   background-color: #14a9e7;
   border-radius: 3px;
