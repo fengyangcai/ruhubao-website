@@ -51,7 +51,7 @@
     <div class="content">
       <div class="container">
         <p class="wei">
-          <span>您当前所在的位置： 首页 > ${title}>${title}</span>
+          <span>您当前所在的位置： 首页 > ${contentCategory}>${title}</span>
         </p>
         <!-- 发布内容 -->
         <div class="pagecontent">

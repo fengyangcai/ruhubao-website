@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import cn.ruhubao.website.pojo.Content;
+import cn.ruhubao.website.pojo.ContentCategory;
 import cn.ruhubao.website.pojo.DataGridResult;
+import cn.ruhubao.website.service.ContentCategoryService;
 import cn.ruhubao.website.service.ContentService;
 import cn.ruhubao.website.utils.UrlRequestUtils;
 import freemarker.template.Configuration;
@@ -34,6 +36,10 @@ public class ContentController {
 
 	@Autowired
 	private ContentService contentService;
+	
+	
+	@Autowired
+	private ContentCategoryService contentCategroryService;
 
 	@Autowired
 	private FreeMarkerConfig freeMarkerConfig;
@@ -134,6 +140,8 @@ public class ContentController {
 			content.setUrl(strUrl);
 			System.out.println(content);
 			// 把需要展示的内容存到map中。
+			ContentCategory contentCategory = contentCategroryService.queryById(content.getCategoryId());
+			map.put("contentCategory",contentCategory.getName());
 			map.put("content", content.getContent());	
 			map.put("title",content.getTitle());
 			//pic来到这里是null,
