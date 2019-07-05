@@ -127,9 +127,7 @@ public class ContentController {
 			// 先把cotent的id 的图片地址查询处理
 			Content content2 = contentService.queryById(content.getId());
 			// 把之前的图片删除在设置这个新的图片上去
-			if (content.getPic() == null | content.getPic().equals("")) {
-				content.setPic(content2.getPic());
-			} else {
+			if (content.getPic()!=null && !content.getPic().equals("")) {
 				// 有新的图片地址，把之前的图片删除
 				String pic = content2.getPic();
 				// 获取到文件名
@@ -138,12 +136,8 @@ public class ContentController {
 				if (file.exists()) {
 					file.delete();
 				}
-
-			}
-			if (content.getPic2()==null|content.getPic2().equals("")) {
-				content.setPic2(content2.getPic2());
-				
-			}else {
+			} 
+			if (content.getPic2()!=null&&!content.getPic2().equals("")) {
 				//有新的文件地址，把之前的删除
 				String pic2 =content2.getPic2();
 				String fileName2 = pic2.substring(pic2.lastIndexOf("/")+1);

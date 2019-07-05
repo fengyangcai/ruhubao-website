@@ -57,8 +57,8 @@
         <div class="pagecontent">
           <h2 class="title">${title}</h2>
           <p class="time">${created}</p>
-          <!-- <div class="img-box"><img src=${pic} ></div> -->
-          <!-- <div class="img-box"><img src=${pic} ></div> -->
+          <!-- <div class="img-box"><img src= ></div> -->
+          <!-- <div class="img-box"><img src= ></div> -->
           <div class="text-box">
         	 ${content}
           </div>
