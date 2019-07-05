@@ -66,14 +66,14 @@
           
             <div class="btn" id="hide" >
            		<p hidden="hidden" id ="filename">${file}</p>
-              	<a href=${file!} download=${file!}  class="nv">
+              	<a href=${file} download=${file}  class="nv">
                 <button type="button"  title="点击下载"  class="layui-btn download" id="butt">下载</button>
               </a>
             </div>
-            <div>
+            <!-- <div>
               <span style="color: #e60000;font-size: 26px;font-weight: 800;margin-right: 6px;">推荐阅读:</span>
               <a href="#" class="nv">广州市积分制入户管理办法实施细则</a>
-            </div>
+            </div> -->
           </div>
           
         </div>
