@@ -51,7 +51,7 @@
     <div class="content">
       <div class="container">
         <p class="wei">
-          <span>您当前所在的位置： 首页 > ${title}>${title}</span>
+          <span>您当前所在的位置： 首页 > ${contentCategory}>${title}</span>
         </p>
         <!-- 发布内容 -->
         <div class="pagecontent">
@@ -63,15 +63,17 @@
           </div>
           
           <div class="recommend">
-            <div class="btn">
-              <a href="../js/w.doc" download="../js/w.doc">
-                <button type="button" title="点击下载"  class="layui-btn download">下载</button>
+          
+            <div class="btn" id="hide" >
+           		<p hidden="hidden" id ="filename">${file}</p>
+              	<a href=${file} download=${file}  class="nv">
+                <button type="button"  title="点击下载"  class="layui-btn download" id="butt">下载</button>
               </a>
             </div>
-            <div>
+            <!-- <div>
               <span style="color: #e60000;font-size: 26px;font-weight: 800;margin-right: 6px;">推荐阅读:</span>
               <a href="#" class="nv">广州市积分制入户管理办法实施细则</a>
-            </div>
+            </div> -->
           </div>
           
         </div>
@@ -130,6 +132,17 @@
         
         
         
+    </script>
+    <script type="text/javascript">
+    
+    $(function(){
+    	
+    	var filename=$("#filename").html();
+    	if (filename=="kong") {
+    		 $("#hide").hide();		
+		}
+    	
+    })
     </script>
 	</body>
 </html>

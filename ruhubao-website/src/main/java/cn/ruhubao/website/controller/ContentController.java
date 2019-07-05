@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import cn.ruhubao.website.pojo.Content;
+import cn.ruhubao.website.pojo.ContentCategory;
 import cn.ruhubao.website.pojo.DataGridResult;
+import cn.ruhubao.website.service.ContentCategoryService;
 import cn.ruhubao.website.service.ContentService;
 import cn.ruhubao.website.utils.UrlRequestUtils;
 import freemarker.template.Configuration;
@@ -34,6 +36,10 @@ public class ContentController {
 
 	@Autowired
 	private ContentService contentService;
+	
+	
+	@Autowired
+	private ContentCategoryService contentCategroryService;
 
 	@Autowired
 	private FreeMarkerConfig freeMarkerConfig;
@@ -134,6 +140,8 @@ public class ContentController {
 			content.setUrl(strUrl);
 			System.out.println(content);
 			// 把需要展示的内容存到map中。
+			ContentCategory contentCategory = contentCategroryService.queryById(content.getCategoryId());
+			map.put("contentCategory",contentCategory.getName());
 			map.put("content", content.getContent());	
 			map.put("title",content.getTitle());
 			//pic来到这里是null,
@@ -181,9 +189,15 @@ public class ContentController {
 				map.put("content", content.getContent());	
 				map.put("title",content.getTitle());
 				map.put("pic",content.getPic());
-				map.put("created", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(content.getCreated()));
+				map.put("created", new SimpleDateFormat("yyyy-MM-dd").format(content.getCreated()));
 				map.put("url",strUrl);
-				map.put("file",content.getPic2());
+				if (content.getPic2()!=null&&!content.getPic2().equals("")) {
+					map.put("file",content.getPic2());
+					
+				}else {
+					
+					map.put("file","kong");
+				}
 				map.put("nextUrl","");
 				map.put("nextTitle","");
 
