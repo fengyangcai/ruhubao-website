@@ -186,6 +186,8 @@ public class ContentController {
 				String strUrl = CONTENT_HTML_PATH+File.separator +"content"+File.separator +"ftl"+File.separator + id + ".html";
 				content.setUrl(strUrl);
 				// 把需要展示的内容存到map中。
+				ContentCategory contentCategory = contentCategroryService.queryById(content.getCategoryId());
+				map.put("contentCategory",contentCategory.getName());
 				map.put("content", content.getContent());	
 				map.put("title",content.getTitle());
 				map.put("pic",content.getPic());
