@@ -65,10 +65,9 @@
           
           <div class="recommend">
           
-          
             <div class="btn" id="hide" >
            		<p hidden="hidden" id ="filename">${file}</p>
-              	<a href="+${file}" download="${file}"  class="nv">
+              <a href="+${file}" download="${file}"  class="nv">
                 <button type="button"  title="点击下载"  class="layui-btn download" id="butt">下载</button>
               </a>
             </div>

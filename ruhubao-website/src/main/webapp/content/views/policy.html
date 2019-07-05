@@ -58,7 +58,7 @@
           <a href="contact.html" class="nv">联系我们</a>
         </div>
       </div>
-
+      
       <div class="content">
         <div class="container">
           <p class="wei">
@@ -85,9 +85,8 @@
           </div>
           
           <div class="page-btn-box">
-            <a href="#page1" data-number="1" v-on:click="getDataList(1)" class="nv page-btn">1</a>
-            <a href="#page2" data-number="2" v-on:click="getDataList(2)" class="nv page-btn">2</a>
-            <a href="#page3" data-number="3" v-on:click="getDataList(3)" class="nv page-btn">3</a>
+            <a href="#page1" data-number="1" v-on:click="getDataList()" class="nv page-btn">上一页</a>
+            <a href="#page2" data-number="2" v-on:click="getDataList2()" class="nv page-btn">下一页</a>
           </div>
         </div>
       </div>
@@ -125,31 +124,35 @@
     <script type="text/javascript">
       Vue.prototype.$ = jQuery;
       
-
       var vm = new Vue({
         el: '#app',
         data: {
           data_list: [], //数据列表
-          categoryId: 2
+          categoryId: 2,
+          nowNumber:1
         },
         methods: {
-          getDataList: function(num) {
-            var pagenumber = num;
+          getDataList: function() {
             var _this = this;
+            this.nowNumber = this.nowNumber - 1;
+            if(this.nowNumber < 1){
+              layer.msg('已经是第一页！');
+              _this.nowNumber = _this.nowNumber + 1;
+              // console.log( _this.nowNumber)
+              return false;
+            }
             
             this.$.ajax({
               url: '../../content', 
               cache:false,
               data: {
-            	  page:pagenumber,
-            	  rows:5,
-                categoryId:_this.categoryId
+            	  page:_this.nowNumber,
+            	  rows:10
               },
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
                 console.log(res, _this.data_list)
-                
               },
               error: function(res) {
                 layer.msg('获取数据失败');
@@ -157,22 +160,48 @@
             })
           
           },
+          getDataList2:function(){
+            var _this = this;
+            this.nowNumber = this.nowNumber + 1;
+            
+            this.$.ajax({
+              url: '../../content', 
+              cache:false,
+              data: {
+            	  page:_this.nowNumber,
+            	  rows:10
+              },
+              type: 'GET',
+              success: function(res) {
+                if(res.total < 10){ //判断是否是最后一页
+                   layer.msg('已经是最后一页');
+                   _this.nowNumber = _this.nowNumber - 1;
+                   _this.data_list = res.rows;
+                   return false;
+                }
+                _this.data_list = res.rows;
+                
+                console.log(res, _this.data_list)
+                
+              },
+              error: function(res) {
+                layer.msg('获取数据失败');
+              }
+            })
+          },
           getData:function(categoryId){
             var categoryId = categoryId;
            	var _this = this;
-           	
            	_this.$.ajax({
               url: '../../content',
               data: {
-               /*  page: pagenumber, */
-                rows: 5,
-                categoryId:categoryId
+                page: _this.nowNumber,
+                rows: 10
               },
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
                 console.log(res, _this.data_list)
-                
               },
               error: function(res) {
                
@@ -182,29 +211,8 @@
         
         },
         mounted: function() {
-          //获取数据类型Id
-          
-          var _this = this;
-          this.$.ajax({
-            /*  url: '../js/data3.json', */
-            url: '../../content/category/queryContentCategoryByName',
-            data: {
-              name:"最新政策",
-            
-            },
-            type: 'post',
-            success: function(res) {
-              _this.categoryId = res[0].id;
-             
-              //根据类型id获取数据
-              _this.getData(_this.categoryId);
-             
-              console.log(res,_this.categoryId)
-            },
-            error: function(res) {
-              layer.msg('获取数据失败');
-            }
-          })
+          //获取数据
+          this.getData()
         }
       })
 
