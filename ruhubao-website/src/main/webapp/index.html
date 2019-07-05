@@ -624,7 +624,7 @@
           success: function(res) {
             console.log(res)
             data_list.list = res;
-            console.log(data_list,data_list.list[0].id)
+            // console.log(data_list,data_list.list[0].id)
             
             for(var i=0;i<data_list.list.length;i++){
               var index = i;
@@ -649,7 +649,7 @@
           success:function(res){
             var newdata = res.rows;
             data_list.list[index].list = newdata;
-            console.log(data_list);
+            // console.log(data_list);
             setTimeout(function(){
               show_list(data_list)
             },1)
