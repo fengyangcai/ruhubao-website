@@ -19,10 +19,6 @@
 	            <td><input class="easyui-textbox" name="titleDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
 	            </td>
 	        </tr>
-	        <!--  <tr>
-	            <td>URL:</td>
-	            <td><input class="easyui-textbox" type="text" name="url" style="width: 280px;"></input></td>
-	        </tr> -->
 	        <tr>
 	            <td>图片:</td>
 	            <td>
@@ -57,6 +53,7 @@
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
+
 <script type="text/javascript">
 	//编辑器参数
 	kingEditorParams = {

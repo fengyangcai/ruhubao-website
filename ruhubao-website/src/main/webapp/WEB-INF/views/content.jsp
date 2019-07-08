@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="easyui-panel" title="Nested Panel" data-options="width:'100%',minHeight:500,noheader:true,border:false" style="padding:10px;">
     <div class="easyui-layout" data-options="fit:true">
-        <div data-options="region:'west',split:false" style="width:250px;padding:5px">
+        <div data-options="region:'west',split:false" style="width:250px;padding:5px;background: :#333;color: #fff;">
             <ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/content/category',animate: true,method : 'GET'">
             </ul>
         </div>
@@ -35,7 +35,7 @@ $(function(){
 				//将数据表格数据按照新选择的内容分类id查询数据
 				datagrid.datagrid('reload', {
 					categoryId :node.id
-		        });
+		     });
 			}
 		}
 	});
