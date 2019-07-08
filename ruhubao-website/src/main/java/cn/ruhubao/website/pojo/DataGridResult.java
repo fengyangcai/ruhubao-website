@@ -14,7 +14,7 @@ public class DataGridResult implements Serializable {
 	 */
 	private static final long serialVersionUID = -5034057491744606993L;
 
-	private Long total;
+	private Long total; 
 	
 	private List<?> rows;
 

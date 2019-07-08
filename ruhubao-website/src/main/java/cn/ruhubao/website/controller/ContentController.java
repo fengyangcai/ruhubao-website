@@ -24,6 +24,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import cn.ruhubao.website.pojo.Content;
 import cn.ruhubao.website.pojo.ContentCategory;
 import cn.ruhubao.website.pojo.DataGridResult;
+import cn.ruhubao.website.pojo.DataGridResult2;
 import cn.ruhubao.website.service.ContentCategoryService;
 import cn.ruhubao.website.service.ContentService;
 import cn.ruhubao.website.utils.UrlRequestUtils;
@@ -127,7 +128,7 @@ public class ContentController {
 			// 先把cotent的id 的图片地址查询处理
 			Content content2 = contentService.queryById(content.getId());
 			// 把之前的图片删除在设置这个新的图片上去
-			if (content.getPic()!=null && !content.getPic().equals("")) {
+			if (content.getPic() != null && !content.getPic().equals("")) {
 				// 有新的图片地址，把之前的图片删除
 				String pic = content2.getPic();
 				// 获取到文件名
@@ -136,18 +137,17 @@ public class ContentController {
 				if (file.exists()) {
 					file.delete();
 				}
-			} 
-			if (content.getPic2()!=null&&!content.getPic2().equals("")) {
-				//有新的文件地址，把之前的删除
-				String pic2 =content2.getPic2();
-				String fileName2 = pic2.substring(pic2.lastIndexOf("/")+1);
-				File file2 = new File(PIC_PATH+fileName2);
+			}
+			if (content.getPic2() != null && !content.getPic2().equals("")) {
+				// 有新的文件地址，把之前的删除
+				String pic2 = content2.getPic2();
+				String fileName2 = pic2.substring(pic2.lastIndexOf("/") + 1);
+				File file2 = new File(PIC_PATH + fileName2);
 				if (file2.exists()) {
 					file2.delete();
 				}
-				
+
 			}
-			
 
 			contentService.updateSelective(content);
 			// 重新删除生成新的静态页面
@@ -165,7 +165,7 @@ public class ContentController {
 			FileWriter writer = new FileWriter(new File(filePath));
 			Map<String, Object> map = new HashMap<String, Object>();
 
-			String strUrl = UrlRequestUtils.getContextUrl(request) + "content" + File.separator + "ftl" + File.separator
+			String strUrl = CONTENT_HTML_PATH + File.separator + "content" + File.separator + "ftl" + File.separator
 					+ content.getId() + ".html";// 拿到路径全称。
 			content.setUrl(strUrl);
 			System.out.println(content);
@@ -283,19 +283,44 @@ public class ContentController {
 		// 返回500
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}
-
-	public ResponseEntity<Map<String, Object>> queryContentAll() {
-
+	
+	@RequestMapping(value = "/getData",method = RequestMethod.GET)
+	public ResponseEntity<DataGridResult2> qeuryContentListBypage2(@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows){
 		try {
-			List<Content> contents = contentService.queryAll();
-			result.put("contetnList", contents);
-			return ResponseEntity.ok(result);
+			DataGridResult2 dataGridResult2 = contentService.queryContentListByPage2(categoryId, page, rows);
+			dataGridResult2.setCode(0L);
+			return ResponseEntity.ok(dataGridResult2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// 返回500
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	}
+
+	@RequestMapping(value = "/queryAll", method = RequestMethod.GET)
+	public ResponseEntity<DataGridResult> queryAllContentListByPage(
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
+
+		
+		
+		try {
+			DataGridResult dataGridResult = contentService.queryAllContentListByPage(page, rows);			
+			
+
+			return ResponseEntity.ok(dataGridResult);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 返回500
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 
 	}
+	
+
 
 }

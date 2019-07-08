@@ -2,6 +2,7 @@ package cn.ruhubao.website.service;
 
 import cn.ruhubao.website.pojo.Content;
 import cn.ruhubao.website.pojo.DataGridResult;
+import cn.ruhubao.website.pojo.DataGridResult2;
 
 public interface ContentService extends BaseService<Content>{
 
@@ -13,6 +14,11 @@ public interface ContentService extends BaseService<Content>{
 	 * @return
 	 */
 	DataGridResult queryContentListByPage(Long categoryId, Integer page, Integer rows);
+
+	DataGridResult2 queryContentListByPage2(Long categoryId, Integer page, Integer rows);
+	
+	DataGridResult queryAllContentListByPage(Integer page, Integer rows);
+
 
 	
 	
