@@ -13,4 +13,6 @@ public class IndexController {
 	 * ModelAndView index() { ModelAndView mv =new ModelAndView("index"); return mv;
 	 * }
 	 */
+	
+	
 }

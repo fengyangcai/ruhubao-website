@@ -23,7 +23,6 @@ public class FirstInterceptor implements HandlerInterceptor{
 			}
 
 		
-			
 			System.out.println("您还未登录，请先去登录......");
 			response.sendRedirect(request.getContextPath()+"/user/login");
 		

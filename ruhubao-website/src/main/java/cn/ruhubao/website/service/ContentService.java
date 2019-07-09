@@ -19,6 +19,10 @@ public interface ContentService extends BaseService<Content>{
 	
 	DataGridResult queryAllContentListByPage(Integer page, Integer rows);
 
+	
+
+	
+
 
 	
 	

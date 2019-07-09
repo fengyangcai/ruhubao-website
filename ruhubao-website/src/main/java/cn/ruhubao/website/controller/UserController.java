@@ -27,7 +27,7 @@ public class UserController {
 
 		//返回到 /views/indew.jsp
 		//return"redirect:/index";
-		return"/index";
+		return"/setConten-index";
 
 	}
 

@@ -144,7 +144,7 @@
             }
             
             this.$.ajax({
-              url: '../../content/queryAll', 
+              url: '../../content/queryContentListByName', 
               cache:false,
               data: {
             	  page:_this.nowNumber,
@@ -167,7 +167,7 @@
             this.nowNumber = this.nowNumber + 1;
             
             this.$.ajax({
-              url: '../../content/queryAll', 
+              url: '../../content/queryContentListByName', 
               cache:false,
               data: {
             	  page:_this.nowNumber,
@@ -195,7 +195,7 @@
             var categoryId = categoryId;
            	var _this = this;
            	_this.$.ajax({
-              url: '../../content/queryAll',
+              url: '../../content/queryContentListByName',
               data: {
                 page: _this.nowNumber,
                 rows: 10

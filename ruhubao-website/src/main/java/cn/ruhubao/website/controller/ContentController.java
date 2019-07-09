@@ -31,6 +31,7 @@ import cn.ruhubao.website.service.ContentService;
 import cn.ruhubao.website.utils.UrlRequestUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/content")
 @Controller
@@ -55,6 +56,7 @@ public class ContentController {
 	private String PIC_REQUEST_URL;
 
 	private static Map<String, Object> result = new HashMap<String, Object>();
+	
 
 	@RequestMapping(value = "/controlle")
 	public ResponseEntity<Map<String, Object>> controller(HttpServletRequest request) {
@@ -284,11 +286,12 @@ public class ContentController {
 		// 返回500
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}
-	
-	@RequestMapping(value = "/getData",method = RequestMethod.GET)
-	public ResponseEntity<DataGridResult2> qeuryContentListBypage2(@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+
+	@RequestMapping(value = "/getData", method = RequestMethod.GET)
+	public ResponseEntity<DataGridResult2> qeuryContentListBypage2(
+			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", defaultValue = "5") Integer rows){
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
 		try {
 			DataGridResult2 dataGridResult2 = contentService.queryContentListByPage2(categoryId, page, rows);
 			dataGridResult2.setCode(0L);
@@ -306,11 +309,8 @@ public class ContentController {
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
 
-		
-		
 		try {
-			DataGridResult dataGridResult = contentService.queryAllContentListByPage(page, rows);			
-			
+			DataGridResult dataGridResult = contentService.queryAllContentListByPage(page, rows);
 
 			return ResponseEntity.ok(dataGridResult);
 		} catch (Exception e) {
@@ -321,7 +321,29 @@ public class ContentController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 
 	}
-	
 
+	@RequestMapping(value = "/queryContentListByName", method = RequestMethod.GET)
+	public ResponseEntity<DataGridResult> queryContentListByName(
+			@RequestParam(value = "name", required = true) String contentCategoryName,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
+
+		try {
+			ContentCategory cc = new ContentCategory();
+			cc.setName(contentCategoryName);
+			List<ContentCategory> list = contentCategroryService.queryByWhere(cc);
+			Long id = 0L;
+			if (list!=null&&list.size()>0) {
+				id =list.get(0).getId();
+			}
+			DataGridResult dataGridResult = contentService.queryContentListByPage(id, page, rows);
+			return ResponseEntity.ok(dataGridResult);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+
+	}
 
 }
