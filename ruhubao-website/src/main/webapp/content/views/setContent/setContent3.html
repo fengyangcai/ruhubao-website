@@ -322,8 +322,10 @@
       //渲染导航菜单 渲染入户政策菜单
       $.ajax({
          type: "get",
-         url: "data2.json",
-         data: $("#contentAddForm").serialize(),
+         /* url: "data2.json", */
+         url:"../../../content/category",
+         /* data: $("#contentAddForm").serialize(), */
+         data:{id:1},
          success: function(data){
            console.log(data);
            var data = data;
@@ -355,8 +357,10 @@
        //渲染导航菜单 渲染新闻资讯菜单
       $.ajax({
          type: "get",
-         url: "data22.json",
-         data: $("#contentAddForm").serialize(),
+         /* url: "data22.json", */
+         url: "../../../content/category",
+        /*  data: $("#contentAddForm").serialize(), */
+        data:{id:6},
          success: function(data){
            console.log(data);
            var data = data;
@@ -452,13 +456,15 @@
         var categoryId = $(this).attr('data-id');
         var parentId = $(this).attr('data-parentId');
         var name = $(this).attr('data-name');
-        
+       
         //<input type="hidden" name="categoryId" />
         $('input[name=categoryId]').val($('.layui-this').attr('data-id')); //选中的id 类型
         
+        
+        
         $.ajax({
            type: "get",
-           url: "data11.json",
+           url: "../../../content",
            page: true,
            data: {
              categoryId:categoryId,
@@ -467,13 +473,14 @@
            },
            success: function(data){
              var data = data;
+             console.log(data.rows)
              table.render({
                elem: '#demo',
                height: 670,
                // url: 'data1.json', //数据接口
                title: '文章列表',
                page: true,
-               data:data.data,
+               data:data.rows,
                limit : 20,// 每页显示条数
                toolbar: 'default', //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
                cols: [
@@ -528,7 +535,7 @@
              });
              
              
-             console.log(data.data)
+            
              
            },
            error: function(){
@@ -599,7 +606,7 @@
              //删除行数据
               $.ajax({
                 type:'get',
-                url:'data.json',
+                url:'../../../content/delete',
                 data:{
                   id:ids
                 },
@@ -621,7 +628,7 @@
     //编辑器参数
     kingEditorParams = {
     	filePostName  : "pictureFile",   
-    	uploadJson : '/pic/uploadFile',	
+    	uploadJson : '../../../pic/uploadFile',	
     	dir : "image" 
     };
     
@@ -655,7 +662,7 @@
     	//提交到后台的RESTful  /content/savaContent POST
     	$.ajax({
     	   type: "get",
-    	   url: "data.json",
+    	   url: "../../../content/savaContent",
     	   data: $("#contentAddForm").serialize(),
     	   success: function(msg){
     		   alert('提示: 新增内容成功!');
@@ -693,7 +700,7 @@
       
       $.ajax({
          type: "get",
-         url: "data.json",
+         url: "../../../content/savaContent",
          data: $("#contentAddForm").serialize(),
          success: function(msg){
       	   alert('提示: 编辑内容成功!');
