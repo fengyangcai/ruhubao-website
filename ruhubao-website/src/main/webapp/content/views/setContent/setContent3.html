@@ -176,7 +176,7 @@
                 <!-- 关闭按钮 -->
                 <span class="close">x</span>
                 <h3 style="font-weight: 700;">添加文章</h3>
-                <form id="contentAddForm" class="itemForm" method="post">
+                <form id="contentAddForm"  class="itemForm" method="post">
                   <input type="hidden" name="categoryId" />
                   <table cellpadding="5" style="width: 100%;">
                     <tr>
@@ -226,8 +226,9 @@
                 <!-- 关闭按钮 -->
                 <span class="close">x</span>
                 <h3 style="padding: 10px 0;font-weight: 700;">编辑文章</h3>
-                <form id="contentEditForm" class="itemForm" method="post">
+                <form id="contentEditForm"  class="itemForm" method="post">
                   <input type="hidden" name="categoryId" />
+                  <input type="hidden" name="id" />
                   <table cellpadding="5" style="width: 100%;">
                     <tr>
                       <td width="120">内容标题:</td>
@@ -386,7 +387,7 @@
       
       
       //执行一个 table 实例
-      table.render({
+     var tableIns =  table.render({
         elem: '#demo',
         height: 620,
         title: '文章列表',
@@ -552,6 +553,7 @@
             if(!$('.add-content input[name=categoryId]').val()){
               alert('请选择类型')
             }else{
+              clearForm();
               $('.add-content').show();
             }
             
@@ -569,6 +571,7 @@
               $('.edit').show();
               
               $('.edit input[name=categoryId]').val(data.categoryId);
+              $('.edit input[name=id]').val(data.id);
               $('.edit .title').val(data.title);
               $('.edit .subTitle').val(data.subTitle);
               $('.edit .pic').val(data.pic);
@@ -591,24 +594,31 @@
                // ids += checkStatus.data[i].id+",";
                ids.push(checkStatus.data[i].id)
              }
+             ids = ids.join(",");
              
-             
-             //删除行数据
-              $.ajax({
-                type:'post',
-                url:'https://bolinjy.cn/content/delete',
-                data:{
-                  ids:ids
-                },
-                success:function(res){
-                   alert('删除成功')
-                   //重新刷新表格
-                   table.render()
-                },
-                error:function(){
-                  alert('删除失败')
-                }
-              })
+             layer.confirm('确定删除吗?', function(index){
+                //do something
+                 //删除行数据
+                  $.ajax({
+                   type:'post',
+                   url:'https://bolinjy.cn/content/delete',
+                   data:{
+                     "ids":ids
+                   },
+                   success:function(res){
+                      alert('删除成功')
+                      //重新刷新表格
+                      table.reload()
+                      window.location.reload();
+                   },
+                   error:function(){
+                     alert('删除失败')
+                   }
+                 })
+                 
+                layer.close(index);
+             }); 
+            
             }
             break;
         };
@@ -658,8 +668,9 @@
     		   alert('提示: 新增内容成功!');
             // $("#contentList").datagrid("reload");
             // TT.closeCurrentWindow();
-            
-            table.render() //重新渲染表格
+            $('.add').hide()
+            table.reload() //重新渲染表格
+            window.location.reload();
     	   },
     	   error: function(){
     		   alert('提示:新增内容失败!');
@@ -670,9 +681,6 @@
     //编辑点击按钮 提交和重置
     $('.editReset').on('click',function(){
       clearFormEdit();
-    })
-    $('.editBtn').on('click',function(){
-      
     })
     
     
@@ -687,34 +695,35 @@
       
       contentAddEditor2.sync();
       // /content/edit  https://bolinjy.cn/content/edit
-      console.log($("#contentEditForm").serialize())
       
      
-      // $.ajax({
-      //    type: "post",
-      //    url: "https://bolinjy.cn/content/edit",
-      //    data: $("#contentEditForm").serialize(),
-      //    success: function(msg){
-      // 	   alert('提示: 编辑内容成功!');
-      //       // $("#contentList").datagrid("reload");
-      //       // TT.closeCurrentWindow();
-      //       
-      //       table.render() //重新渲染表格
-      //    },
-      //    error: function(){
-      // 	   alert('提示:编辑内容失败!');
-      //    }
+      $.ajax({
+         type: "post",
+         url: "https://bolinjy.cn/content/edit",
+         data: $("#contentEditForm").serialize(),
+         success: function(msg){
+      	   alert('提示: 编辑内容成功!');
+            // $("#contentList").datagrid("reload");
+            // TT.closeCurrentWindow();
+            $('.add').hide();
+            table.reload() //重新渲染表格
+            window.location.reload();
+         },
+         error: function(){
+      	   alert('提示:编辑内容失败!');
+         }
+      });
+      // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
+      console.log($("#contentEditForm").serialize())
+       
+      // $.post("https://bolinjy.cn/content/edit",$("#contentEditForm").serialize(), function(data){
+      //   
+      // 	alert('提示：编辑内容成功!');
+      //   $('.add').hide()
+      //    //重新渲染表格
+      //   table.reload()
       // });
       
-      $.post("https://bolinjy.cn/content/edit",$("#contentEditForm").serialize(), function(data){
-      	//if(data.status == 200){
-      		alert('提示: edit编辑内容成功!');
-      		// $("#contentList").datagrid("reload");
-      		// TT.closeCurrentWindow();
-          table.render() //重新渲染表格
-          console.log(data)
-      	//}
-      });
     }
     
     function clearForm(){
