@@ -176,7 +176,7 @@
                 <!-- 关闭按钮 -->
                 <span class="close">x</span>
                 <h3 style="font-weight: 700;">添加文章</h3>
-                <form id="contentAddForm" class="itemForm" method="post">
+                <form id="contentAddForm"  class="itemForm" method="post">
                   <input type="hidden" name="categoryId" />
                   <table cellpadding="5" style="width: 100%;">
                     <tr>
@@ -226,8 +226,9 @@
                 <!-- 关闭按钮 -->
                 <span class="close">x</span>
                 <h3 style="padding: 10px 0;font-weight: 700;">编辑文章</h3>
-                <form id="contentEditForm" class="itemForm" method="post">
+                <form id="contentEditForm"  class="itemForm" method="post">
                   <input type="hidden" name="categoryId" />
+                  <input type="hidden" name="id" />
                   <table cellpadding="5" style="width: 100%;">
                     <tr>
                       <td width="120">内容标题:</td>
@@ -318,14 +319,11 @@
       var contentAddEditor2 = null;
       
       
-      
       //渲染导航菜单 渲染入户政策菜单
       $.ajax({
          type: "get",
-         /* url: "data2.json", */
-         url:"../../../content/category",
-         /* data: $("#contentAddForm").serialize(), */
-         data:{id:1},
+         url: "data2.json",
+         data: $("#contentAddForm").serialize(),
          success: function(data){
            console.log(data);
            var data = data;
@@ -353,14 +351,11 @@
          }
       });
       
-      
        //渲染导航菜单 渲染新闻资讯菜单
       $.ajax({
          type: "get",
-         /* url: "data22.json", */
-         url: "../../../content/category",
-        /*  data: $("#contentAddForm").serialize(), */
-        data:{id:6},
+         url: "data22.json",
+         data: $("#contentAddForm").serialize(),
          success: function(data){
            console.log(data);
            var data = data;
@@ -392,7 +387,7 @@
       
       
       //执行一个 table 实例
-      table.render({
+     var tableIns =  table.render({
         elem: '#demo',
         height: 620,
         title: '文章列表',
@@ -456,15 +451,13 @@
         var categoryId = $(this).attr('data-id');
         var parentId = $(this).attr('data-parentId');
         var name = $(this).attr('data-name');
-       
+        
         //<input type="hidden" name="categoryId" />
         $('input[name=categoryId]').val($('.layui-this').attr('data-id')); //选中的id 类型
         
-        
-        
         $.ajax({
            type: "get",
-           url: "../../../content",
+           url: "https://bolinjy.cn/content/",
            page: true,
            data: {
              categoryId:categoryId,
@@ -473,7 +466,7 @@
            },
            success: function(data){
              var data = data;
-             console.log(data.rows)
+             console.log(data)
              table.render({
                elem: '#demo',
                height: 670,
@@ -534,9 +527,6 @@
                ]
              });
              
-             
-            
-             
            },
            error: function(){
         	   alert('获取菜单数据失败')
@@ -563,6 +553,7 @@
             if(!$('.add-content input[name=categoryId]').val()){
               alert('请选择类型')
             }else{
+              clearForm();
               $('.add-content').show();
             }
             
@@ -580,6 +571,7 @@
               $('.edit').show();
               
               $('.edit input[name=categoryId]').val(data.categoryId);
+              $('.edit input[name=id]').val(data.id);
               $('.edit .title').val(data.title);
               $('.edit .subTitle').val(data.subTitle);
               $('.edit .pic').val(data.pic);
@@ -595,40 +587,48 @@
             if (data.length === 0) {
               layer.msg('请选择一行');
             } else {
-             
+             // https://bolinjy.cn/content/delete
              var data = checkStatus.data;
-             var ids = "";
+             var ids = [];
              for(var i=0;i<checkStatus.data.length;i++){
-               ids += checkStatus.data[i].id+",";
+               // ids += checkStatus.data[i].id+",";
+               ids.push(checkStatus.data[i].id)
              }
+             ids = ids.join(",");
              
-             console.log(data,ids)
-             //删除行数据
-              $.ajax({
-                type:'get',
-                url:'../../../content/delete',
-                data:{
-                  id:ids
-                },
-                success:function(res){
-                   alert('删除成功')
-                   //重新刷新表格
-                   table.render()
-                },
-                error:function(){
-                  alert('删除失败')
-                }
-              })
+             layer.confirm('确定删除吗?', function(index){
+                //do something
+                 //删除行数据
+                  $.ajax({
+                   type:'post',
+                   url:'https://bolinjy.cn/content/delete',
+                   data:{
+                     "ids":ids
+                   },
+                   success:function(res){
+                      alert('删除成功')
+                      //重新刷新表格
+                      table.reload()
+                      window.location.reload();
+                   },
+                   error:function(){
+                     alert('删除失败')
+                   }
+                 })
+                 
+                layer.close(index);
+             }); 
+            
             }
             break;
         };
       });
       
       
-    //编辑器参数
+    //编辑器参数 pictureFile  /pic/uploadFile
     kingEditorParams = {
     	filePostName  : "pictureFile",   
-    	uploadJson : '../../../pic/uploadFile',	
+    	uploadJson : 'https://bolinjy.cn/pic/uploadFile',	
     	dir : "image" 
     };
     
@@ -657,19 +657,20 @@
         alert('提示 表单还未填写完成!');
     		return ;
     	}
-     
+     // https://bolinjy.cn/content/savaContent
     	contentAddEditor.sync();
     	//提交到后台的RESTful  /content/savaContent POST
     	$.ajax({
     	   type: "get",
-    	   url: "../../../content/savaContent",
+    	   url: "https://bolinjy.cn/content/savaContent",
     	   data: $("#contentAddForm").serialize(),
     	   success: function(msg){
     		   alert('提示: 新增内容成功!');
             // $("#contentList").datagrid("reload");
             // TT.closeCurrentWindow();
-            
-            table.render() //重新渲染表格
+            $('.add').hide()
+            table.reload() //重新渲染表格
+            window.location.reload();
     	   },
     	   error: function(){
     		   alert('提示:新增内容失败!');
@@ -680,9 +681,6 @@
     //编辑点击按钮 提交和重置
     $('.editReset').on('click',function(){
       clearFormEdit();
-    })
-    $('.editBtn').on('click',function(){
-      
     })
     
     
@@ -696,33 +694,36 @@
       }
       
       contentAddEditor2.sync();
-      // /content/edit
+      // /content/edit  https://bolinjy.cn/content/edit
       
+     
       $.ajax({
-         type: "get",
-         url: "../../../content/savaContent",
-         data: $("#contentAddForm").serialize(),
+         type: "post",
+         url: "https://bolinjy.cn/content/edit",
+         data: $("#contentEditForm").serialize(),
          success: function(msg){
       	   alert('提示: 编辑内容成功!');
             // $("#contentList").datagrid("reload");
             // TT.closeCurrentWindow();
-            
-            table.render() //重新渲染表格
+            $('.add').hide();
+            table.reload() //重新渲染表格
+            window.location.reload();
          },
          error: function(){
       	   alert('提示:编辑内容失败!');
          }
       });
-      
-      // $.post("data.json",$("#contentEditForm").serialize(), function(data){
-      // 	//if(data.status == 200){
-      // 		alert('提示','edit编辑内容成功!');
-      // 		$("#contentList").datagrid("reload");
-      // 		TT.closeCurrentWindow();
-      //     table.render() //重新渲染表格
-      //     
-      // 	//}
+      // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
+      console.log($("#contentEditForm").serialize())
+       
+      // $.post("https://bolinjy.cn/content/edit",$("#contentEditForm").serialize(), function(data){
+      //   
+      // 	alert('提示：编辑内容成功!');
+      //   $('.add').hide()
+      //    //重新渲染表格
+      //   table.reload()
       // });
+      
     }
     
     function clearForm(){
