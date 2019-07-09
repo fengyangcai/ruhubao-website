@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="../../css/admin.css" media="all">
     
     <link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-    
+   
     <script>
       /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
   </script>
@@ -248,15 +246,17 @@
                       <td>图片:</td>
                       <td style="height: 110px;">
                         <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传
-                        <br><input  class="pic" type="hidden" name="pic" />
-                        <img class="pic" src="" style="height: 50px;" alt=""> 
+                        <br>
+                        <input  class="pic" type="hidden" name="pic" />
+                        <img class="pic" src="" style="height: 50px;" alt="">
                       </td>
                     </tr>
                     <tr>
                       <td>文章对应文件附件:</td>
                       <td>
                         <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">附件上传</a>
-                        <br><input type="hidden" class="pic2" name="pic2" />                      
+                        <br>
+                        <input type="hidden" class="pic2" name="pic2" />                      
                       </td>
                     </tr>
                     <tr>
@@ -294,6 +294,9 @@
     <script src="../../js/jquery.easyui.min.js"></script>
     <script src="../../js/easyui-lang-zh_CN.js"></script>
     <script src="../../../ku/layui/layui.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+    
     <script src="../../../js/common.js"></script>
     <!-- https://www.bolinjy.cn/content/?categoryId=2&page=1&rows=20  编辑的数据 -->
     <!-- https://www.bolinjy.cn/content/category?id=1 获取类型数据 -->
@@ -382,8 +385,6 @@
       	   alert('获取菜单数据失败')
          }
       });
-      
-      
       
       
       //执行一个 table 实例
@@ -568,6 +569,7 @@
               
               //对表单赋值  title subTitle titleDesc pic pic2 content
               var data = data[0];
+              console.log(data)
               $('.edit').show();
               
               $('.edit input[name=categoryId]').val(data.categoryId);
@@ -640,7 +642,7 @@
       
    //初始化单图片上传
     initOnePicUpload();
-    TT.initOnePicUpload();
+    // TT.initOnePicUpload();
     //把内容分类id放到input中，提交到后台
     // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
   
@@ -737,8 +739,12 @@
     
     function initOnePicUpload(){
       	$(".onePicUpload").click(function(){
+         
     		var input = $(this).siblings("input");
+        console.log($(this),input)
+        
     		KindEditor.editor(kingEditorParams).loadPlugin('image', function() {
+          
     			this.plugin.imageDialog({
     				showRemote : false,
     				clickFn : function(url, title, width, height, border, align) {
