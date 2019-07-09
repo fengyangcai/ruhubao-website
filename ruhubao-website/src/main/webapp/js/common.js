@@ -23,7 +23,8 @@ var TT = TAOTAO = {
 	// 编辑器参数 https://bolinjy.cn/pic/uploadFile  /pic/uploadFile
 	kingEditorParams : {
 		filePostName  : "pictureFile",
-		uploadJson : 'https://bolinjy.cn/pic/uploadFile',
+		/*uploadJson : 'https://bolinjy.cn/pic/uploadFile',*/
+		uploadJson : '/pic/uploadFile',
 		dir : "image"
 	},
 	// 格式化时间

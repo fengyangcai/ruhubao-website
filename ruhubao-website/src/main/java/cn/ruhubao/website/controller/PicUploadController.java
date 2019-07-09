@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +16,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cn.ruhubao.website.utils.UrlRequestUtils;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/pic")
 @Controller
 public class PicUploadController {
@@ -34,10 +32,10 @@ public class PicUploadController {
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	private static HashMap<String, Object> result =new HashMap<String, Object>();
 	
-	
+	//linux下的相对路径/home/pic
 	@Value("${PIC_PATH}")
 	private String PIC_PATH;
-	
+	//对外的访问路劲：http://pic.bolinjy.cn
 	@Value("${PIC_REQUEST_URL}")
 	private String PIC_REQUEST_URL;
 	
@@ -118,9 +116,11 @@ public class PicUploadController {
 	@RequestMapping("/manage")
 	public ResponseEntity<HashMap<String, Object>> manage(HttpServletRequest request,HttpServletResponse response){
 		//获取uploadimg的绝对路径
-		String uploadPath =request.getSession().getServletContext().getRealPath("/content/uploadimg");
+		//String uploadPath =request.getSession().getServletContext().getRealPath("/content/uploadimg");
+		
 		//1.读取upload目录
-		File uploadFile = new File(uploadPath);
+		//File uploadFile = new File(uploadPath);
+		File uploadFile =new File(PIC_PATH);//获取到图片的文件夹路径
 		//图片扩展名
 		String[] fileTypes = new String[]{"gif", "jpg", "jpeg", "png", "bmp"};
 		//2.把upload目录的所有文件解析出来
@@ -153,11 +153,22 @@ public class PicUploadController {
 		
 		//3.把文件信息转为KindEditor固定json格式返回
 		//加上文件存放的路径
-		result.put("current_url",request.getContextPath()+"/content/upload/");
+		result.put("current_url",PIC_REQUEST_URL);
 		result.put("file_list", fileList);
 		return ResponseEntity.ok(result);
 
 
 	}
+	
+	//删除文件,只删除我们的path_pic路径下的文件
+	public void deleteFile(String fileUrl){
+		String fileName = fileUrl.substring(fileUrl.lastIndexOf("/")+1);		
+		File file =new File(PIC_PATH+fileName);
+		if (file.exists()) {		
+			file.delete();
+		}
+				
+	}
+	
 	
 }

@@ -144,7 +144,7 @@
             }
             
             this.$.ajax({
-              url: '../../content', 
+              url: '../../content/queryAll', 
               cache:false,
               data: {
             	  page:_this.nowNumber,
@@ -166,7 +166,7 @@
             this.nowNumber = this.nowNumber + 1;
             
             this.$.ajax({
-              url: '../../content', 
+              url: '../../content/queryAll', 
               cache:false,
               data: {
             	  page:_this.nowNumber,
@@ -194,7 +194,7 @@
             var categoryId = categoryId;
            	var _this = this;
            	_this.$.ajax({
-              url: '../../content',
+              url: '../../content/queryAll',
               data: {
                 page: _this.nowNumber,
                 rows: 10
