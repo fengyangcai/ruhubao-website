@@ -457,7 +457,8 @@
         
         $.ajax({
            type: "get",
-           url: "https://bolinjy.cn/content/",
+          /*  url: "https://bolinjy.cn/content/", */
+          url:"../../../content/",
            page: true,
            data: {
              categoryId:categoryId,
@@ -601,7 +602,8 @@
                  //删除行数据
                   $.ajax({
                    type:'post',
-                   url:'https://bolinjy.cn/content/delete',
+                  /*  url:'https://bolinjy.cn/content/delete', */
+                  url:"../../../content/delete",
                    data:{
                      "ids":ids
                    },
@@ -628,7 +630,8 @@
     //编辑器参数 pictureFile  /pic/uploadFile
     kingEditorParams = {
     	filePostName  : "pictureFile",   
-    	uploadJson : 'https://bolinjy.cn/pic/uploadFile',	
+    	/* uploadJson : 'https://bolinjy.cn/pic/uploadFile', */	
+    	uploadJson : '../../../pic/uploadFile',	
     	dir : "image" 
     };
     
@@ -662,7 +665,8 @@
     	//提交到后台的RESTful  /content/savaContent POST
     	$.ajax({
     	   type: "get",
-    	   url: "https://bolinjy.cn/content/savaContent",
+    	  /*  url: "https://bolinjy.cn/content/savaContent", */
+    	   url: "../../../content/savaContent",
     	   data: $("#contentAddForm").serialize(),
     	   success: function(msg){
     		   alert('提示: 新增内容成功!');
@@ -699,7 +703,8 @@
      
       $.ajax({
          type: "post",
-         url: "https://bolinjy.cn/content/edit",
+        /*  url: "https://bolinjy.cn/content/edit", */
+         url: "../../../content/edit",
          data: $("#contentEditForm").serialize(),
          success: function(msg){
       	   alert('提示: 编辑内容成功!');
