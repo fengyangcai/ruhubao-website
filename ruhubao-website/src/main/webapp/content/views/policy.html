@@ -124,13 +124,16 @@
     <script src="../js/Vue.js"></script>
     <script type="text/javascript">
       Vue.prototype.$ = jQuery;
-      
+      var total;
+      var maxpage=1;
+      var nowpage=1;
       var vm = new Vue({
         el: '#app',
         data: {
           data_list: [], //数据列表
-          categoryId: 2,
-          nowNumber:1
+          nowNumber:1,
+          maxpage:1 ,
+          total:0
         },
         methods: {
           getDataList: function() {
@@ -149,11 +152,17 @@
               data: {
             	  page:_this.nowNumber,
             	  rows:10,
-                name:"入户政策"
+                  name:"入户政策"
               },
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
+                total=res.total;
+                maxpage=total/10;
+                if (maxpage<1) {
+					maxpage=1;
+				}
+                
                 console.log(res, _this.data_list)
               },
               error: function(res) {
@@ -162,16 +171,20 @@
             })
           
           },
-          getDataList2:function(){
+          getDataList2:function(){//下一页
             var _this = this;
-            this.nowNumber = this.nowNumber + 1;
             
+            this.nowNumber = this.nowNumber + 1;
+            if (this.nowNumber>maxpage) {
+            	this.nowNumber = maxpage;
+			}
             this.$.ajax({
               url: '../../content/queryContentListByName', 
               cache:false,
               data: {
             	  page:_this.nowNumber,
-            	  rows:10
+            	  rows:10,
+            	  name:"入户政策"
               },
               type: 'GET',
               success: function(res) {
@@ -198,11 +211,17 @@
               url: '../../content/queryContentListByName',
               data: {
                 page: _this.nowNumber,
-                rows: 10
+                rows: 10,
+                name:"入户政策"
               },
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
+                total=res.total;
+                maxpage=total/10;
+                if (maxpage<1) {
+					maxpage=1;
+				}     
                 console.log(res, _this.data_list)
               },
               error: function(res) {

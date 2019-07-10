@@ -332,7 +332,8 @@
       //渲染导航菜单 渲染入户政策菜单
       $.ajax({
         type: "get",
-        url: "https://bolinjy.cn/content/category",
+        //url: "https://bolinjy.cn/content/category",
+        url: "/content/category",
         success: function(data) {
           console.log(data);
           var data = data;
@@ -365,7 +366,8 @@
                var index= i;
                 $.ajax({
                 type: "get",
-                url: "https://bolinjy.cn/content/category",
+                //url: "https://bolinjy.cn/content/category",
+                url: "/content/category",
                 data: {
                   id: id
                 },
@@ -476,8 +478,8 @@
         
         $.ajax({
           type: "get",
-          url: "https://bolinjy.cn/content/",
-          // url:"../../../content/",
+         // url: "https://bolinjy.cn/content/",
+          url:"/content/",
           page: true,
           data: {
             categoryId: categoryId,
@@ -572,7 +574,8 @@
         var html2 = "";
          $.ajax({
           type: "get",
-          url: "https://bolinjy.cn/content/",
+         // url: "https://bolinjy.cn/content/",
+          url: "/content/",
           data: {
             categoryId: id,
             page: 1,
@@ -732,8 +735,8 @@
                 //删除行数据
                 $.ajax({
                   type: 'post',
-                  url: 'https://bolinjy.cn/content/delete',
-                  // url:"../../../content/delete",
+               // url: 'https://bolinjy.cn/content/delete',
+                  url:"/content/delete",
                   data: {
                     "ids": ids
                   },
@@ -741,7 +744,7 @@
                 	  layer.alert('删除成功！',{title:"提示"});
                     //重新刷新表格
                     table.reload()
-                    window.location.reload();
+                    $(".layui-this").click();
                   },
                   error: function() {
                 	  layer.alert('删除失败！',{title:"提示"})
@@ -760,8 +763,8 @@
       //编辑器参数 pictureFile  /pic/uploadFile
       kingEditorParams = {
         filePostName: "pictureFile",
-        uploadJson: 'https://bolinjy.cn/pic/uploadFile',
-        // uploadJson : '../../../pic/uploadFile',	
+        //uploadJson: 'https://bolinjy.cn/pic/uploadFile',
+        uploadJson : '/pic/uploadFile',	
         dir: "image"
       };
 
@@ -796,14 +799,14 @@
         //提交到后台的RESTful  /content/savaContent POST
         $.ajax({
           type: "get",
-          url: "https://bolinjy.cn/content/savaContent",
-          // url: "../../../content/savaContent",
+          // url: "https://bolinjy.cn/content/savaContent",
+           url: "/content/savaContent",
           data: $("#contentAddForm").serialize(),
           success: function(msg) {      
             layer.alert('新增内容成功！',{title:"提示"});
             $('.add').hide()
             table.reload() //重新渲染表格
-            window.location.reload();
+            $(".layui-this").click();
           },
           error: function() {
            
@@ -834,8 +837,8 @@
 
         $.ajax({
           type: "post",
-          url: "https://bolinjy.cn/content/edit", 
-         /*  url: "../../../content/edit", */
+         /*  url: "https://bolinjy.cn/content/edit",  */
+         url: "/content/edit",
           data: $("#contentEditForm").serialize(),
           success: function(msg) {
            
@@ -843,7 +846,7 @@
          
             $('.add').hide();
             table.reload() //重新渲染表格
-            window.location.reload();
+            $(".layui-this").click();
           },
           error: function() {       
             layer.alert('编辑内容失败！',{title:"提示"});

@@ -13,7 +13,7 @@ public class UserController {
 	@RequestMapping("/login")
 	public String login(String username, String password,HttpServletRequest request,HttpServletResponse response) {
 		
-		if ("123".equals(username) && "123".equals(password)) {
+		if ("bolin".equals(username) && "bolin".equals(password)) {
 			request.getSession().setAttribute("user", username);
 			
 			System.out.println("执行登录操作");
@@ -27,7 +27,7 @@ public class UserController {
 
 		//返回到 /views/indew.jsp
 		//return"redirect:/index";
-		return"/setConten-index";
+		return"/index";
 
 	}
 

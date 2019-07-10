@@ -28,7 +28,6 @@ import cn.ruhubao.website.pojo.DataGridResult;
 import cn.ruhubao.website.pojo.DataGridResult2;
 import cn.ruhubao.website.service.ContentCategoryService;
 import cn.ruhubao.website.service.ContentService;
-import cn.ruhubao.website.utils.UrlRequestUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -57,35 +56,6 @@ public class ContentController {
 
 	private static Map<String, Object> result = new HashMap<String, Object>();
 	
-
-	@RequestMapping(value = "/controlle")
-	public ResponseEntity<Map<String, Object>> controller(HttpServletRequest request) {
-		// 默认需要传回去的参数
-
-		/*
-		 * { "imageUrl":
-		 * "http://localhost/ueditor/php/controller.php?action=uploadimage",
-		 * "imagePath": "/ueditor/php/", "imageFieldName": "upfile", "imageMaxSize":
-		 * 2048, "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"]
-		 * "其他配置项...": "其他配置值..." }
-		 */
-
-		String imageUrl = "http://localhost:9091/pic/uploadimage";
-		String imagePath = "/ueditor/jsp/upload/";
-		String imageFieldName = "uploadimage";
-		int imageMaxSize = 2018;
-		String[] imageAllowFiles = { ".png", ".jpg", ".jpeg", ".gif", ".bmp" };
-		String qita = "其他的配置";
-
-		result.put(imageUrl, imageUrl);
-		result.put("imagePath", imagePath);
-		result.put("imageFieldName", imageFieldName);
-		result.put("imageMaxSize", imageMaxSize);
-		result.put("imageAllowFiles", imageAllowFiles);
-		result.put("qita", qita);
-		return ResponseEntity.ok(result);
-
-	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ResponseEntity<HashMap<String, Object>> deleteContent(
@@ -324,19 +294,19 @@ public class ContentController {
 
 	@RequestMapping(value = "/queryContentListByName", method = RequestMethod.GET)
 	public ResponseEntity<DataGridResult> queryContentListByName(
-			@RequestParam(value = "name", required = true) String contentCategoryName,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows,HttpServletRequest request) {
 
 		try {
 			ContentCategory cc = new ContentCategory();
+			String contentCategoryName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
 			cc.setName(contentCategoryName);
 			List<ContentCategory> list = contentCategroryService.queryByWhere(cc);
 			Long id = 0L;
 			if (list!=null&&list.size()>0) {
 				id =list.get(0).getId();
 			}
-			DataGridResult dataGridResult = contentService.queryContentListByPage(id, page, rows);
+			DataGridResult dataGridResult = contentService.queryAllContentListByCategroryId(id, page, rows);
 			return ResponseEntity.ok(dataGridResult);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
