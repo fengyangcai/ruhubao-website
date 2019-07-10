@@ -6,9 +6,9 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" type="images/x-icon" href="../layuiadmin/style/res/bolinglink.png">
-    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="../../css/admin.css" media="all">
+    <link rel="shortcut icon" type="images/x-icon" href="/content/layuiadmin/style/res/bolinglink.png">
+    <link rel="stylesheet" href="/content/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/content/css/admin.css" media="all">
 
     <link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 
@@ -298,20 +298,20 @@
 
 
 
-    <script src="../../../js/jquery2.01.js"></script>
-    <script src="../../js/jquery.easyui.min.js"></script>
-    <script src="../../js/easyui-lang-zh_CN.js"></script>
-    <script src="../../../ku/layui/layui.all.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-    
-    <script src="../../../js/common.js"></script>
+    <script src="/js/jquery2.01.js"></script>
+    <script src="/content/js/jquery.easyui.min.js"></script>
+    <script src="/content/js/easyui-lang-zh_CN.js"></script>
+    <script src="/ku/layui/layui.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+    <script src="/js/common.js"></script>
     <!-- https://www.bolinjy.cn/content/?categoryId=2&page=1&rows=20  编辑的数据 -->
     <!-- https://www.bolinjy.cn/content/category?id=1 获取类型数据 -->
     <!-- https://www.bolinjy.cn/content/?categoryId=4&page=1&rows=20 获取单个类型数据列表-->
     <script>
       layui.config({
-        base: '../../layuiadmin/' //静态资源所在路径
+        base: '/content/layuiadmin/' //静态资源所在路径
       }).extend({
         index: 'lib/index' //主入口模块
       }).use('index');
@@ -332,7 +332,8 @@
       //渲染导航菜单 渲染入户政策菜单
       $.ajax({
         type: "get",
-        url: "https://bolinjy.cn/content/category",
+        //url: "https://bolinjy.cn/content/category",
+        url: "/content/category",
         success: function(data) {
           console.log(data);
           var data = data;
@@ -365,7 +366,8 @@
                var index= i;
                 $.ajax({
                 type: "get",
-                url: "https://bolinjy.cn/content/category",
+                //url: "https://bolinjy.cn/content/category",
+                url: "/content/category",
                 data: {
                   id: id
                 },
@@ -382,7 +384,7 @@
                   element.render('nav', 'layadmin-system-side-menu');
                 },
                 error: function() {
-                  layer.alert('获取菜单数据失败！',{title:"提示"}); 
+                	layer.alert('获取菜单数据失败！',{title:"提示"})
                 }
               });
 
@@ -398,7 +400,7 @@
           element.render('nav', 'layadmin-system-side-menu');
         },
         error: function() {
-          layer.alert('获取菜单数据失败！',{title:"提示"}); 
+        	layer.alert('获取菜单数据失败！',{title:"提示"})
         }
       });
 
@@ -463,10 +465,7 @@
       });
 
 
-      //点击菜单获取相应的数据tableIns.reload(options)
-      
-      var tableIns=null;
-      
+      //点击菜单获取相应的数据
       $('body').on('click', '.layui-nav-child dd', function() {
         var categoryId = $(this).attr('data-id');
 
@@ -479,8 +478,8 @@
         
         $.ajax({
           type: "get",
-          url: "https://bolinjy.cn/content/",
-          // url:"../../../content/",
+         // url: "https://bolinjy.cn/content/",
+          url:"/content/",
           page: true,
           data: {
             categoryId: categoryId,
@@ -490,7 +489,7 @@
           success: function(data) {
             var data = data;
             console.log(data)
-            tableIns = table.render({
+            table.render({
               elem: '#demo',
               height: 670,
               // url: 'data1.json', //数据接口
@@ -555,8 +554,7 @@
 
           },
           error: function() {
-            // alert('获取菜单数据失败')
-            layer.alert('获取菜单数据失败！',{title:"提示"}); 
+        	  layer.alert('获取菜单数据失败！',{title:"提示"})
           }
         });
 
@@ -576,7 +574,8 @@
         var html2 = "";
          $.ajax({
           type: "get",
-          url: "https://bolinjy.cn/content/",
+         // url: "https://bolinjy.cn/content/",
+          url: "/content/",
           data: {
             categoryId: id,
             page: 1,
@@ -591,7 +590,7 @@
               html2 += '</dd>';
             }
             
-            $(_this).siblings('.layui-nav-child').html(html2);
+           /*  $(_this).siblings('.layui-nav-child').html(html2); */
             console.log(_this)
             element.render('nav', 'layadmin-system-side-menu');
             
@@ -661,13 +660,16 @@
             });
             
             
+            
+            
           },
           error: function() {
-            // alert('获取菜单数据失败')
-            layer.alert('获取菜单数据失败！',{title:"提示"}); 
-
+            alert('获取菜单数据失败')
           }
         });
+        
+        
+        
         
         
       })
@@ -682,7 +684,7 @@
         switch (obj.event) {
           case 'add':
             if (!$('.add-content input[name=categoryId]').val()) {
-              layer.alert('请选择类型！',{title:"提示"}); 
+              alert('请选择类型')
             } else {
               clearForm();
               $('.add-content').show();
@@ -691,7 +693,7 @@
             break;
           case 'update':
             if (data.length === 0) {
-              layer.alert('请选择一行！',{title:"提示"}); 
+              layer.msg('请选择一行');
             } else if (data.length > 1) {
               layer.msg('只能同时编辑一个');
             } else {
@@ -733,20 +735,19 @@
                 //删除行数据
                 $.ajax({
                   type: 'post',
-                  url: 'https://bolinjy.cn/content/delete',
-                  // url:"../../../content/delete",
+               // url: 'https://bolinjy.cn/content/delete',
+                  url:"/content/delete",
                   data: {
                     "ids": ids
                   },
                   success: function(res) {
-                    layer.alert('删除成功!',{title:"提示"});
+                	  layer.alert('删除成功！',{title:"提示"});
                     //重新刷新表格
-                    tableIns.reload()
-                    // window.location.reload();
+                    table.reload()
                     $(".layui-this").click();
                   },
                   error: function() {
-                     layer.alert('删除失败！',{title:"提示"}); 
+                	  layer.alert('删除失败！',{title:"提示"})
                   }
                 })
 
@@ -762,8 +763,8 @@
       //编辑器参数 pictureFile  /pic/uploadFile
       kingEditorParams = {
         filePostName: "pictureFile",
-        uploadJson: 'https://bolinjy.cn/pic/uploadFile',
-        // uploadJson : '../../../pic/uploadFile',	
+        //uploadJson: 'https://bolinjy.cn/pic/uploadFile',
+        uploadJson : '/pic/uploadFile',	
         dir: "image"
       };
 
@@ -789,7 +790,8 @@
       function submitForm() {
         //校验
         if (!$('#contentAddForm').form('validate')) {
-          layer.alert('提示 表单还未填写完成!',{title:"提示"}); 
+    
+          layer.alert('表单还未填写完成！',{title:"提示"});
           return;
         }
         // https://bolinjy.cn/content/savaContent
@@ -797,35 +799,35 @@
         //提交到后台的RESTful  /content/savaContent POST
         $.ajax({
           type: "get",
-          url: "https://bolinjy.cn/content/savaContent",
-          // url: "../../../content/savaContent",
+          // url: "https://bolinjy.cn/content/savaContent",
+           url: "/content/savaContent",
           data: $("#contentAddForm").serialize(),
-          success: function(msg) {
-            layer.alert('新增内容成功!',{title:"提示"});
+          success: function(msg) {      
+            layer.alert('新增内容成功！',{title:"提示"});
             $('.add').hide()
             table.reload() //重新渲染表格
-            // window.location.reload();
             $(".layui-this").click();
           },
           error: function() {
-            layer.alert('新增内容失败!',{title:"提示"});
+           
+            layer.alert('新增内容失败！',{title:"提示"});
           }
         });
       }
-      
+
       //编辑点击按钮 提交和重置
       $('.editReset').on('click', function() {
         clearFormEdit();
       })
 
-      
+
 
       //编辑提交
       function submintEdit() {
-        
+
         if (!$('#contentEditForm').form('validate')) {
-          layer.alert('表单还未填写完成!',{title:"提示"});
-            
+        
+          layer.alert('表单还未填写完成！',{title:"提示"});
           return;
         }
 
@@ -835,20 +837,19 @@
 
         $.ajax({
           type: "post",
-          /*  url: "https://bolinjy.cn/content/edit", */
-          url: "../../../content/edit",
+         /*  url: "https://bolinjy.cn/content/edit",  */
+         url: "/content/edit",
           data: $("#contentEditForm").serialize(),
           success: function(msg) {
-            layer.alert('编辑内容成功!',{title:"提示"});
-            // $("#contentList").datagrid("reload");
-            // TT.closeCurrentWindow();
+           
+            layer.alert('编辑内容成功！',{title:"提示"});
+         
             $('.add').hide();
             table.reload() //重新渲染表格
-            // window.location.reload();
             $(".layui-this").click();
           },
-          error: function() {
-            layer.alert('编辑内容失败!',{title:"提示"});
+          error: function() {       
+            layer.alert('编辑内容失败！',{title:"提示"});
           }
         });
         // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit

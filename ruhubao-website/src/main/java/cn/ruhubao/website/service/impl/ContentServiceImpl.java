@@ -1,24 +1,35 @@
 package cn.ruhubao.website.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.ListUI;
+import javax.swing.text.StyledEditorKit.ItalicAction;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.ruhubao.website.mapper.ContentCategoryMapper;
 import cn.ruhubao.website.mapper.ContentMapper;
 import cn.ruhubao.website.pojo.Content;
+import cn.ruhubao.website.pojo.ContentCategory;
 import cn.ruhubao.website.pojo.DataGridResult;
 import cn.ruhubao.website.pojo.DataGridResult2;
 import cn.ruhubao.website.service.ContentService;
 import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Service
 public class ContentServiceImpl extends BaseServiceImpl<Content> implements ContentService {
 	@Autowired
 	private ContentMapper contentMapper;
+	
+	@Autowired
+	private ContentCategoryMapper contentCategoryMapper;
 
 	@Override
 	public DataGridResult queryContentListByPage(Long categoryId, Integer page, Integer rows) {
@@ -81,6 +92,62 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
 		result2.setData(list);
 		result2.setTotal(pageInfo.getTotal());
 		return result2;
+	}
+
+	//根据类目id遍历查询其下的所有的文章
+	@Override
+	public DataGridResult queryAllContentListByCategroryId(Long categoryId, Integer page, Integer rows) {
+		
+		List<Long> ids = getContentCategoryId(categoryId);
+		System.out.println("----------------------------------------");
+		System.out.println(ids);
+		System.out.println("----------------------------------------");
+		// Long[] array = (Long[]) ids.toArray();
+		Example example = new Example(Content.class);
+		example.createCriteria().andIn("categoryId", ids);
+		//example.createCriteria().andIn("categoryId",array);
+		//这里查询完了把contentCategoryIds清除一下
+		example.orderBy("updated").desc();
+		PageHelper.startPage(page, rows);
+		List<Content> list = contentMapper.selectByExample(example);
+		//contentCategoryIds.clear();
+		PageInfo<Content> pageInfo = new PageInfo<>(list);
+		return new DataGridResult(pageInfo.getTotal(),pageInfo.getList());
+		
+	}
+	
+	
+	private static 	ArrayList<Long> contentCategoryIds ;
+	private List<Long> getContentCategoryId(Long categoryId) {
+		
+		ContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(categoryId);
+		
+		if (contentCategory!=null) {
+			Boolean isParent = contentCategory.getIsParent();
+			if (isParent) {
+				//查询下一级
+				Example example =new Example(ContentCategory.class);
+				Criteria criteria = example.createCriteria();
+				criteria.andEqualTo("parentId", contentCategory.getId());
+				List<ContentCategory> list2 = contentCategoryMapper.selectByExample(example);
+				System.out.println(list2);
+				for (ContentCategory contentCategory2 : list2) {
+					contentCategoryIds.add(contentCategory2.getId());
+					if (contentCategory2.getIsParent()) {
+						getContentCategoryId(contentCategory2.getId());
+					}
+				}
+				
+			}else {
+				Long id = contentCategory.getId();
+				System.out.println("idwei阿斯顿顶顶顶顶顶顶顶顶顶顶"+id);
+				contentCategoryIds.add(id);
+			}
+			
+		}
+		return contentCategoryIds;
+		
+		
 	}
 
 	

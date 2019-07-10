@@ -7,9 +7,9 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="shortcut icon" type="images/x-icon" href="../layuiadmin/style/res/bolinglink.png">
-  <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="../css/admin.css" media="all">
+  <link rel="shortcut icon" type="images/x-icon" href="/content/layuiadmin/style/res/bolinglink.png">
+  <link rel="stylesheet" href="/content/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/content/css/admin.css" media="all">
   
   <script>
   /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
@@ -102,7 +102,7 @@
               </a>
               <dl class="layui-nav-child">
                 <dd data-name="console">
-                  <a lay-href="setContent/setContent3.html">内容管理</a>
+                  <a lay-href="/page/setContent3">内容管理</a>
                 </dd>
               </dl>
               <li data-name="home" class="layui-nav-item">
@@ -112,10 +112,10 @@
                 </a>
                 <dl class="layui-nav-child">
                   <dd data-name="console">
-                    <a lay-href="setContent/ruhuDate.html">入户数据管理</a>
+                    <a lay-href="/page/ruhuDate">入户数据管理</a>
                   </dd>
                   <dd data-name="console">
-                    <a lay-href="setContent/xueDate.html">学历数据管理</a>
+                    <a lay-href="/page/xueDate">学历数据管理</a>
                   </dd>
                 </dl>
             </li>
@@ -162,11 +162,11 @@
   
   
   
-  <script src="../../ku/layui/layui.all.js"></script>
+  <script src="/ku/layui/layui.all.js"></script>
   
   <script>
   layui.config({
-    base: '../layuiadmin/' //静态资源所在路径
+    base: '/content/layuiadmin/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
   }).use('index');

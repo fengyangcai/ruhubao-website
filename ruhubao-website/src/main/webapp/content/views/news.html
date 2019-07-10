@@ -129,8 +129,10 @@
         el: '#app',
         data: {
           data_list: [], //数据列表
-          categoryId: 2,
-          nowNumber:1
+         // categoryId: 2,
+          nowNumber:1,
+          maxpage:1 ,
+          total:0
         },
         methods: {
           getDataList: function() {
@@ -164,13 +166,16 @@
           getDataList2:function(){
             var _this = this;
             this.nowNumber = this.nowNumber + 1;
-            
+            if (this.nowNumber>maxpage) {
+            	this.nowNumber = maxpage;
+			}
             this.$.ajax({
-              url: '../../content', 
+              url: '../../content/queryContentListByName', 
               cache:false,
               data: {
             	  page:_this.nowNumber,
-            	  rows:10
+            	  rows:10,
+            	  name:"新闻资讯"
               },
               type: 'GET',
               success: function(res) {
@@ -194,7 +199,7 @@
             var categoryId = categoryId;
            	var _this = this;
            	_this.$.ajax({
-              url: '../../content',
+              url: '../../content/queryContentListByName',
               data: {
                 page: _this.nowNumber,
                 rows: 10,
@@ -203,6 +208,11 @@
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
+                total=res.total;
+                maxpage=total/10;
+                if (maxpage<1) {
+					maxpage=1;
+				}  
                 console.log(res, _this.data_list)
               },
               error: function(res) {
