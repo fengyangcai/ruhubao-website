@@ -110,14 +110,14 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
 		example.orderBy("updated").desc();
 		PageHelper.startPage(page, rows);
 		List<Content> list = contentMapper.selectByExample(example);
-		//contentCategoryIds.clear();
+		contentCategoryIds.clear();
 		PageInfo<Content> pageInfo = new PageInfo<>(list);
 		return new DataGridResult(pageInfo.getTotal(),pageInfo.getList());
 		
 	}
 	
 	
-	private static 	ArrayList<Long> contentCategoryIds ;
+	private static 	ArrayList<Long> contentCategoryIds =new ArrayList<Long>();
 	private List<Long> getContentCategoryId(Long categoryId) {
 		
 		ContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(categoryId);
