@@ -1,6 +1,5 @@
 html,
 body {
-  font-size: 16px;
   font: 14px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
 }
 * {
@@ -11,13 +10,34 @@ body {
   width: 1200px;
   margin: 0 auto;
 }
+.app {
+  padding-bottom: 60px;
+  padding-top: 50px;
+  background: radial-gradient(#ffffff, #1c82d4);
+}
 .app h1 {
   text-align: center;
-  padding: 50px 0;
+  padding: 20px 0;
   letter-spacing: 3px;
   font-size: 40px;
 }
 .app .base {
   font-size: 20px;
   padding: 10px 0 30px 0;
+}
+.app .box {
+  background: #fff;
+  padding: 40px 50px 60px 80px;
+  box-sizing: border-box;
+}
+.app .item {
+  padding: 10px 0px 20px 40px;
+}
+.app .item h4 {
+  font-size: 16px;
+  padding: 5px 0 10px 0;
+  line-height: 28px;
+}
+.app .pt {
+  padding: 10px 0;
 }
