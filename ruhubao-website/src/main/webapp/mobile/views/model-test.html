@@ -513,14 +513,15 @@
       
       
       var data = {
-        username:$('input[name=username]').val(),
-        telphone:$('input[name=telphone]').val(),
+        name:$('input[name=username]').val(),
+        telPhone:$('input[name=telphone]').val(),
         grade:grade,
         fromPlatform: "入户宝测试分网",
         sourceLink: document.referrer ? document.referrer : window.location.href,
       }
       
       console.log(data)
+      // https://crm.bolinjy.cn/data/customer/addCustomer
       $.ajax({
         type:'post',
         data:data,
