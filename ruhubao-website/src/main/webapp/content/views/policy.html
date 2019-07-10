@@ -12,7 +12,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" /> -->
     <!-- <link rel="stylesheet" type="text/css" href="../css/polity.css" /> -->
     <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
-    
+
     <script type="text/javascript">
       function goPAGE() {
         if ((navigator.userAgent.match(
@@ -59,7 +59,7 @@
           <a href="contact.html" class="nv">联系我们</a>
         </div>
       </div>
-      
+
       <div class="content">
         <div class="container">
           <p class="wei">
@@ -84,7 +84,7 @@
               </li>
             </ul>
           </div>
-          
+
           <div class="page-btn-box">
             <a href="#page1" data-number="1" v-on:click="getDataList()" class="nv page-btn">上一页</a>
             <a href="#page2" data-number="2" v-on:click="getDataList2()" class="nv page-btn">下一页</a>
@@ -124,42 +124,42 @@
     <script src="../js/Vue.js"></script>
     <script type="text/javascript">
       Vue.prototype.$ = jQuery;
-    
+
       var vm = new Vue({
         el: '#app',
         data: {
           data_list: [], //数据列表
-          nowNumber:1,
-          maxpage:1 ,
-          total:0
+          nowNumber: 1,
+          maxpage: 1,
+          total: 0
         },
         methods: {
           getDataList: function() {
             var _this = this;
             this.nowNumber = this.nowNumber - 1;
-            if(this.nowNumber < 1){
+            if (this.nowNumber < 1) {
               layer.msg('已经是第一页！');
               _this.nowNumber = _this.nowNumber + 1;
               // console.log( _this.nowNumber)
               return false;
             }
-            
-            this.$.ajax({
-              url: '../../content/queryContentListByName', 
-              cache:false,
+
+            this.$.ajax({ // ../../content/queryContentListByName
+              url: 'https://bolinjy.cn/content/queryContentListByName',
+              cache: false,
               data: {
-            	  page:_this.nowNumber,
-            	  rows:10,
-                  name:"入户政策"
+                page: _this.nowNumber,
+                rows: 10,
+                name: "入户政策"
               },
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
-                total=res.total;
-                maxpage=total/10;
-                if (maxpage<1) {
-					maxpage=1;
-				}
+                this.total = res.total;
+                _this.maxpage = this.total / 10;
+                if (_this.maxpage < 1) {
+                  _this.maxpage = 1;
+                }
                 
                 console.log(res, _this.data_list)
               },
@@ -167,69 +167,69 @@
                 layer.msg('获取数据失败');
               }
             })
-          
+
           },
-          getDataList2:function(){//下一页
+          getDataList2: function() { //下一页
             var _this = this;
-            
+
             this.nowNumber = this.nowNumber + 1;
-            if (this.nowNumber>maxpage) {
-            	this.nowNumber = maxpage;
-			}
-            this.$.ajax({
-              url: '../../content/queryContentListByName', 
-              cache:false,
+            if (this.nowNumber > _this.maxpage) {
+              this.nowNumber = _this.maxpage;
+            }
+            this.$.ajax({ //../../content/queryContentListByName
+              url: 'https://bolinjy.cn/content/queryContentListByName',
+              cache: false,
               data: {
-            	  page:_this.nowNumber,
-            	  rows:10,
-            	  name:"入户政策"
+                page: _this.nowNumber,
+                rows: 10,
+                name: "入户政策"
               },
               type: 'GET',
               success: function(res) {
-                if(res.total < 10){ //判断是否是最后一页
-                   layer.msg('已经是最后一页');
-                   _this.nowNumber = _this.nowNumber - 1;
-                   _this.data_list = res.rows;
-                   return false;
+                if (res.total < 10) { //判断是否是最后一页
+                  layer.msg('已经是最后一页');
+                  _this.nowNumber = _this.nowNumber - 1;
+                  _this.data_list = res.rows;
+                  return false;
                 }
                 _this.data_list = res.rows;
                 
                 console.log(res, _this.data_list)
-                
+
               },
               error: function(res) {
                 layer.msg('获取数据失败');
               }
             })
           },
-          getData:function(categoryId){
+          getData: function(categoryId) {
             var categoryId = categoryId;
-           	var _this = this;
-           	_this.$.ajax({
-              url: '../../content/queryContentListByName',
+            var _this = this;
+            _this.$.ajax({ // ../../content/queryContentListByName
+              url: 'https://bolinjy.cn/content/queryContentListByName',
               data: {
                 page: _this.nowNumber,
                 rows: 10,
-                name:"入户政策"
+                name: "入户政策"
               },
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
-                total=res.total;
-                maxpage=total/10;
-                if (total/10==0||tatal/10==1) {
-					maxpage=1
-				}else{
-					maxpage=total/10+1
-				}
-                
-                
+                _this.total = res.total;
+                _this.maxpage = _this.total / 10;
+                if (_this.total / 10 == 0 || _this.tatal / 10 == 1) {
+                  _this.maxpage = 1
+                } else {
+                  _this.maxpage = _this.total / 10 + 1
+                }
+
+
                 console.log(res, _this.data_list)
               },
               error: function(res) {
-               
+
               }
-            })       
+            })
           }
         },
         mounted: function() {
@@ -251,9 +251,6 @@
         var link = $(this).attr('href');
         $(link).removeClass('hide').siblings('.page').addClass('hide');
       })
-      
-      
-      
     </script>
   </body>
 </html>

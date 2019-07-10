@@ -166,8 +166,8 @@
           getDataList2:function(){
             var _this = this;
             this.nowNumber = this.nowNumber + 1;
-            if (this.nowNumber>maxpage) {
-            	this.nowNumber = maxpage;
+            if (this.nowNumber>_this.maxpage) {
+            	this.nowNumber = _this.maxpage;
 			}
             this.$.ajax({
               url: '../../content/queryContentListByName', 
@@ -208,10 +208,10 @@
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
-                total=res.total;
-                maxpage=total/10;
-                if (maxpage<1) {
-					maxpage=1;
+                _this.total=res.total;
+                _this.maxpage=total/10;
+                if (_this.maxpage<1) {
+					_this.maxpage=1;
 				}  
                 console.log(res, _this.data_list)
               },
