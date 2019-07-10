@@ -139,7 +139,7 @@
             var _this = this;
             this.nowNumber = this.nowNumber - 1;
             if(this.nowNumber < 1){
-              layer.msg('已经是第一页！');
+             // layer.msg('已经是第一页！');
               _this.nowNumber = _this.nowNumber + 1;
               // console.log( _this.nowNumber)
               return false;
@@ -166,8 +166,9 @@
           getDataList2:function(){
             var _this = this;
             this.nowNumber = this.nowNumber + 1;
-            if (this.nowNumber>maxpage) {
-            	this.nowNumber = maxpage;
+            if (this.nowNumber>this.maxpage) {
+            	this.nowNumber = this.maxpage;
+            	return false;
 			}
             this.$.ajax({
               url: '../../content/queryContentListByName', 
@@ -208,11 +209,13 @@
               type: 'GET',
               success: function(res) {
                 _this.data_list = res.rows;
-                total=res.total;
-                maxpage=total/10;
-                if (maxpage<1) {
-					maxpage=1;
-				}  
+                _this.total=res.total;
+                _this.maxpage=_this.total/10;
+                if ((_this.total/10)==0||(_this.tatal/10)==1) {
+                	_this.maxpage=1
+				}else{
+					_this.maxpage = parseInt((_this.total/10)+1)
+				}      
                 console.log(res, _this.data_list)
               },
               error: function(res) {

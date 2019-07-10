@@ -105,11 +105,10 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
 		// Long[] array = (Long[]) ids.toArray();
 		Example example = new Example(Content.class);
 		example.createCriteria().andIn("categoryId", ids);
-		//example.createCriteria().andIn("categoryId",array);
-		//这里查询完了把contentCategoryIds清除一下
 		example.orderBy("updated").desc();
 		PageHelper.startPage(page, rows);
 		List<Content> list = contentMapper.selectByExample(example);
+		//这里查询完了把contentCategoryIds清除一下
 		contentCategoryIds.clear();
 		PageInfo<Content> pageInfo = new PageInfo<>(list);
 		return new DataGridResult(pageInfo.getTotal(),pageInfo.getList());
