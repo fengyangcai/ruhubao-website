@@ -513,9 +513,8 @@
       
       
       var data = {
-        username:$('input[name=username]').val(),
-        telphone:$('input[name=telphone]').val(),
-        grade:grade,
+    	name:$('input[name=username]').val(),
+        telPhone:$('input[name=telphone]').val(),
         fromPlatform: "入户宝测试分网",
         sourceLink: document.referrer ? document.referrer : window.location.href,
       }
@@ -524,7 +523,7 @@
       $.ajax({
         type:'post',
         data:data,
-        url:'',
+        url:'https://crm.bolinjy.cn/data/customer/addCustomer',
         success:function(data){
           layer.alert('您的分数是&nbsp:'+grade+'分',{title:'提示'})
           $('form')[0].reset();
