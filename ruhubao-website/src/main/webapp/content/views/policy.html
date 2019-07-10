@@ -124,9 +124,7 @@
     <script src="../js/Vue.js"></script>
     <script type="text/javascript">
       Vue.prototype.$ = jQuery;
-      var total;
-      var maxpage=1;
-      var nowpage=1;
+    
       var vm = new Vue({
         el: '#app',
         data: {
@@ -219,9 +217,13 @@
                 _this.data_list = res.rows;
                 total=res.total;
                 maxpage=total/10;
-                if (maxpage<1) {
-					maxpage=1;
-				}     
+                if (total/10==0||tatal/10==1) {
+					maxpage=1
+				}else{
+					maxpage=total/10+1
+				}
+                
+                
                 console.log(res, _this.data_list)
               },
               error: function(res) {
