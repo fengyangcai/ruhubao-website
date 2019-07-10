@@ -1,0 +1,81 @@
+html,
+body {
+  font: 14px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+.container {
+  width: 99%;
+  margin: 0 auto;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  display: inline-table;
+}
+.app {
+  padding-bottom: 40px;
+  padding-top: 20px;
+  background: radial-gradient(#ffffff, #1c82d4);
+}
+.app h1 {
+  text-align: center;
+  padding: 20px 0;
+  letter-spacing: 3px;
+  font-size: 17px;
+}
+.app .base {
+  font-size: 14px;
+  padding: 10px 0 10px 10px;
+}
+.app .box {
+  background: #fff;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.app .item {
+  margin-top: 15px;
+}
+.app .item h4 {
+  font-size: 14px;
+  padding: 5px 0 10px 0;
+  line-height: 28px;
+}
+.app .item img {
+  width: 90%;
+}
+.app .item input {
+  font-size: 12px;
+}
+.app .pt {
+  padding: 10px 0;
+}
+.layui-form-radio * {
+  font-size: 12px;
+}
+.layui-form-label {
+  padding-left: 0px;
+}
+.layui-block {
+  display: block;
+}
+.layui-block > div {
+  float: left;
+  width: 100%;
+}
+.layui-block > div div {
+  float: left;
+  width: 85%;
+  vertical-align: top;
+}
+.layui-block > div i {
+  float: left;
+}

@@ -19,7 +19,7 @@
             /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
           ))) {
           var link = document.createElement('link');
-          link.href = 'css/model-test_moble.css';
+          link.href = 'css/model_test_moble.css';
           link.rel = 'stylesheet';
           link.type = 'text/css';
           document.getElementsByTagName('head').item(0).appendChild(link);
@@ -46,7 +46,7 @@
         	<div class="layui-form-item">
             <label class="layui-form-label">您的姓名</label>
             <div class="layui-input-block">
-              <input type="text" name="name" lay-verify="required"  maxlength="20"  autocomplete="off" placeholder="请填写您的姓名" class="layui-input">
+              <input type="text" name="username" lay-verify="required"  maxlength="20"  autocomplete="off" placeholder="请填写您的姓名" class="layui-input">
             </div>
           </div>
         	<div class="layui-form-item">
@@ -422,10 +422,9 @@
             </div>
           </div>
           
-          <div class="layui-form-item">
-            <div class="layui-input-block" style="text-align: center;">
-              <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          <div class="layui-form-item" style="margin: 0;">
+            <div class="layui-input-block" style="text-align: center;padding: 20px 0;">
+              <button class="layui-btn" lay-submit="" lay-filter="demo1" style="margin-left: -110px;">立即查看分数</button>
             </div>
           </div>
         </form>
@@ -443,7 +442,8 @@
      * programme web ODBC domain protocol
      * falseness barring CRM  network believes
      */
-    function isCheck(){
+    
+    function isCheckPost(grade){
       var system = $('input[name=system]');
       var computer = $('input[name=computer]');
       var formulate = $('input[name=formulate]');
@@ -465,25 +465,104 @@
       var network = $('input[name=network]');
       var believes = $('input[name=believes]');
       
+      var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+      var grade = grade(); //计算分数
+      
       var arr = [
         system,computer,formulate,media,configuration,risk,software,technology,
         money,day,programme,web,ODBC,domain,protocol,falseness,barring,CRM,network,
         believes
       ]
       
+      if(!$('input[name=username]').val()){
+        layer.alert('请填写您的姓名！',{title:'提示'})
+        $('input[name=username]').focus()
+        return false;
+      }
+      if(!$('input[name=telphone]').val()){
+        layer.alert('请填写您的手机号码！',{title:'提示'})
+        $('input[name=telphone]').focus()
+        return false;
+      }
+      if(!reg.test($('input[name=telphone]').val())){
+        layer.alert('请填写正确的11位手机号码！',{title:'提示'})
+        $('input[name=telphone]').focus()
+        return false;
+      }
+      
+      // var arrobj  = Array.prototype.slice.call(arr[i]);
       for(var i=0;i<arr.length;i++){
-        arr[i].each(function(index,el){
-          
-          console.log($(el).attr('checked'))
+        var arrobj  = Array.prototype.slice.call(arr[i]);
+        
+        var bol = arrobj.some(function(el,index){
+          console.log($(el).prop('checked'))
+          return $(el).prop('checked') == true;
         })
+        console.log(bol)
+        if(!bol){
+          layer.alert('没有做完题目！请做完再提交？',{title:'提示'})
+          var layui_block = arr[i].eq(0).parent('.layui-block');
+          var h = layui_block.offset().top - 70;
+          console.log(h)
+          $(document).scrollTop(h);
+          return false;
+        }
+       
+        
       }
       
       
+      var data = {
+        username:$('input[name=username]').val(),
+        telphone:$('input[name=telphone]').val(),
+        grade:grade,
+        fromPlatform: "入户宝测试分网",
+        sourceLink: document.referrer ? document.referrer : window.location.href,
+      }
+      
+      console.log(data)
+      $.ajax({
+        type:'post',
+        data:data,
+        url:'',
+        success:function(data){
+          layer.alert('您的分数是&nbsp:'+grade+'分',{title:'提示'})
+          $('form')[0].reset();
+        },
+        error:function(){
+          // $('form')[0].reset();
+          layer.alert('您的分数是&nbsp:'+grade+'分',{title:'提示'})
+        }
+      })
+      
     }
-    isCheck()
+   
     
+    var form = layui.form;
     
+    // form.on('submit', function(data){
+    //  
+    //   isCheckPost(grade);
+    //   return false; //阻止表单跳转。
+    // });
     
+    $('.layui-btn').on('click',function(){
+      isCheckPost(grade);
+      return false; //阻止表单跳转。
+    })
+    
+    //计算分数
+    function grade(){
+      var calculate = 0;
+      var arr = $(":radio:checked");
+      for(var i=0;i<arr.length;i++){
+        calculate += parseInt(arr.eq(i).attr('data-data'));
+      }
+      console.log(calculate)
+      return calculate;
+    }
+    
+   
     
   </script>
   </body>
