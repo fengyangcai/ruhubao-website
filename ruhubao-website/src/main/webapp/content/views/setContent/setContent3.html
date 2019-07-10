@@ -304,7 +304,7 @@
     <script src="../../../ku/layui/layui.all.js"></script>
     <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../../../js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-
+    
     <script src="../../../js/common.js"></script>
     <!-- https://www.bolinjy.cn/content/?categoryId=2&page=1&rows=20  编辑的数据 -->
     <!-- https://www.bolinjy.cn/content/category?id=1 获取类型数据 -->
@@ -382,7 +382,7 @@
                   element.render('nav', 'layadmin-system-side-menu');
                 },
                 error: function() {
-                  alert('获取菜单数据失败')
+                  layer.alert('获取菜单数据失败！',{title:"提示"}); 
                 }
               });
 
@@ -398,7 +398,7 @@
           element.render('nav', 'layadmin-system-side-menu');
         },
         error: function() {
-          alert('获取菜单数据失败')
+          layer.alert('获取菜单数据失败！',{title:"提示"}); 
         }
       });
 
@@ -463,7 +463,10 @@
       });
 
 
-      //点击菜单获取相应的数据
+      //点击菜单获取相应的数据tableIns.reload(options)
+      
+      var tableIns=null;
+      
       $('body').on('click', '.layui-nav-child dd', function() {
         var categoryId = $(this).attr('data-id');
 
@@ -487,7 +490,7 @@
           success: function(data) {
             var data = data;
             console.log(data)
-            table.render({
+            tableIns = table.render({
               elem: '#demo',
               height: 670,
               // url: 'data1.json', //数据接口
@@ -552,7 +555,8 @@
 
           },
           error: function() {
-            alert('获取菜单数据失败')
+            // alert('获取菜单数据失败')
+            layer.alert('获取菜单数据失败！',{title:"提示"}); 
           }
         });
 
@@ -657,16 +661,13 @@
             });
             
             
-            
-            
           },
           error: function() {
-            alert('获取菜单数据失败')
+            // alert('获取菜单数据失败')
+            layer.alert('获取菜单数据失败！',{title:"提示"}); 
+
           }
         });
-        
-        
-        
         
         
       })
@@ -681,7 +682,7 @@
         switch (obj.event) {
           case 'add':
             if (!$('.add-content input[name=categoryId]').val()) {
-              alert('请选择类型')
+              layer.alert('请选择类型！',{title:"提示"}); 
             } else {
               clearForm();
               $('.add-content').show();
@@ -690,7 +691,7 @@
             break;
           case 'update':
             if (data.length === 0) {
-              layer.msg('请选择一行');
+              layer.alert('请选择一行！',{title:"提示"}); 
             } else if (data.length > 1) {
               layer.msg('只能同时编辑一个');
             } else {
@@ -738,13 +739,14 @@
                     "ids": ids
                   },
                   success: function(res) {
-                    alert('删除成功')
+                    layer.alert('删除成功!',{title:"提示"});
                     //重新刷新表格
-                    table.reload()
-                    window.location.reload();
+                    tableIns.reload()
+                    // window.location.reload();
+                    $(".layui-this").click();
                   },
                   error: function() {
-                    alert('删除失败')
+                     layer.alert('删除失败！',{title:"提示"}); 
                   }
                 })
 
@@ -787,7 +789,7 @@
       function submitForm() {
         //校验
         if (!$('#contentAddForm').form('validate')) {
-          alert('提示 表单还未填写完成!');
+          layer.alert('提示 表单还未填写完成!',{title:"提示"}); 
           return;
         }
         // https://bolinjy.cn/content/savaContent
@@ -799,31 +801,31 @@
           // url: "../../../content/savaContent",
           data: $("#contentAddForm").serialize(),
           success: function(msg) {
-            alert('提示: 新增内容成功!');
-            // $("#contentList").datagrid("reload");
-            // TT.closeCurrentWindow();
+            layer.alert('新增内容成功!',{title:"提示"});
             $('.add').hide()
             table.reload() //重新渲染表格
-            window.location.reload();
+            // window.location.reload();
+            $(".layui-this").click();
           },
           error: function() {
-            alert('提示:新增内容失败!');
+            layer.alert('新增内容失败!',{title:"提示"});
           }
         });
       }
-
+      
       //编辑点击按钮 提交和重置
       $('.editReset').on('click', function() {
         clearFormEdit();
       })
 
-
+      
 
       //编辑提交
       function submintEdit() {
-
+        
         if (!$('#contentEditForm').form('validate')) {
-          alert('提示: 表单还未填写完成!');
+          layer.alert('表单还未填写完成!',{title:"提示"});
+            
           return;
         }
 
@@ -837,15 +839,16 @@
           url: "../../../content/edit",
           data: $("#contentEditForm").serialize(),
           success: function(msg) {
-            alert('提示: 编辑内容成功!');
+            layer.alert('编辑内容成功!',{title:"提示"});
             // $("#contentList").datagrid("reload");
             // TT.closeCurrentWindow();
             $('.add').hide();
             table.reload() //重新渲染表格
-            window.location.reload();
+            // window.location.reload();
+            $(".layui-this").click();
           },
           error: function() {
-            alert('提示:编辑内容失败!');
+            layer.alert('编辑内容失败!',{title:"提示"});
           }
         });
         // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
