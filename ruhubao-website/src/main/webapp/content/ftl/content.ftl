@@ -41,7 +41,8 @@
         <img src="../img/logo.jpg" alt="">
         <a href="../../index.html" style="margin-left: 45px;" class="nv">首页</a>
         <a href="../../ruhu-way/index.html" class="nv">入户方式 </a>
-        <a href="../views/policy.html"  class="nv active">入户政策</a>
+        <a href="../views/policy.html"  class="nv">入户政策</a>
+        <a href="../views/news.html" class="nv">新闻资讯</a>
         <a href="http://www.ruhubao.net/mobile/views/ru.html" class="nv">积分计算</a>
         <a href="https://www.bolinjy.cn/" class="nv">学历提升</a>
         <a href="../views/about.html" class="nv">关于我们</a>
