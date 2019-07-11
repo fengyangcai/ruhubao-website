@@ -667,8 +667,6 @@
         
         
         
-        
-        
       })
       
       
@@ -686,6 +684,7 @@
               $('.add-content').show();
               // $('.add-content img').attr('src','');
               $('.add img').attr('src','');
+              $('a.imgbox').remove();
             }
             
             break;
@@ -806,9 +805,11 @@
             table.reload() //重新渲染表格
             $(".layui-this").click();
             $('.add img.pic').attr('src','');
+            $('a.imgbox').remove();
           },
           error: function() {
            $('.add img.pic').attr('src','');
+           $('a.imgbox').remove();
             layer.alert('新增内容失败！',{title:"提示"});
           }
         });
@@ -846,11 +847,12 @@
             $('.add').hide();
             table.reload() //重新渲染表格
             $(".layui-this").click();
+            $('a.imgbox').remove();
           },
           error: function() {       
             layer.alert('编辑内容失败！',{title:"提示"});
             $('.add img.pic').attr('src','');
-            
+            $('a.imgbox').remove();
           }
         });
         // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
@@ -889,7 +891,7 @@
               clickFn: function(url, title, width, height, border, align) {
                 input.parent().find("img").remove();
                 input.val(url);
-                input.after("<a href='" + url + "' target='_blank'><img src='" + url +
+                input.after("<a class='imgbox' href='" + url + "' target='_blank'><img src='" + url +
                   "' width='80' height='50'/></a>");
                 this.hideDialog();
               }
