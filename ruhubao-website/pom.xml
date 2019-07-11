@@ -37,10 +37,15 @@
 		<!-- 文件上传包版本 -->
 		<poi.version>3.9</poi.version>
 		<freemarker.version>2.3.23</freemarker.version>
-
+		<httpclient.version>4.3.5</httpclient.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
 		<!-- <dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-lgpl</artifactId>
