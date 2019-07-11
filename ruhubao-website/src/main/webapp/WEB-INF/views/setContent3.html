@@ -253,10 +253,10 @@
                     <tr style="">
                       <td>图片:</td>
                       <td style="height: 110px;">
-                        <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传
+                        <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
                           <br>
                           <input class="pic" type="hidden" name="pic" />
-                          <!-- <img class="pic" src="" style="height: 50px;" alt=""> -->
+                          <img class="pic" src="" style="height: 50px;" alt="">
                       </td>
                     </tr>
                     <tr>
@@ -468,13 +468,12 @@
       //点击菜单获取相应的数据
       $('body').on('click', '.layui-nav-child dd', function() {
         var categoryId = $(this).attr('data-id');
-
+        
         var parentId = $(this).attr('data-parentId');
         var name = $(this).attr('data-name');
         
         //<input type="hidden" name="categoryId" />
         $('input[name=categoryId]').val($('.layui-this').attr('data-id')); //选中的id 类型
-        
         
         $.ajax({
           type: "get",
@@ -557,7 +556,7 @@
         	  layer.alert('获取菜单数据失败！',{title:"提示"})
           }
         });
-
+        
       })
 
       
@@ -660,8 +659,6 @@
             });
             
             
-            
-            
           },
           error: function() {
             alert('获取菜单数据失败')
@@ -673,7 +670,6 @@
         
         
       })
-      
       
       
 
@@ -688,7 +684,8 @@
             } else {
               clearForm();
               $('.add-content').show();
-              $('.add-content img').attr('src','');
+              // $('.add-content img').attr('src','');
+              $('.add img').attr('src','');
             }
             
             break;
@@ -730,7 +727,7 @@
                 ids.push(checkStatus.data[i].id)
               }
               ids = ids.join(",");
-
+              
               layer.confirm('确定删除吗?', function(index) {
                 //do something
                 //删除行数据
@@ -770,7 +767,7 @@
       };
 
 
-
+      
       //创建富文本编辑器
       contentAddEditor = KindEditor.create("#contentAddForm [name=content]", kingEditorParams);
       contentAddEditor2 = KindEditor.create("#contentEditForm [name=content]", kingEditorParams);
@@ -780,7 +777,7 @@
       TT.initOnePicUpload();
       //把内容分类id放到input中，提交到后台
       // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
-
+      
 
       //关闭add 弹框
       $('.close').click(function() {
@@ -808,10 +805,10 @@
             $('.add').hide()
             table.reload() //重新渲染表格
             $(".layui-this").click();
-            $('.edit img.pic').attr('src','');
+            $('.add img.pic').attr('src','');
           },
           error: function() {
-           $('.edit img.pic').attr('src','');
+           $('.add img.pic').attr('src','');
             layer.alert('新增内容失败！',{title:"提示"});
           }
         });
@@ -849,11 +846,10 @@
             $('.add').hide();
             table.reload() //重新渲染表格
             $(".layui-this").click();
-            $('.edit img.pic').attr('src','');
           },
           error: function() {       
             layer.alert('编辑内容失败！',{title:"提示"});
-            $('.edit img.pic').attr('src','');
+            $('.add img.pic').attr('src','');
             
           }
         });
@@ -867,9 +863,9 @@
         //    //重新渲染表格
         //   table.reload()
         // });
-
+        
       }
-
+      
       function clearForm() {
         $('#contentAddForm').form('reset');
         contentAddEditor.html('');
@@ -882,7 +878,7 @@
       
       function initOnePicUpload() {
         $(".onePicUpload").click(function() {
-
+        
           var input = $(this).siblings("input");
           console.log($(this), input)
           
