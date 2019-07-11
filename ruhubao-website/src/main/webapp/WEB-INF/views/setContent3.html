@@ -773,7 +773,7 @@
 
       //初始化单图片上传
       initOnePicUpload();
-      TT.initOnePicUpload();
+      // TT.initOnePicUpload();
       //把内容分类id放到input中，提交到后台
       // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
       
@@ -804,7 +804,7 @@
             $('.add').hide()
             table.reload() //重新渲染表格
             $(".layui-this").click();
-            $('.add img.pic').attr('src','');
+            $('a img').attr('src','');
             $('a.imgbox').remove();
           },
           error: function() {
@@ -843,9 +843,10 @@
           success: function(msg) {
            
             layer.alert('编辑内容成功！',{title:"提示"});
-            
+            $(".layui-this").click();
             $('.add').hide();
             table.reload() //重新渲染表格
+            $('a.imgbox').remove();
           },
           error: function() {       
             layer.alert('编辑内容失败！',{title:"提示"});
