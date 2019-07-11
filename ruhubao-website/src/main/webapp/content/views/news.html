@@ -152,7 +152,7 @@
             	  page:_this.nowNumber,
             	  rows:10
               },
-              type: 'GET',
+              type: 'post',
               success: function(res) {
                 _this.data_list = res.rows;
                 console.log(res, _this.data_list)
@@ -178,7 +178,7 @@
             	  rows:10,
             	  name:"新闻资讯"
               },
-              type: 'GET',
+              type: 'post',
               success: function(res) {
                 if(res.total < 10){ //判断是否是最后一页
                    layer.msg('已经是最后一页');
@@ -206,7 +206,7 @@
                 rows: 10,
                 name:"新闻资讯"
               },
-              type: 'GET',
+              type: 'post',
               success: function(res) {
                 _this.data_list = res.rows;
                 _this.total=res.total;

@@ -55,7 +55,6 @@ public class ContentController {
 	private String PIC_REQUEST_URL;
 
 	private static Map<String, Object> result = new HashMap<String, Object>();
-	
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ResponseEntity<HashMap<String, Object>> deleteContent(
@@ -292,19 +291,22 @@ public class ContentController {
 
 	}
 
-	@RequestMapping(value = "/queryContentListByName", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryContentListByName", method = RequestMethod.POST)
 	public ResponseEntity<DataGridResult> queryContentListByName(
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", defaultValue = "5") Integer rows,HttpServletRequest request) {
-
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows,
+			@RequestParam(value = "name") String name) {
 		try {
 			ContentCategory cc = new ContentCategory();
-			String contentCategoryName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
-			cc.setName(contentCategoryName);
+			/*
+			 * String contentCategoryName = new
+			 * String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+			 */
+			cc.setName(name);
 			List<ContentCategory> list = contentCategroryService.queryByWhere(cc);
 			Long id = 0L;
-			if (list!=null&&list.size()>0) {
-				id =list.get(0).getId();
+			if (list != null && list.size() > 0) {
+				id = list.get(0).getId();
 			}
 			DataGridResult dataGridResult = contentService.queryAllContentListByCategroryId(id, page, rows);
 			return ResponseEntity.ok(dataGridResult);

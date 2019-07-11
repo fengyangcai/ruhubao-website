@@ -3,10 +3,6 @@ package cn.ruhubao.website.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.ListUI;
-import javax.swing.text.StyledEditorKit.ItalicAction;
-
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,7 +97,9 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
 		System.out.println(ids);
 		System.out.println("----------------------------------------");
 		Example example = new Example(Content.class);
-		example.createCriteria().andIn("categoryId", ids);
+		//example.createCriteria().andIn("categoryId", ids);
+		Criteria criteria = example.createCriteria();
+		criteria.andIn("categoryId", ids);
 		example.orderBy("updated").desc();
 		PageHelper.startPage(page, rows);
 		List<Content> list = contentMapper.selectByExample(example);
@@ -134,7 +132,7 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
 
 			} else {
 				Long id = contentCategory.getId();
-				System.out.println("idwei阿斯顿顶顶顶顶顶顶顶顶顶顶" + id);
+				//System.out.println("idwei阿斯顿顶顶顶顶顶顶顶顶顶顶" + id);
 				ids.add(id);
 			}
 
@@ -142,16 +140,5 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
 
 	}
 
-	// 获取所有的文章类别
-	/*
-	 * private void getCategoryIds(ArrayList<Long> ids, Long categoryId) { //
-	 * 查询当前的节点的子节点 ContentCategory param = new ContentCategory();
-	 * param.setParentId(categoryId); List<ContentCategory> list =
-	 * contentCategoryMapper.select(param); if (list != null && list.size() > 0) {
-	 * for (ContentCategory cc : list) { ids.add(cc.getId()); getCategoryIds(ids,
-	 * categoryId); } }
-	 * 
-	 * }
-	 */
-
+	
 }

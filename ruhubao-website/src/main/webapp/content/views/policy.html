@@ -151,7 +151,7 @@
             	  rows:10,
                   name:"入户政策"
               },
-              type: 'GET',
+              type: 'post',
               success: function(res) {
                 _this.data_list = res.rows;
                     
@@ -180,7 +180,7 @@
             	  rows:10,
             	  name:"入户政策"
               },
-              type: 'GET',
+              type: 'post',
               success: function(res) {
                 if(res.total < 10){ //判断是否是最后一页
                    layer.msg('已经是最后一页');
@@ -209,7 +209,7 @@
                 rows: 10,
                 name:"入户政策"
               },
-              type: 'GET',
+              type: 'post',
               success: function(res) {
                 _this.data_list = res.rows;
                 _this.total=res.total;
