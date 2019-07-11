@@ -777,7 +777,7 @@
 
       //初始化单图片上传
       initOnePicUpload();
-      // TT.initOnePicUpload();
+      TT.initOnePicUpload();
       //把内容分类id放到input中，提交到后台
       // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
 
@@ -887,7 +887,7 @@
           console.log($(this), input)
           
           KindEditor.editor(kingEditorParams).loadPlugin('image', function() {
-
+          
             this.plugin.imageDialog({
               showRemote: false,
               clickFn: function(url, title, width, height, border, align) {
