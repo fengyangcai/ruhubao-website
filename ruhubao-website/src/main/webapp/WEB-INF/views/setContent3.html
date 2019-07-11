@@ -798,7 +798,7 @@
         contentAddEditor.sync();
         //提交到后台的RESTful  /content/savaContent POST
         $.ajax({
-          type: "get",
+          type: "post",
           // url: "https://bolinjy.cn/content/savaContent",
            url: "/content/savaContent",
           data: $("#contentAddForm").serialize(),
