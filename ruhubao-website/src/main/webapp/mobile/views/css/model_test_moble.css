@@ -28,10 +28,10 @@ body {
   text-align: center;
   padding: 20px 0;
   letter-spacing: 3px;
-  font-size: 17px;
+  font-size: 20px;
 }
 .app .base {
-  font-size: 14px;
+  font-size: 16px;
   padding: 10px 0 10px 10px;
 }
 .app .box {
@@ -44,7 +44,7 @@ body {
   padding: 10px 0px 30px 0;
 }
 .app .item h4 {
-  font-size: 14px;
+  font-size: 15px;
   padding: 5px 0 10px 0;
   line-height: 28px;
 }
@@ -52,13 +52,13 @@ body {
   width: 90%;
 }
 .app .item input {
-  font-size: 12px;
+  font-size: 14px;
 }
 .app .pt {
   padding: 10px 0;
 }
 .layui-form-radio * {
-  font-size: 12px;
+  font-size: 14px;
 }
 .layui-form-label {
   padding-left: 0px;
