@@ -463,7 +463,7 @@
           ]
         ]
       });
-
+      
 
       //点击菜单获取相应的数据
       $('body').on('click', '.layui-nav-child dd', function() {
@@ -807,9 +807,10 @@
             $('.add').hide()
             table.reload() //重新渲染表格
             $(".layui-this").click();
+            $('.edit img.pic').attr('src','');
           },
           error: function() {
-           
+           $('.edit img.pic').attr('src','');
             layer.alert('新增内容失败！',{title:"提示"});
           }
         });
@@ -838,18 +839,21 @@
         $.ajax({
           type: "post",
          /*  url: "https://bolinjy.cn/content/edit",  */
-         url: "/content/edit",
+          url: "/content/edit",
           data: $("#contentEditForm").serialize(),
           success: function(msg) {
            
             layer.alert('编辑内容成功！',{title:"提示"});
-         
+            
             $('.add').hide();
             table.reload() //重新渲染表格
             $(".layui-this").click();
+            $('.edit img.pic').attr('src','');
           },
           error: function() {       
             layer.alert('编辑内容失败！',{title:"提示"});
+            $('.edit img.pic').attr('src','');
+            
           }
         });
         // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
@@ -869,7 +873,7 @@
         $('#contentAddForm').form('reset');
         contentAddEditor.html('');
       }
-
+      
       function clearFormEdit() {
         $('#contentEditForm')[0].reset();
         contentAddEditor2.html('');
@@ -880,7 +884,7 @@
 
           var input = $(this).siblings("input");
           console.log($(this), input)
-
+          
           KindEditor.editor(kingEditorParams).loadPlugin('image', function() {
 
             this.plugin.imageDialog({
