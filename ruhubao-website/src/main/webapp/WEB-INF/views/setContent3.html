@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/content/css/admin.css" media="all">
 
     <link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-
+    
     <script>
       /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
   </script>
@@ -688,8 +688,9 @@
             } else {
               clearForm();
               $('.add-content').show();
+              $('.add-content img').attr('src','');
             }
-
+            
             break;
           case 'update':
             if (data.length === 0) {
@@ -703,7 +704,7 @@
               var data = data[0];
               console.log(data)
               $('.edit').show();
-
+              
               $('.edit input[name=categoryId]').val(data.categoryId);
               $('.edit input[name=id]').val(data.id);
               $('.edit .title').val(data.title);
@@ -834,7 +835,7 @@
 
         contentAddEditor2.sync();
         // /content/edit  https://bolinjy.cn/content/edit
-
+        
 
         $.ajax({
           type: "post",
@@ -858,7 +859,7 @@
         });
         // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
         console.log($("#contentEditForm").serialize())
-
+        
         // $.post("https://bolinjy.cn/content/edit",$("#contentEditForm").serialize(), function(data){
         //   
         // 	alert('提示：编辑内容成功!');
@@ -878,7 +879,7 @@
         $('#contentEditForm')[0].reset();
         contentAddEditor2.html('');
       }
-
+      
       function initOnePicUpload() {
         $(".onePicUpload").click(function() {
 
