@@ -265,6 +265,7 @@
                         <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">附件上传</a>
                         <br>
                         <input type="hidden" class="pic2" name="pic2" />
+                        <img class="pic2" src="" style="height: 50px;" alt="">
                       </td>
                     </tr>
                     <tr>
@@ -285,7 +286,7 @@
           </div>
 
         </div>
-
+        
         <!-- 辅助元素，一般用于移动设备下遮罩 -->
         <div class="layadmin-body-shade" layadmin-event="shade"></div>
       </div>
@@ -695,7 +696,7 @@
               layer.msg('只能同时编辑一个');
             } else {
               // layer.alert('编辑 [id]：' + checkStatus.data[0].id);
-
+              
               //对表单赋值  title subTitle titleDesc pic pic2 content
               var data = data[0];
               console.log(data)
@@ -706,11 +707,12 @@
               $('.edit .title').val(data.title);
               $('.edit .subTitle').val(data.subTitle);
               $('.edit .pic').val(data.pic);
+              $('.edit .pic2').val(data.pic2);
               $('.edit img.pic').attr('src', data.pic);
               $('.edit .pic2').val(data.pic2);
               $('.edit .titleDesc').val(data.titleDesc);
               contentAddEditor2.html(data.content)
-
+              
               console.log(data);
             }
             break;
@@ -725,6 +727,7 @@
                 // ids += checkStatus.data[i].id+",";
                 ids.push(checkStatus.data[i].id)
               }
+              
               ids = ids.join(",");
               
               layer.confirm('确定删除吗?', function(index) {
@@ -747,7 +750,7 @@
                 	  layer.alert('删除失败！',{title:"提示"})
                   }
                 })
-
+                
                 layer.close(index);
               });
 
@@ -782,7 +785,7 @@
       $('.close').click(function() {
         $('.add').hide()
       })
-
+      
       // add提交逻辑
       function submitForm() {
         //校验
@@ -805,11 +808,11 @@
             table.reload() //重新渲染表格
             $(".layui-this").click();
             $('a img').attr('src','');
-            $('a.imgbox').remove();
+            $('#contentAddForm a.imgbox').remove();
           },
           error: function() {
-           $('.add img.pic').attr('src','');
-           $('a.imgbox').remove();
+           $('.add img').attr('src','');
+           $('#contentAddForm a.imgbox').remove();
             layer.alert('新增内容失败！',{title:"提示"});
           }
         });
@@ -846,12 +849,12 @@
             $(".layui-this").click();
             $('.add').hide();
             table.reload() //重新渲染表格
-            $('a.imgbox').remove();
+            // $('a.imgbox').remove();
           },
           error: function() {       
             layer.alert('编辑内容失败！',{title:"提示"});
             $('.add img.pic').attr('src','');
-            $('a.imgbox').remove();
+            // $('a.imgbox').remove();
           }
         });
         // https://bolinjy.cn/content/savaContent https://bolinjy.cn/content/edit
