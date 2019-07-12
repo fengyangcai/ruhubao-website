@@ -707,8 +707,8 @@
               $('.edit .title').val(data.title);
               $('.edit .subTitle').val(data.subTitle);
               $('.edit .pic').val(data.pic);
-              $('.edit .pic2').val(data.pic2);
               $('.edit img.pic').attr('src', data.pic);
+              $('.edit img.pic2').attr('src', data.pic2);
               $('.edit .pic2').val(data.pic2);
               $('.edit .titleDesc').val(data.titleDesc);
               contentAddEditor2.html(data.content)
@@ -873,11 +873,13 @@
       function clearForm() {
         $('#contentAddForm').form('reset');
         contentAddEditor.html('');
+        $('img').arrt('src','')
       }
       
       function clearFormEdit() {
         $('#contentEditForm')[0].reset();
         contentAddEditor2.html('');
+        $('img').arrt('src','');
       }
       
       function initOnePicUpload() {
