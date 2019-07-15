@@ -429,6 +429,9 @@
 					</div>
 
 					<div class="inp">
+            <div style="margin-bottom: 6px;">
+              <input type="text" name="name" id="" placeholder="请输入您的姓名" value="" />
+            </div>
 						<div>
 							<input type="text" maxlength="11" name="userphone" id="userphone" value="" placeholder="请输入手机号码" />
 							<input type="text" class="ma" maxlength="6" name="ma" id="" value="" placeholder="验证码" />
@@ -507,7 +510,8 @@
 				var diqu = $('input[name=diqu]:checked').val();
 				var way = $('input[name=way]:checked').val();
 				var userphone = $.trim($('input[name=userphone]').val());
-
+        var name = $.trim($('input[name=name]').val());
+        
 				var num = 60;
 				var timer = null;
 				var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
@@ -578,6 +582,7 @@
 
 				var data = {
 					telPhone: userphone,
+          name:name,
 					livePermitYears: zhu,
 					yearsSocial: she,
 					ruhuReason: way,
