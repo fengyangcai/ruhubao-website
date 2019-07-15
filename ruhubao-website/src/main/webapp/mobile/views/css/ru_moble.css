@@ -119,6 +119,9 @@ body {
   margin-top: 40px;
   padding-left: 0.1rem;
 }
+.app .form form .inp #name {
+  width: 6.52rem;
+}
 .app .form form .inp input {
   display: inline-block;
   width: 3.3rem;
