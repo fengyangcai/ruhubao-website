@@ -139,6 +139,9 @@ body {
   vertical-align: middle;
   font-size: 18px;
 }
+.app .form form .inp #name {
+  width: 636px;
+}
 .app .form form .inp input.ma {
   width: 119px;
   margin-left: 10px;

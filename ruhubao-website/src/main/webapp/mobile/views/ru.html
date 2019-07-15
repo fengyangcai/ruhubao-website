@@ -430,7 +430,7 @@
 
 					<div class="inp">
             <div style="margin-bottom: 6px;">
-              <input type="text" name="name" id="" placeholder="请输入您的姓名" value="" />
+              <input type="text" name="name" id="name" placeholder="请输入您的姓名" value="" />
             </div>
 						<div>
 							<input type="text" maxlength="11" name="userphone" id="userphone" value="" placeholder="请输入手机号码" />
@@ -594,7 +594,7 @@
 					sourceLink: document.referrer ? document.referrer : window.location.href,
 					fromPlatform: "入户宝测试分网"
 				}
-
+        
 				$('form')[0].reset();
 				console.log('可以发送数据了！', data)
 				//发送测试请求 http://localhost:9092/data/customer/addCustomer
