@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
     <link rel="shortcut icon" type="images/x-icon" href="../../img/bolinglink.png">
-    <!-- <link rel="stylesheet" type="text/css" href="../ku/layui/css/layui.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../../ku/layui/css/layui.css" />
     <!-- <link rel="stylesheet" type="text/css" href="../css/polity.css" /> -->
     <script type="text/javascript" src="../js/changHtmlFontSize.js"></script>
     
@@ -36,13 +36,9 @@
 
       goPAGE();
     </script>
+    
 
-
-    <style type="text/css">
-      [v-cloak] {
-        display: none;
-      }
-    </style>
+   
   </head>
   <body>
     <div class="app" id="app" v-cloak>
@@ -66,29 +62,26 @@
             <span>您当前所在的位置： 首页 > 新闻资讯</span>
           </p>
           <div class="page1 page clearfix" id="page1">
-            <ul>
-              <li class="clearfix" v-for="item in data_list">
-                <img :src="item.pic" class="f_l list-img">
+            <ul class="item-box">
+              <li class="clearfix">
+                <img src="" class="f_l list-img">
                 <div class="list f_l">
                   <p class="time">
-                    <span>{{ item.updated }}</span>
+                    <span></span>
                     <span class="line"></span>
                   </p>
-                  <p class="title" :title="item.title">
-                    <a :href="item.url" class="link">{{ item.title }}</a>
+                  <p class="title" title="item.title">
+                    <a href="item.url" class="link"></a>
                   </p>
                   <div class="btn">
-                    <a :href="item.url" class="link">点击了解</a>
+                    <a href="item.url" class="link">点击了解</a>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
+          <div id="test1" style="text-align: center;"></div>
           
-          <div class="page-btn-box">
-            <a href="#page1" data-number="1" v-on:click="getDataList()" class="nv page-btn">上一页</a>
-            <a href="#page2" data-number="2" v-on:click="getDataList2()" class="nv page-btn">下一页</a>
-          </div>
         </div>
       </div>
       <div class="footer">
@@ -121,123 +114,121 @@
 
     <script src="../../js/jquery2.01.js"></script>
     <script src="../../ku/layui/layui.all.js "></script>
-    <script src="../js/Vue.js"></script>
+    <!-- <script src="../js/Vue.js"></script> -->
     <script type="text/javascript">
-      Vue.prototype.$ = jQuery;
+     
+      var laypage = layui.laypage
       
-      var vm = new Vue({
-        el: '#app',
-        data: {
-          data_list: [], //数据列表
-         // categoryId: 2,
-          nowNumber:1,
-          maxpage:1 ,
-          total:0
-        },
-        methods: {
-          getDataList: function() {
-            var _this = this;
-            this.nowNumber = this.nowNumber - 1;
-            if(this.nowNumber < 1){
-             // layer.msg('已经是第一页！');
-              _this.nowNumber = _this.nowNumber + 1;
-              // console.log( _this.nowNumber)
-              return false;
+       getdata()
+      function getdata(){
+         $.ajax({
+          url:'../../content/queryContentListByName',
+          // url: 'http://192.168.110.186:9091/content/queryContentListByName',
+          data: {
+            page: 1,
+            rows: 10,
+            name: "新闻资讯"
+          },
+          type: 'post',
+          success: function(data) {
+            console.log(data)
+            var datas = data.rows;
+            var count = data.total;
+            //渲染数据
+            var html = '';
+            console.log(data.total,datas)
+            for (var i = 0; i < datas.length; i++) {
+              html += '<li class="clearfix">';
+              html += '<img src="' + datas[i].pic + '" class="f_l list-img">';
+              html += '<div class="list f_l">';
+              html += '<p class="time">';
+              html += '<span class="updated">' + datas[i].updated + '</span>';
+              html += '<span class="line"></span>';
+              html += '</p>';
+              html += '<p class="title" title="' + datas[i].title + '">';
+              html += '<a href="' + datas[i].url + '" class="link">' + datas[i].title + '</a>';
+              html += '</p>';
+              html += '<div class="btn">';
+              html += '<a href="' + datas[i].url + '" class="link">点击了解</a>';
+              html += '</div>';
+              html += '</div>';
+              html += '</li>';
             }
+        
+            $('.item-box').html(html)
             
-            this.$.ajax({
-              url: '../../content', 
-              cache:false,
-              data: {
-            	  page:_this.nowNumber,
-            	  rows:10
-              },
-              type: 'post',
-              success: function(res) {
-                _this.data_list = res.rows;
-                console.log(res, _this.data_list)
-              },
-              error: function(res) {
-                layer.msg('获取数据失败');
-              }
-            })
-          
-          },
-          getDataList2:function(){
-            var _this = this;
-            this.nowNumber = this.nowNumber + 1;
-            if (this.nowNumber>this.maxpage) {
-            	this.nowNumber = this.maxpage;
-            	return false;
-			}
-            this.$.ajax({
-              url: '../../content/queryContentListByName', 
-              cache:false,
-              data: {
-            	  page:_this.nowNumber,
-            	  rows:10,
-            	  name:"新闻资讯"
-              },
-              type: 'post',
-              success: function(res) {
-                if(res.total < 10){ //判断是否是最后一页
-                   layer.msg('已经是最后一页');
-                   _this.nowNumber = _this.nowNumber - 1;
-                   _this.data_list = res.rows;
-                   return false;
+             laypage.render({
+              elem: 'test1',
+              count: count, //数据总数，从服务端得到
+              jump: function(obj, first) {
+                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                console.log(obj.limit); //得到每页显示的条数
+            
+                //首次不执行
+                if (!first) {
+                  //do something
+                  $.ajax({
+                   // ../../content/queryContentListByName
+                   url: 'http://192.168.110.186:9091/content/queryContentListByName',
+                   data: {
+                     page: obj.curr,
+                     rows: 10,
+                     name: "新闻资讯"
+                   },
+                   type: 'post',
+                   success: function(data) {
+                     console.log(data)
+                     var datas = data.rows;
+                     var count = data.total;
+                     //渲染数据
+                     var html = '';
+                     console.log(data.total)
+                     for (var i = 0; i < datas.length; i++) {
+                       html += '<li class="clearfix">';
+                       html += '<img src="' + datas[i].pic + '" class="f_l list-img">';
+                       html += '<div class="list f_l">';
+                       html += '<p class="time">';
+                       html += '<span class="updated">' + datas[i].updated + '</span>';
+                       html += '<span class="line"></span>';
+                       html += '</p>';
+                       html += '<p class="title" title="' + datas[i].title + '">';
+                       html += '<a href="' + datas[i].url + '" class="link">' + datas[i].title + '</a>';
+                       html += '</p>';
+                       html += '<div class="btn">';
+                       html += '<a href="' + datas[i].url + '" class="link">点击了解</a>';
+                       html += '</div>';
+                       html += '</div>';
+                       html += '</li>';
+                     }
+                             
+                     $('.item-box').html(html)
+                   }
+                 })
+                             
+                } else {
+                  
                 }
-                _this.data_list = res.rows;
-                
-                console.log(res, _this.data_list)
-                
-              },
-              error: function(res) {
-                layer.msg('获取数据失败');
+            
               }
-            })
-          },
-          getData:function(categoryId){
-            var categoryId = categoryId;
-           	var _this = this;
-           	_this.$.ajax({
-              url: '../../content/queryContentListByName',
-              data: {
-                page: _this.nowNumber,
-                rows: 10,
-                name:"新闻资讯"
-              },
-              type: 'post',
-              success: function(res) {
-                _this.data_list = res.rows;
-                _this.total=res.total;
-                _this.maxpage=_this.total/10;
-                if ((_this.total/10)==0||(_this.tatal/10)==1) {
-                	_this.maxpage=1
-				}else{
-					_this.maxpage = parseInt((_this.total/10)+1)
-				}      
-                console.log(res, _this.data_list)
-              },
-              error: function(res) {
-                
-              }
-            })       
+            
+            });
+            
           }
-        },
-        mounted: function() {
-          //获取数据
-          this.getData()
-        }
-      })
-
-      //接入客服
-      $('a').not('.link,.nv').on('click', function() {
-        layer.open({
-          type: 2,
-          area: ['800px', '500px'],
-          content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
         })
+        
+      }
+      
+      
+      
+      //接入客服
+      $('a').not('.link,.nv,#test1 a').on('click', function() {
+       layer.open({
+         type: 2,
+         area: ['800px', '500px'],
+         content: 'https://www16.53kf.com/webCompany.php?arg=10187673&kf_sign=DY5MTMTU1OU4ODExMDc3NTgxNTg4MDA4NzIxODc2NzM%253D&style=1' //这里content是一
+       })
       })
+      
       //分页
       $('.page-btn-box a').on('click', function() {
         var link = $(this).attr('href');

@@ -247,3 +247,8 @@ input {
   padding-top: 58px;
   width: 100%;
 }
+#test1 a,
+#test1 em,
+#test1 span {
+  font-size: 16px;
+}
